@@ -1,7 +1,7 @@
 #[allow(dead_code)]
 pub fn sieves(k: usize) -> Vec<usize> {
     /* Generate the prime numbers in the range 2 <= n <= k */
-    let mut sieved = vec![false; k as usize];
+    let mut sieved = vec![false; (k + 1) as usize];
     let mut primes = Vec::new();
 
     if k <= 2 {

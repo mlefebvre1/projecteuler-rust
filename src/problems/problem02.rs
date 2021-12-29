@@ -1,6 +1,6 @@
 use utils::timeit;
 
-fn p() -> i32 {
+fn p() -> i64 {
     /*
     Even Fibonacci numbers
     Problem 2
@@ -28,9 +28,9 @@ fn p() -> i32 {
         let c = a + b;
         a = b;
         b = c;
-       }
+    }
 
-    return total;
+    return total as i64;
 }
 
 timeit::timeit!(Problem02, solve, p);

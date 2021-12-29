@@ -1,6 +1,6 @@
 use utils::timeit;
 
-fn p() -> i32 {
+fn p() -> i64 {
     /*
     Multiples of 3 and 5
     Problem 1
@@ -19,7 +19,7 @@ fn p() -> i32 {
         }
     }
     let sum: usize = multiples.iter().sum();
-    return sum as i32;
+    return sum as i64;
 }
 
 timeit::timeit!(Problem01, solve, p);

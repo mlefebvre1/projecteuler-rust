@@ -1,7 +1,7 @@
 use ntheory::primes;
 use utils::timeit;
 
-fn p() -> i32 {
+fn p() -> i64 {
     /*
     Largest prime factor
     Problem 3
@@ -12,7 +12,7 @@ fn p() -> i32 {
     const K: usize = 600851475143;
     let numbers = 1..(K as f64).sqrt() as usize;
     let candidates = numbers.filter(|x| primes::is_prime(*x) && (K % x == 0));
-    return candidates.max().unwrap() as i32;
+    return candidates.max().unwrap() as i64;
 }
 
 timeit::timeit!(Problem03, solve, p);
