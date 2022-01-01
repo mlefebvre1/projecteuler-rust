@@ -1,7 +1,7 @@
 use ntheory::palindrome;
 use utils::timeit;
 
-fn p() -> i64 {
+fn p() -> usize {
     /*
     Largest palindrome product
     Problem 4
@@ -17,7 +17,7 @@ fn p() -> i64 {
         }
     }
     let candidates = products.iter().filter(|&x| palindrome::is_palindrome(*x));
-    return *candidates.max().unwrap() as i64;
+    *candidates.max().unwrap()
 }
 
 timeit::timeit!(Problem04, solve, p);

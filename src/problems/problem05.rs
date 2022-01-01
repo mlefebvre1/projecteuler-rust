@@ -1,7 +1,7 @@
 use ntheory::primes;
 use utils::timeit;
 
-fn p() -> i64 {
+fn p() -> usize {
     /*
     Smallest multiple
     Problem 5
@@ -19,10 +19,9 @@ fn p() -> i64 {
         .iter()
         .map(|x| (MAX_N as f64).log(*x as f64).floor() as usize);
     let primes_and_occurences = primes.iter().zip(prime_occurences);
-    let smallest_positive_number = primes_and_occurences.fold(1, |acc, (prime, occurence)| {
+    primes_and_occurences.fold(1, |acc, (prime, occurence)| {
         acc * prime.pow(occurence as u32)
-    });
-    return smallest_positive_number as i64;
+    })
 }
 
 timeit::timeit!(Problem05, solve, p);

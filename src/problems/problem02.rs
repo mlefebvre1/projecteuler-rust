@@ -1,6 +1,7 @@
+use ntheory::series;
 use utils::timeit;
 
-fn p() -> i64 {
+fn p() -> usize {
     /*
     Even Fibonacci numbers
     Problem 2
@@ -12,25 +13,9 @@ fn p() -> i64 {
     By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the
     even-valued terms.
     */
-    const MAX_F_VALUE: i32 = 4e6 as i32;
-
-    let mut total: i32 = 0;
-
-    let mut a = 0;
-    let mut b = 1;
-    loop {
-        if a >= MAX_F_VALUE {
-            break;
-        }
-        if a % 2 == 0 {
-            total += a;
-        }
-        let c = a + b;
-        a = b;
-        b = c;
-    }
-
-    return total as i64;
+    const MAX_F_VALUE: usize = 4e6 as usize;
+    let fib_iter = series::Fibonacci::new(MAX_F_VALUE);
+    fib_iter.filter(|x| x % 2 == 0).sum()
 }
 
 timeit::timeit!(Problem02, solve, p);
