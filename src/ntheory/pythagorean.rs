@@ -1,4 +1,4 @@
-use ntheory::primes;
+use crate::ntheory::primes;
 use std::fmt;
 
 pub struct PythagoreanTriple(usize, usize, usize);

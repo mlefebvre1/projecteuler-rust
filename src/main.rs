@@ -13,4 +13,7 @@ fn main() {
     problems::problem08::solve();
     problems::problem09::solve();
     problems::problem10::solve();
+    problems::problem11::solve();
+    problems::problem12::solve();
+    problems::problem13::solve();
 }

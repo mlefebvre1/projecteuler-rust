@@ -1,5 +1,5 @@
-use ntheory::series;
-use utils::timeit;
+use crate::ntheory::series;
+use crate::utils::timeit;
 
 fn p() -> usize {
     /*

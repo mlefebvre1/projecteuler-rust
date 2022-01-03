@@ -1,5 +1,5 @@
-use ntheory::pythagorean;
-use utils::timeit;
+use crate::ntheory::pythagorean;
+use crate::utils::timeit;
 
 fn p() -> usize {
     /*

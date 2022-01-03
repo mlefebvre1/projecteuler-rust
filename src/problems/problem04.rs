@@ -1,5 +1,5 @@
-use ntheory::palindrome;
-use utils::timeit;
+use crate::ntheory::palindrome;
+use crate::utils::timeit;
 
 fn p() -> usize {
     /*
