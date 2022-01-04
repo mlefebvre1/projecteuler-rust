@@ -1,5 +1,5 @@
-use ntheory::primes::sieves;
-use utils::timeit;
+use crate::ntheory::primes::sieves;
+use crate::utils::timeit;
 
 fn p() -> usize {
     /*

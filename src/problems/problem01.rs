@@ -1,4 +1,4 @@
-use utils::timeit;
+use crate::utils::timeit;
 
 fn p() -> usize {
     /*

@@ -47,3 +47,14 @@ pub fn is_prime(n: usize) -> bool {
     }
     return true;
 }
+
+pub fn gcd(a: usize, b: usize) -> usize {
+    let mut x = a;
+    let mut y = b;
+    while y != 0 {
+        let t: usize = y;
+        y = x % y;
+        x = t;
+    }
+    x
+}
