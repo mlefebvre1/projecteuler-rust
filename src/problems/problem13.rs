@@ -1,5 +1,3 @@
-// extern crate num_bigint;
-// use self::num_bigint::BigUint;
 use crate::utils::timeit;
 use num_bigint::BigUint;
 use std::fs;
@@ -111,7 +109,6 @@ fn p() -> usize {
     20849603980134001723930671666823555245252804609722
     53503534226472524250874054075591789781264330331690
     */
-    // Read the data and prepare the matrix
     let mut total = BigUint::from(0usize);
     let data =
         fs::read_to_string("src/problems/data/problem13.txt").expect("Problem opening the file");
