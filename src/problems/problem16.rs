@@ -11,11 +11,7 @@ fn p() -> usize {
     What is the sum of the digits of the number 2^1000?
     */
     let n: BigUint = BigUint::from(2usize).pow(1000);
-    return n
-        .to_str_radix(10)
-        .chars()
-        .map(|c| c.to_digit(10).unwrap())
-        .sum::<u32>() as usize;
+    n.to_radix_be(10).iter().map(|x| *x as usize).sum::<usize>()
 }
 
 timeit::timeit!(Problem16, solve, p);
