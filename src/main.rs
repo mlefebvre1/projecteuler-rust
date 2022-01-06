@@ -20,4 +20,7 @@ fn main() {
     problems::problem15::solve();
     problems::problem16::solve();
     problems::problem17::solve();
+    problems::problem18::solve();
+    problems::problem19::solve();
+    problems::problem20::solve();
 }

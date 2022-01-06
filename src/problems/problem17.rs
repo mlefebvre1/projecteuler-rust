@@ -89,8 +89,7 @@ fn p() -> usize {
     British usage.
     */
     const MAX_N: usize = 1000;
-    let range = 1..=MAX_N;
-    let nb_letters = range.map(|n| count_letters(n));
+    let nb_letters = (1..=MAX_N).map(|n| count_letters(n));
     nb_letters.sum()
 }
 
