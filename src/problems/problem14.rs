@@ -16,7 +16,7 @@ fn chain(n: usize) -> usize {
     return chain_len;
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Longest Collatz sequence
     Problem 14
@@ -41,7 +41,7 @@ fn p() -> usize {
     const RANGE: std::ops::Range<usize> = (END / 2)..END;
     let chains = RANGE.map(|n| chain(n)).zip(RANGE);
     let (_, max_n) = chains.max().unwrap();
-    return max_n;
+    return max_n.to_string();
 }
 
 timeit::timeit!(Problem14, solve, p);

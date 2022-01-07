@@ -9,7 +9,7 @@ fn calc_name_score(name: &str, index: usize) -> usize {
     name_score
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Names scores
     Problem 22
@@ -31,7 +31,7 @@ fn p() -> usize {
         .enumerate()
         .map(|(index, name)| calc_name_score(&name, index));
     let total: usize = names_score.sum();
-    return total;
+    return total.to_string();
 }
 
 timeit::timeit!(Problem22, solve, p);

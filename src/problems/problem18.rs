@@ -17,7 +17,7 @@ fn prepare_matrix() -> Vec<Vec<usize>> {
     return matrix;
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Maximum path sum I
     Problem 18
@@ -64,7 +64,7 @@ fn p() -> usize {
         }
     }
     let last_line = &matrix[matrix.len() - 1];
-    *last_line.iter().max().unwrap()
+    (*last_line.iter().max().unwrap()).to_string()
 }
 
 timeit::timeit!(Problem18, solve, p);

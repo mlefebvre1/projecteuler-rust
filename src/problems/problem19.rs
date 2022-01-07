@@ -25,7 +25,7 @@ fn nb_days_in_month(month: &str, year: usize) -> usize {
     return *NB_DAYS_PER_MONTH.get(month).unwrap();
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Counting Sundays
     Problem 19
@@ -71,7 +71,7 @@ fn p() -> usize {
             }
         }
     }
-    return nb_sundays;
+    return nb_sundays.to_string();
 }
 
 timeit::timeit!(Problem19, solve, p);

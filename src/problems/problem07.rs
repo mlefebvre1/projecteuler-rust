@@ -1,7 +1,7 @@
 use crate::ntheory::primes::sieves;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Sum square difference
     Problem 6
@@ -19,7 +19,7 @@ fn p() -> usize {
     const MAX_PRIME: usize = 1e6 as usize;
     const PRIME_INDEX: usize = 10001;
     let primes = sieves(MAX_PRIME);
-    primes[PRIME_INDEX - 1]
+    primes[PRIME_INDEX - 1].to_string()
 }
 
 timeit::timeit!(Problem07, solve, p);

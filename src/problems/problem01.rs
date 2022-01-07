@@ -1,6 +1,6 @@
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Multiples of 3 and 5
     Problem 1
@@ -18,7 +18,7 @@ fn p() -> usize {
             multiples.insert(n);
         }
     }
-    multiples.iter().sum()
+    multiples.iter().sum::<usize>().to_string()
 }
 
 timeit::timeit!(Problem01, solve, p);

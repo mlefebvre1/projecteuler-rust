@@ -2,7 +2,7 @@ use crate::utils::timeit;
 use num_bigint::BigUint;
 use std::fs;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Large sum
     Problem 13
@@ -117,7 +117,7 @@ fn p() -> usize {
         total += n
     }
     let total_str = total.to_str_radix(10);
-    return total_str[0..10].parse().unwrap();
+    return String::from(&total_str[0..10]);
 }
 
 timeit::timeit!(Problem13, solve, p);

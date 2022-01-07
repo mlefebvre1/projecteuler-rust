@@ -1,7 +1,7 @@
 use crate::ntheory::palindrome;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Largest palindrome product
     Problem 4
@@ -17,7 +17,7 @@ fn p() -> usize {
         }
     }
     let candidates = products.iter().filter(|&x| palindrome::is_palindrome(*x));
-    *candidates.max().unwrap()
+    (*candidates.max().unwrap()).to_string()
 }
 
 timeit::timeit!(Problem04, solve, p);

@@ -1,7 +1,7 @@
 use crate::ntheory::primes;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Largest prime factor
     Problem 3
@@ -12,7 +12,7 @@ fn p() -> usize {
     const K: usize = 600851475143;
     let numbers = 1..(K as f64).sqrt() as usize;
     let candidates = numbers.filter(|x| primes::is_prime(*x) && (K % x == 0));
-    candidates.max().unwrap()
+    candidates.max().unwrap().to_string()
 }
 
 timeit::timeit!(Problem03, solve, p);

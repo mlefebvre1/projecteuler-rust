@@ -1,7 +1,7 @@
 use crate::ntheory::pythagorean;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Special Pythagorean triplet
     Problem 9
@@ -17,7 +17,7 @@ fn p() -> usize {
     let triples = pythagorean::pythagorean_triples(2000);
     for triple in triples {
         if triple.sum() == 1000 {
-            return triple.prod();
+            return triple.prod().to_string();
         }
     }
     panic!();

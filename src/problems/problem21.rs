@@ -1,7 +1,7 @@
 use crate::ntheory::factor;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Amicable numbers
     Problem 21
@@ -25,7 +25,8 @@ fn p() -> usize {
                 0
             }
         })
-        .sum()
+        .sum::<usize>()
+        .to_string()
 }
 
 timeit::timeit!(Problem21, solve, p);

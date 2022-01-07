@@ -75,7 +75,7 @@ fn count_letters(n: usize) -> usize {
     return nb_letters;
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Number letter counts
     Problem 17
@@ -90,7 +90,7 @@ fn p() -> usize {
     */
     const MAX_N: usize = 1000;
     let nb_letters = (1..=MAX_N).map(|n| count_letters(n));
-    nb_letters.sum()
+    nb_letters.sum::<usize>().to_string()
 }
 
 timeit::timeit!(Problem17, solve, p);
