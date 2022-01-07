@@ -1,6 +1,6 @@
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Largest product in a series
     Problem 8
@@ -40,7 +40,7 @@ fn p() -> usize {
             .chars()
             .fold(1, |acc, x| acc * x.to_digit(10).unwrap() as usize)
     });
-    products.max().unwrap()
+    products.max().unwrap().to_string()
 }
 
 timeit::timeit!(Problem08, solve, p);

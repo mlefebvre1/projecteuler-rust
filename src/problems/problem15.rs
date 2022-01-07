@@ -1,6 +1,6 @@
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Lattice paths
     Problem 15
@@ -34,7 +34,7 @@ fn p() -> usize {
             tab[row][col] = tab[row - 1][col] + tab[row][col - 1];
         }
     }
-    return tab[20][20];
+    return tab[20][20].to_string();
 }
 
 timeit::timeit!(Problem15, solve, p);

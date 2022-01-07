@@ -1,7 +1,7 @@
 #[macro_export]
 macro_rules! timeit {
     ($module:ident, $func:ident, $method:ident) => {
-        pub fn $func() {
+        pub fn $func() -> String {
             use std::time;
             let now = time::Instant::now();
             let ans = $method();
@@ -12,6 +12,7 @@ macro_rules! timeit {
                 ans,
                 exec_time
             );
+            ans
         }
     };
 }

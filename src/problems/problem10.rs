@@ -1,7 +1,7 @@
 use crate::ntheory::primes;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Summation of primes
     Problem 10
@@ -13,7 +13,7 @@ fn p() -> usize {
     const MAX_PRIME: usize = 2e6 as usize;
     let primes = primes::sieves(MAX_PRIME);
     let sum: usize = primes.iter().sum();
-    sum
+    sum.to_string()
 }
 
 timeit::timeit!(Problem10, solve, p);

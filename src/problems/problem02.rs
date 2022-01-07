@@ -1,7 +1,7 @@
 use crate::ntheory::series;
 use crate::utils::timeit;
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Even Fibonacci numbers
     Problem 2
@@ -15,7 +15,7 @@ fn p() -> usize {
     */
     const MAX_F_VALUE: usize = 4e6 as usize;
     let fib_iter = series::Fibonacci::new(MAX_F_VALUE);
-    fib_iter.filter(|x| x % 2 == 0).sum()
+    fib_iter.filter(|x| x % 2 == 0).sum::<usize>().to_string()
 }
 
 timeit::timeit!(Problem02, solve, p);

@@ -13,7 +13,7 @@ fn matrix_from_file() -> [[usize; 20]; 20] {
     matrix
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Largest product in a grid
     Problem 11
@@ -119,7 +119,7 @@ fn p() -> usize {
             }
         }
     }
-    return max_prod;
+    return max_prod.to_string();
 }
 
 timeit::timeit!(Problem11, solve, p);

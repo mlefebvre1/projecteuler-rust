@@ -12,7 +12,7 @@ fn t(n: isize) -> f64 {
     n as f64 * (n as f64 + 1f64) / 2f64
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Highly divisible triangular number
     Problem 12
@@ -55,7 +55,7 @@ fn p() -> usize {
         n += 1;
         k += n as f64;
     }
-    return k as usize;
+    return (k as usize).to_string();
 }
 
 timeit::timeit!(Problem12, solve, p);

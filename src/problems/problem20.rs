@@ -9,7 +9,7 @@ fn factorial(n: usize) -> BigUint {
     return fact;
 }
 
-fn p() -> usize {
+fn p() -> String {
     /*
     Factorial digit sum
     Problem 20
@@ -25,7 +25,8 @@ fn p() -> usize {
         .to_radix_be(10)
         .iter()
         .map(|x| *x as usize)
-        .sum::<usize>() as usize
+        .sum::<usize>()
+        .to_string()
 }
 
 timeit::timeit!(Problem20, solve, p);
