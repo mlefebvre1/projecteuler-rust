@@ -1,5 +1,5 @@
 use crate::utils::timeit;
-use num_bigint::BigUint;
+use num::BigUint;
 use std::fs;
 
 fn p() -> String {

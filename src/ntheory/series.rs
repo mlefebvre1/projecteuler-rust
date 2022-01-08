@@ -1,29 +1,32 @@
-pub struct Fibonacci {
-    a: usize,
-    b: usize,
-    max: usize,
+use num::traits::{One, Zero};
+
+pub struct Fibonacci<T> {
+    a: T,
+    b: T,
 }
 
-impl Fibonacci {
-    pub fn new(max: usize) -> Self {
+impl<T> Fibonacci<T>
+where
+    T: Zero + One,
+{
+    pub fn new() -> Self {
         Self {
-            a: 0,
-            b: 1,
-            max: max,
+            a: num::zero(),
+            b: num::one(),
         }
     }
 }
 
-impl Iterator for Fibonacci {
-    type Item = usize;
-    fn next(&mut self) -> Option<Self::Item> {
-        let fib = self.a + self.b;
-        self.a = self.b;
-        self.b = fib;
-        if fib >= self.max {
-            None
-        } else {
-            Some(fib)
-        }
+impl<T> Iterator for Fibonacci<T>
+where
+    T: Clone,
+    for<'a> &'a T: std::ops::Add<Output = T>,
+{
+    type Item = T;
+
+    fn next(&mut self) -> Option<T> {
+        std::mem::swap(&mut self.a, &mut self.b);
+        self.b = &self.b + &self.a;
+        Some(self.a.clone())
     }
 }
