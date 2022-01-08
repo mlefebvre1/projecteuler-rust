@@ -14,8 +14,12 @@ fn p() -> String {
     even-valued terms.
     */
     const MAX_F_VALUE: usize = 4e6 as usize;
-    let fib_iter = series::Fibonacci::new(MAX_F_VALUE);
-    fib_iter.filter(|x| x % 2 == 0).sum::<usize>().to_string()
+    let fib_iter = series::Fibonacci::<usize>::new();
+    fib_iter
+        .take_while(|x| *x <= MAX_F_VALUE)
+        .filter(|x| x % 2 == 0)
+        .sum::<usize>()
+        .to_string()
 }
 
 timeit::timeit!(Problem02, solve, p);

@@ -1,5 +1,5 @@
 use crate::utils::timeit;
-use num_bigint::BigUint;
+use num::BigUint;
 
 fn factorial(n: usize) -> BigUint {
     let mut fact = BigUint::from(1usize);
