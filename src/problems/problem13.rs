@@ -109,13 +109,15 @@ fn p() -> String {
     20849603980134001723930671666823555245252804609722
     53503534226472524250874054075591789781264330331690
     */
-    let mut total = BigUint::from(0usize);
     let data =
         fs::read_to_string("src/problems/data/problem13.txt").expect("Problem opening the file");
-    for line in data.lines() {
-        let n: BigUint = line.parse().unwrap();
-        total += n
-    }
+    let total: BigUint = data
+        .lines()
+        .map(|line| {
+            let n: BigUint = line.parse().unwrap();
+            n
+        })
+        .sum();
     let total_str = total.to_str_radix(10);
     return String::from(&total_str[0..10]);
 }

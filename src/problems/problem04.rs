@@ -1,5 +1,6 @@
 use crate::ntheory::palindrome;
 use crate::utils::timeit;
+use itertools::Itertools;
 
 fn p() -> String {
     /*
@@ -10,14 +11,11 @@ fn p() -> String {
 
     Find the largest palindrome made from the product of two 3-digit numbers.
     */
-    let mut products = Vec::new();
-    for n1 in 100..999 {
-        for n2 in n1..999 {
-            products.push(n1 * n2);
-        }
-    }
-    let candidates = products.iter().filter(|&x| palindrome::is_palindrome(*x));
-    (*candidates.max().unwrap()).to_string()
+    const RANGE: std::ops::Range<usize> = 100..999;
+    let cartesian_prod = RANGE.cartesian_product(RANGE);
+    let products = cartesian_prod.map(|(n1, n2)| n1 * n2);
+    let candidates = products.filter(|x| palindrome::is_palindrome(*x));
+    candidates.max().unwrap().to_string()
 }
 
 timeit::timeit!(Problem04, solve, p);

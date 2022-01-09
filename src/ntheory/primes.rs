@@ -66,20 +66,6 @@ where
     return true;
 }
 
-pub fn gcd<T>(a: T, b: T) -> T
-where
-    T: Num + NumCast + PartialOrd + Copy,
-{
-    let mut x = a;
-    let mut y = b;
-    while y != num::zero() {
-        let t = NumCast::from(y).unwrap();
-        y = x % y;
-        x = t;
-    }
-    x
-}
-
 #[test]
 fn test_sieves() {
     assert_eq!(
@@ -104,12 +90,4 @@ fn test_is_prime() {
     assert_eq!(is_prime(4), false);
     assert_eq!(is_prime(100), false);
     assert_eq!(is_prime(10000), false);
-}
-
-#[test]
-fn test_gcd() {
-    assert_eq!(gcd(3, 5), 1);
-    assert_eq!(gcd(2, 8), 2);
-    assert_eq!(gcd(100, 84), 4);
-    assert_eq!(gcd(127426, 95874), 58);
 }
