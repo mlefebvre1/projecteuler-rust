@@ -15,12 +15,8 @@ fn p() -> String {
     Find the product abc.
     */
     let triples = pythagorean::pythagorean_triples(2000);
-    for triple in triples {
-        if triple.sum() == 1000 {
-            return triple.prod().to_string();
-        }
-    }
-    panic!();
+    let triple = triples.iter().find(|triple| triple.sum() == 1000).unwrap();
+    triple.prod().to_string()
 }
 
 timeit::timeit!(Problem09, solve, p);

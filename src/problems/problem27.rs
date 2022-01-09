@@ -1,5 +1,6 @@
 use crate::ntheory::primes::is_prime;
 use crate::utils::timeit;
+use itertools::Itertools;
 
 fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
     let mut n = 0;
@@ -43,15 +44,10 @@ fn p() -> String {
     Find the product of the coefficients, a nd b, for the quadratic expression that produces the maximum number of
     primes for consecutive values of n, starting with n=0.
     */
-    let mut v = Vec::new();
-    for a in -1000..1000 {
-        for b in -1000..1000 {
-            v.push((a, b));
-        }
-    }
-    let quad_consecutive_primes = v
-        .iter()
-        .map(|(a, b)| (a, b, quadratic_consecutive_primes(*a, *b)));
+    const RANGE: std::ops::Range<isize> = -1000..1000;
+    let candidates = RANGE.cartesian_product(RANGE);
+    let quad_consecutive_primes =
+        candidates.map(|(a, b)| (a, b, quadratic_consecutive_primes(a, b)));
     let (a, b, _) = quad_consecutive_primes.max_by_key(|k| k.2).unwrap();
 
     return (a * b).to_string();
