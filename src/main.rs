@@ -2,7 +2,7 @@ mod ntheory;
 mod problems;
 mod utils;
 
-const PROBLEMS: [fn() -> String; 28] = [
+const PROBLEMS: [fn() -> String; 30] = [
     problems::problem01::solve,
     problems::problem02::solve,
     problems::problem03::solve,
@@ -31,6 +31,8 @@ const PROBLEMS: [fn() -> String; 28] = [
     problems::problem26::solve,
     problems::problem27::solve,
     problems::problem28::solve,
+    problems::problem29::solve,
+    problems::problem30::solve,
 ];
 
 fn main() {
@@ -41,7 +43,7 @@ fn main() {
 
 #[test]
 fn test_regression() {
-    const SOLUTIONS: [&str; 28] = [
+    const SOLUTIONS: [&str; 30] = [
         "233168",
         "4613732",
         "6857",
@@ -70,6 +72,8 @@ fn test_regression() {
         "983",
         "-59231",
         "669171001",
+        "9183",
+        "443839",
     ];
     for (problem, solution) in PROBLEMS.iter().zip(SOLUTIONS.iter()) {
         let result = problem();
