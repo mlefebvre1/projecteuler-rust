@@ -1,19 +1,3 @@
-/*
-def decimal_recurring_len(n: int) -> int:
-    """
-    Calculate the number of digits of the recurrence of decimal
-    """
-    nb_digits = len(str(n))
-    decimal = decimal_division(n, n * 2)
-    # Trying to find this sequence again, for relatively small numbers (< 1000) checking 3 digits only is enough
-    target = decimal[0:nb_digits]
-    for n in range(nb_digits, len(decimal)):
-        if decimal[n : n + nb_digits] == target:
-            return n
-    else:
-        return 1
-*/
-
 pub fn decimal_division(n: usize, nb_digits: usize) -> Vec<u8> {
     /*
     Generate the decimal representation of 1/n up to 'nb_digits' digits

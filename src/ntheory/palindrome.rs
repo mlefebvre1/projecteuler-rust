@@ -11,3 +11,14 @@ pub fn is_palindrome(n: usize) -> bool {
         return true;
     }
 }
+
+#[test]
+fn test_is_palindrome() {
+    assert_eq!(is_palindrome(123), false);
+    assert_eq!(is_palindrome(121), true);
+    assert_eq!(is_palindrome(1245421), true);
+    assert_eq!(is_palindrome(111), true);
+    assert_eq!(is_palindrome(3333), true);
+    assert_eq!(is_palindrome(987656789), true);
+    assert_eq!(is_palindrome(987656779), false);
+}
