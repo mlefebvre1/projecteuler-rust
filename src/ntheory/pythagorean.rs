@@ -1,7 +1,7 @@
 use num::Integer;
 use std::fmt;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct PythagoreanTriple(usize, usize, usize);
 
 impl PythagoreanTriple {
@@ -19,19 +19,12 @@ impl fmt::Display for PythagoreanTriple {
     }
 }
 
-impl PartialEq for PythagoreanTriple {
-    fn eq(&self, other: &Self) -> bool {
-        self.0 == other.0 && self.1 == other.1 && self.2 == other.2
-    }
-}
-
 pub fn primitive_pythagorean_triples(max_h: usize) -> Vec<PythagoreanTriple> {
     let end: usize = (max_h as f64).sqrt().ceil() as usize;
     let mut triples = Vec::new();
     for n in 1..end {
         for m in n..end {
             if n.gcd(&m) == 1 && (m != n) && ((m + n) % 2 != 0) {
-                // primes::gcd(n, m) == 1 && (m != n) && ((m + n) % 2 != 0) {
                 let mut a = m * m - n * n;
                 let mut b = 2 * m * n;
                 if b < a {
