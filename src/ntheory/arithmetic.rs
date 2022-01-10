@@ -24,6 +24,23 @@ pub fn nb_decimal_recurring_len(n: usize) -> usize {
     1
 }
 
+pub fn pandigital_validation(n: &str, start: usize, stop: usize) -> bool {
+    let mut presence_status = vec![0usize; stop + 1];
+    for digit in n.chars().map(|c| c.to_digit(10).unwrap() as usize) {
+        presence_status[digit] += 1;
+    }
+    for (digit, presence) in presence_status.iter().enumerate() {
+        if digit < start {
+            if *presence != 0 {
+                return false;
+            }
+        } else if *presence != 1 {
+            return false;
+        }
+    }
+    true
+}
+
 #[test]
 fn test_decimal_division() {
     assert_eq!(decimal_division(3, 5), [3, 3, 3, 3, 3]);
@@ -41,4 +58,11 @@ fn test_nb_decimal_recurring_len() {
     assert_eq!(nb_decimal_recurring_len(7), 6);
     assert_eq!(nb_decimal_recurring_len(13), 6);
     assert_eq!(nb_decimal_recurring_len(983), 982);
+}
+
+#[test]
+fn test_pandigital_validation() {
+    assert!(pandigital_validation("123", 1, 3));
+    assert!(!pandigital_validation("1213", 1, 3));
+    assert!(pandigital_validation("987654321", 1, 9));
 }
