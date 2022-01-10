@@ -8,7 +8,7 @@ pub fn decimal_division(n: usize, nb_digits: usize) -> Vec<u8> {
         decimals.push((a / n) as u8);
         a = (a % n) * 10;
     }
-    return decimals;
+    decimals
 }
 
 pub fn nb_decimal_recurring_len(n: usize) -> usize {
@@ -21,7 +21,7 @@ pub fn nb_decimal_recurring_len(n: usize) -> usize {
             return i;
         }
     }
-    return 1;
+    1
 }
 
 #[test]

@@ -6,7 +6,7 @@ fn factorial(n: usize) -> BigUint {
     for i in 1..=n {
         fact *= i;
     }
-    return fact;
+    fact
 }
 
 fn p() -> String {

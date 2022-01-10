@@ -31,7 +31,7 @@ fn p() -> String {
         .map(|p| arithmetic::nb_decimal_recurring_len(*p));
     let both = primes.iter().zip(decimal_recurring);
     let (max_prime, _) = both.max_by_key(|k| k.1).unwrap();
-    return (*max_prime).to_string();
+    (*max_prime).to_string()
 }
 
 timeit::timeit!(Problem26, solve, p);

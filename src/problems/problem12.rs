@@ -55,7 +55,7 @@ fn p() -> String {
         n += 1;
         k += n as f64;
     }
-    return (k as usize).to_string();
+    (k as usize).to_string()
 }
 
 timeit::timeit!(Problem12, solve, p);

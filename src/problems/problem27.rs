@@ -7,7 +7,7 @@ fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
     loop {
         let s = num::pow(n, 2) + a * n + b;
         if s % 2 != 0 {
-            if is_prime(s) == false {
+            if !is_prime(s) {
                 break;
             }
         } else {
@@ -15,7 +15,7 @@ fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
         }
         n += 1;
     }
-    return n;
+    n
 }
 
 fn p() -> String {
@@ -50,7 +50,7 @@ fn p() -> String {
         candidates.map(|(a, b)| (a, b, quadratic_consecutive_primes(a, b)));
     let (a, b, _) = quad_consecutive_primes.max_by_key(|k| k.2).unwrap();
 
-    return (a * b).to_string();
+    (a * b).to_string()
 }
 
 timeit::timeit!(Problem27, solve, p);

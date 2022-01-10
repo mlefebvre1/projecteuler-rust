@@ -3,7 +3,7 @@ use crate::utils::timeit;
 
 const MAX_N: usize = 28123;
 
-fn get_array_of_sum_of_two_abundants(abundants: &Vec<usize>) -> [bool; MAX_N] {
+fn get_array_of_sum_of_two_abundants(abundants: &[usize]) -> [bool; MAX_N] {
     let mut numbers_written_as_sum_of_2_abundants: [bool; MAX_N] = [false; MAX_N];
     for a in abundants {
         for b in abundants {
@@ -13,7 +13,7 @@ fn get_array_of_sum_of_two_abundants(abundants: &Vec<usize>) -> [bool; MAX_N] {
             }
         }
     }
-    return numbers_written_as_sum_of_2_abundants;
+    numbers_written_as_sum_of_2_abundants
 }
 
 fn p() -> String {
@@ -44,8 +44,8 @@ fn p() -> String {
     let sum_of_non_two_abundants: usize = array_sum_of_2_abundants
         .iter()
         .enumerate()
-        .fold(0, |acc, (i, x)| if *x == false { acc + i } else { acc });
-    return sum_of_non_two_abundants.to_string();
+        .fold(0, |acc, (i, x)| if !(*x) { acc + i } else { acc });
+    sum_of_non_two_abundants.to_string()
 }
 
 timeit::timeit!(Problem23, solve, p);

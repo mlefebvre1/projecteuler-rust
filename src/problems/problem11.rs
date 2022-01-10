@@ -119,7 +119,7 @@ fn p() -> String {
             }
         }
     }
-    return max_prod.to_string();
+    max_prod.to_string()
 }
 
 timeit::timeit!(Problem11, solve, p);

@@ -35,7 +35,7 @@ pub fn primitive_pythagorean_triples(max_h: usize) -> Vec<PythagoreanTriple> {
             }
         }
     }
-    return triples;
+    triples
 }
 
 pub fn pythagorean_triples(max_h: usize) -> Vec<PythagoreanTriple> {
@@ -57,7 +57,7 @@ pub fn pythagorean_triples(max_h: usize) -> Vec<PythagoreanTriple> {
             m += 1;
         }
     }
-    return triples;
+    triples
 }
 
 #[test]
