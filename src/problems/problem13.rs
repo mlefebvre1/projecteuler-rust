@@ -119,7 +119,7 @@ fn p() -> String {
         })
         .sum();
     let total_str = total.to_str_radix(10);
-    return String::from(&total_str[0..10]);
+    String::from(&total_str[0..10])
 }
 
 timeit::timeit!(Problem13, solve, p);

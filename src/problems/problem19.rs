@@ -17,10 +17,8 @@ static NB_DAYS_PER_MONTH: phf::Map<&'static str, usize> = phf_map! {
 };
 
 fn nb_days_in_month(month: &str, year: usize) -> usize {
-    if month == "february" {
-        if year % 4 == 0 && year % 400 != 0 {
-            return *NB_DAYS_PER_MONTH.get(month).unwrap() + 1;
-        }
+    if month == "february" && year % 4 == 0 && year % 400 != 0 {
+        return *NB_DAYS_PER_MONTH.get(month).unwrap() + 1;
     }
     return *NB_DAYS_PER_MONTH.get(month).unwrap();
 }
@@ -71,7 +69,7 @@ fn p() -> String {
             }
         }
     }
-    return nb_sundays.to_string();
+    nb_sundays.to_string()
 }
 
 timeit::timeit!(Problem19, solve, p);

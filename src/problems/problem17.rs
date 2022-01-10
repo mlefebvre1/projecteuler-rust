@@ -31,9 +31,9 @@ fn count_base10(n: usize) -> usize {
     let mut nb_letters = 0;
     if n < 10 {
         nb_letters += NUM_0_10[n].chars().count();
-    } else if n >= 10 && n < 20 {
+    } else if (10..20).contains(&n) {
         nb_letters += NUM_10_20[n % 10].chars().count();
-    } else if n >= 20 && n < 100 {
+    } else if (20..100).contains(&n) {
         let n_str = n.to_string();
         let first_digit: usize = n_str[0..1].parse::<usize>().unwrap();
         let second_digit: usize = n_str[1..2].parse::<usize>().unwrap();
@@ -46,7 +46,7 @@ fn count_base10(n: usize) -> usize {
                 NUM_20_100[first_digit].chars().count() + NUM_0_10[second_digit].chars().count();
         }
     }
-    return nb_letters;
+    nb_letters
 }
 
 fn count_letters(n: usize) -> usize {
@@ -72,7 +72,7 @@ fn count_letters(n: usize) -> usize {
         nb_letters += ONE.chars().count() + THOUSAND.chars().count();
     }
 
-    return nb_letters;
+    nb_letters
 }
 
 fn p() -> String {
@@ -89,7 +89,7 @@ fn p() -> String {
     British usage.
     */
     const MAX_N: usize = 1000;
-    let nb_letters = (1..=MAX_N).map(|n| count_letters(n));
+    let nb_letters = (1..=MAX_N).map(count_letters);
     nb_letters.sum::<usize>().to_string()
 }
 

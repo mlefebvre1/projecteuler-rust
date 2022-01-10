@@ -26,6 +26,7 @@ fn p() -> String {
     for col in 1..=20 {
         tab[1][col] = col + 1;
     }
+    #[allow(clippy::needless_range_loop)]
     for row in 1..=20 {
         tab[row][1] = row + 1;
     }
@@ -34,7 +35,7 @@ fn p() -> String {
             tab[row][col] = tab[row - 1][col] + tab[row][col - 1];
         }
     }
-    return tab[20][20].to_string();
+    tab[20][20].to_string()
 }
 
 timeit::timeit!(Problem15, solve, p);

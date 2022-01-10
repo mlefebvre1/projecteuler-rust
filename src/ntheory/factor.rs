@@ -14,8 +14,8 @@ pub fn factorize(n: usize) -> Vec<usize> {
         factors.push(sqrt_n.floor() as usize);
     }
     factors.push(n);
-    factors.sort();
-    return factors;
+    factors.sort_unstable();
+    factors
 }
 
 pub fn proper_divisors_sum(n: usize) -> usize {
@@ -36,7 +36,7 @@ pub fn proper_divisors_sum(n: usize) -> usize {
     if (sqrt_n_int * sqrt_n_int) == n {
         proper_div_sum += sqrt_n_int;
     }
-    return proper_div_sum;
+    proper_div_sum
 }
 
 #[test]

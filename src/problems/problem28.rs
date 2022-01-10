@@ -43,7 +43,7 @@ fn p() -> String {
             total += 1 + base;
         }
     }
-    return total.to_string();
+    total.to_string()
 }
 
 timeit::timeit!(Problem28, solve, p);

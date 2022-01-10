@@ -1,5 +1,6 @@
 use num::{Num, NumCast, ToPrimitive};
 
+#[allow(clippy::just_underscores_and_digits)]
 pub fn sieves<T>(k: T) -> Vec<T>
 where
     T: Num + NumCast + PartialOrd + ToPrimitive + Copy,
@@ -31,14 +32,20 @@ where
         }
     }
 
-    for n in 2..=k.to_usize().unwrap() {
-        if !sieved[n] {
+    for (n, sieve_entry) in sieved
+        .iter()
+        .enumerate()
+        .take(k.to_usize().unwrap() + 1)
+        .skip(2)
+    {
+        if !sieve_entry {
             primes.push(NumCast::from(n).unwrap());
         }
     }
-    return primes;
+    primes
 }
 
+#[allow(clippy::just_underscores_and_digits)]
 pub fn is_prime<T>(n: T) -> bool
 where
     T: Num + PartialOrd + NumCast + Copy,
@@ -63,7 +70,7 @@ where
         }
         i = i + _6;
     }
-    return true;
+    true
 }
 
 #[test]

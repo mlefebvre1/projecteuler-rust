@@ -24,14 +24,14 @@ fn p() -> String {
     */
     let data =
         fs::read_to_string("src/problems/data/problem22.txt").expect("Problem opening the file");
-    let mut names_raw: Vec<&str> = data.split(",").collect();
-    names_raw.sort();
+    let mut names_raw: Vec<&str> = data.split(',').collect();
+    names_raw.sort_unstable();
     let names = names_raw.iter().map(|&name| name.replace("\"", ""));
     let names_score = names
         .enumerate()
         .map(|(index, name)| calc_name_score(&name, index));
     let total: usize = names_score.sum();
-    return total.to_string();
+    total.to_string()
 }
 
 timeit::timeit!(Problem22, solve, p);

@@ -14,7 +14,7 @@ fn prepare_matrix() -> Vec<Vec<usize>> {
         matrix.push(line_vec);
     }
 
-    return matrix;
+    matrix
 }
 
 fn p() -> String {

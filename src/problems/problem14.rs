@@ -13,7 +13,7 @@ fn chain(n: usize) -> usize {
             chain_len += 1
         }
     }
-    return chain_len;
+    chain_len
 }
 
 fn p() -> String {
@@ -39,9 +39,9 @@ fn p() -> String {
     const END: usize = 1e6 as usize;
     // We don't need to check anything below half of the candidates since chain(2*n) = 1 + chain(n)
     const RANGE: std::ops::Range<usize> = (END / 2)..END;
-    let chains = RANGE.map(|n| chain(n)).zip(RANGE);
+    let chains = RANGE.map(chain).zip(RANGE);
     let (_, max_n) = chains.max().unwrap();
-    return max_n.to_string();
+    max_n.to_string()
 }
 
 timeit::timeit!(Problem14, solve, p);
