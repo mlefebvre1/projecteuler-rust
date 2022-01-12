@@ -2,36 +2,6 @@ use crate::utils::timeit;
 use itertools::Itertools;
 use num::Integer;
 
-fn is_non_trivial_two_digits_curious_fraction(num: usize, denom: usize) -> bool {
-    let fraction = num as f64 / denom as f64;
-    let num_digits = [num / 10, num % 10];
-    let denom_digits = [denom / 10, denom % 10];
-
-    if num_digits[0] == denom_digits[1] && num_digits[1] == denom_digits[0] {
-        return false;
-    }
-
-    let simplified_fraction: f64 = {
-        if num_digits[0] == denom_digits[1] && denom_digits[0] != 0 {
-            num_digits[1] as f64 / denom_digits[0] as f64
-        } else if num_digits[1] == denom_digits[0] && denom_digits[1] != 0 {
-            num_digits[0] as f64 / denom_digits[1] as f64
-        } else {
-            0.0f64
-        }
-    };
-    simplified_fraction == fraction
-}
-
-#[test]
-fn test_is_non_trivial_two_digits_curious_fraction() {
-    assert!(!is_non_trivial_two_digits_curious_fraction(14, 64));
-    assert!(is_non_trivial_two_digits_curious_fraction(16, 64));
-    assert!(is_non_trivial_two_digits_curious_fraction(19, 95));
-    assert!(is_non_trivial_two_digits_curious_fraction(26, 65));
-    assert!(is_non_trivial_two_digits_curious_fraction(49, 98));
-}
-
 fn p() -> String {
     /*
     Digit cancelling fractions
@@ -47,6 +17,25 @@ fn p() -> String {
 
     If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
     */
+    fn is_non_trivial_two_digits_curious_fraction(num: usize, denom: usize) -> bool {
+        let fraction = num as f64 / denom as f64;
+        let num_digits = [num / 10, num % 10];
+        let denom_digits = [denom / 10, denom % 10];
+        if num_digits[0] == denom_digits[1] && num_digits[1] == denom_digits[0] {
+            return false;
+        }
+        let simplified_fraction: f64 = {
+            if num_digits[0] == denom_digits[1] && denom_digits[0] != 0 {
+                num_digits[1] as f64 / denom_digits[0] as f64
+            } else if num_digits[1] == denom_digits[0] && denom_digits[1] != 0 {
+                num_digits[0] as f64 / denom_digits[1] as f64
+            } else {
+                0.0f64
+            }
+        };
+        simplified_fraction == fraction
+    }
+
     const MAX: usize = 99;
     let two_digits_fractions = (10..=MAX).combinations_with_replacement(2);
     let non_trivial_two_digits_curious_fractions = two_digits_fractions
