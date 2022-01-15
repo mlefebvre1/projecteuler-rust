@@ -52,8 +52,9 @@ fn p() -> String {
         DigitRotations::new(&_n).take(_n.len())
     }
     fn is_circular(n: usize) -> bool {
-        let rotations = get_all_rotations(n).map(|r| r.into_iter().collect::<String>());
-        let rotations_not_prime = rotations.filter(|x| !is_prime(x.parse::<usize>().unwrap()));
+        let rotations = get_all_rotations(n)
+            .map(|r| r.into_iter().collect::<String>().parse::<usize>().unwrap());
+        let rotations_not_prime = rotations.filter(|&x| !is_prime(x));
         rotations_not_prime.count() == 0
     }
 
