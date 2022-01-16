@@ -42,4 +42,4 @@ fn p() -> String {
     pandigitals.max().unwrap()
 }
 
-timeit::timeit!(Problem37, solve, p);
+timeit::timeit!(Problem38, solve, p);
