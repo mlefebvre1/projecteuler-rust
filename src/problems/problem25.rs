@@ -1,4 +1,4 @@
-use crate::ntheory::series::Fibonacci;
+use crate::series::fibonacci::Fibonacci;
 use crate::utils::timeit;
 use num::BigUint;
 
