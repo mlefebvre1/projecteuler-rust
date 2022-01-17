@@ -1,5 +1,6 @@
 mod ntheory;
 mod problems;
+mod series;
 mod utils;
 
 const PROBLEMS: [fn() -> String; 41] = [

@@ -1,4 +1,4 @@
-use crate::ntheory::series;
+use crate::series::fibonacci::Fibonacci;
 use crate::utils::timeit;
 
 fn p() -> String {
@@ -14,7 +14,7 @@ fn p() -> String {
     even-valued terms.
     */
     const MAX_F_VALUE: usize = 4e6 as usize;
-    let fib_iter = series::Fibonacci::<usize>::new();
+    let fib_iter = Fibonacci::<usize>::new();
     fib_iter
         .take_while(|x| *x <= MAX_F_VALUE)
         .filter(|x| x % 2 == 0)

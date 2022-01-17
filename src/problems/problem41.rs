@@ -12,18 +12,6 @@ fn p() -> String {
 
     What is the largest n-digit pandigital prime that exists?
     */
-    /*
-    def generate_candidates() -> Iterable[int]:
-    _N_LIST = [1, 12, 123, 1234, 12345, 123456, 1234567, 12345678, 123456789]
-    for n in _N_LIST:
-        permutations = itertools.permutations(str(n))
-        for permutation in permutations:
-            permutation = int("".join(permutation))
-            if is_prime(permutation):
-                yield permutation
-    candidates = generate_candidates()
-    return max(candidates)
-    */
     let numbers = [
         1, 12, 123, 1234, 12345, 123456, 1234567, 12345678, 123456789,
     ];
