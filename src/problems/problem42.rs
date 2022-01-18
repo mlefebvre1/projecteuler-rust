@@ -1,4 +1,6 @@
+use crate::series::geometry::Triangular;
 use crate::utils::timeit;
+use std::fs;
 
 fn p() -> String {
     /*
@@ -16,35 +18,27 @@ fn p() -> String {
     Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common
     English words, how many are triangle words?
     */
-    /*
-    def generate_triangles(max_: int) -> List[int]:
-        n = 0
-        while True:
-            t = triangular(n)
-            yield t
-            n += 1
-            if t >= max_:
-                return
-
-
-    def generate_words_sum(words: List[str]) -> Iterable[int]:
-        for word in words:
-            yield reduce(
-                lambda total, char: total + (ord(char) - 64) if char != '"' else total,
-                word,
-                0,
-            )
-    with open(f"{Path(__file__).parent}/data/problem42.txt", "r") as fp:
-        words = str(fp.read()).split(",")
-        fp.close()
-
-    triangles = list(generate_triangles(max(generate_words_sum(words))))
-    return reduce(
-        lambda total, word_sum: total + 1 if word_sum in triangles else total,
-        generate_words_sum(words),
-        0,
-    )
-    */
+    let data =
+        fs::read_to_string("src/problems/data/problem42.txt").expect("Problem opening the file");
+    let words: Vec<&str> = data.split(',').collect();
+    let words_sum: Vec<usize> = words
+        .iter()
+        .map(|&word| {
+            word.chars().fold(0, |acc, c| {
+                if c != '"' {
+                    acc + (c as usize) - 64
+                } else {
+                    acc
+                }
+            })
+        })
+        .collect();
+    let max_word_sum = words_sum.iter().max().unwrap();
+    let triangulars: Vec<usize> = Triangular::<usize>::new().take(*max_word_sum).collect();
+    let triangular_word_sum = words_sum
+        .iter()
+        .filter(|word_sum| triangulars.contains(word_sum));
+    triangular_word_sum.count().to_string()
 }
 
 timeit::timeit!(Problem42, solve, p);
