@@ -3,7 +3,7 @@ mod problems;
 mod series;
 mod utils;
 
-const PROBLEMS: [fn() -> String; 41] = [
+const PROBLEMS: [fn() -> String; 42] = [
     problems::problem01::solve,
     problems::problem02::solve,
     problems::problem03::solve,
@@ -45,17 +45,19 @@ const PROBLEMS: [fn() -> String; 41] = [
     problems::problem39::solve,
     problems::problem40::solve,
     problems::problem41::solve,
+    problems::problem42::solve,
 ];
 
 fn main() {
     for problem in PROBLEMS {
         problem();
     }
+    // problems::problem42::solve();
 }
 
 #[test]
 fn test_regression() {
-    const SOLUTIONS: [&str; 41] = [
+    const SOLUTIONS: [&str; 42] = [
         "233168",
         "4613732",
         "6857",
@@ -97,6 +99,7 @@ fn test_regression() {
         "840",
         "210",
         "7652413",
+        "162",
     ];
     for (problem, solution) in PROBLEMS.iter().zip(SOLUTIONS.iter()) {
         let result = problem();

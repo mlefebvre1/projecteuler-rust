@@ -39,3 +39,4 @@ pub mod problem38;
 pub mod problem39;
 pub mod problem40;
 pub mod problem41;
+pub mod problem42;

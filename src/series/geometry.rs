@@ -15,6 +15,7 @@ where
     pub fn new() -> Self {
         Self { n: num::zero() }
     }
+
     #[allow(dead_code)]
     pub fn from_n(n: T) -> T {
         &n * &(&n + &num::one()) / (&num::one() + &num::one())
