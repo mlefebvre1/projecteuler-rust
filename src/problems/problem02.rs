@@ -1,5 +1,6 @@
 use crate::series::fibonacci::Fibonacci;
 use crate::utils::timeit;
+use num::Integer;
 
 fn p() -> String {
     /*
@@ -17,7 +18,7 @@ fn p() -> String {
     let fib_iter = Fibonacci::<usize>::new();
     fib_iter
         .take_while(|x| *x <= MAX_F_VALUE)
-        .filter(|x| x % 2 == 0)
+        .filter(|x| x.is_even())
         .sum::<usize>()
         .to_string()
 }

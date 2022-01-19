@@ -1,10 +1,11 @@
 use crate::utils::timeit;
+use num::Integer;
 
 fn chain(n: usize) -> usize {
     let mut chain_len = 0usize;
     let mut n = n;
     while n != 1 {
-        if n % 2 != 0 {
+        if n.is_odd() {
             // Skip a step since for an odd number : 3*n+1 always gives a even number
             n = (3 * n + 1) / 2;
             chain_len += 2

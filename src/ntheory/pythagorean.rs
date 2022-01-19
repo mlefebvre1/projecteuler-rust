@@ -24,7 +24,7 @@ pub fn primitive_pythagorean_triples(max_h: usize) -> Vec<PythagoreanTriple> {
     let mut triples = Vec::new();
     for n in 1..end {
         for m in n..end {
-            if n.gcd(&m) == 1 && (m != n) && ((m + n) % 2 != 0) {
+            if n.gcd(&m) == 1 && (m != n) && (m + n).is_odd() {
                 let mut a = m * m - n * n;
                 let mut b = 2 * m * n;
                 if b < a {
