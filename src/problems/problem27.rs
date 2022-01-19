@@ -1,12 +1,13 @@
 use crate::ntheory::primes::is_prime;
 use crate::utils::timeit;
 use itertools::Itertools;
+use num::Integer;
 
 fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
     let mut n = 0;
     loop {
         let s = num::pow(n, 2) + a * n + b;
-        if s % 2 != 0 {
+        if s.is_odd() {
             if !is_prime(s) {
                 break;
             }

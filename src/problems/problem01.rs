@@ -9,16 +9,11 @@ fn p() -> String {
 
     Find the sum of all the multiples of 3 or 5 below 1000.
     */
-    use std::collections::HashSet;
-
-    let max_n = 1000;
-    let mut multiples = HashSet::new();
-    for multiplier in [3, 5].iter() {
-        for n in (*multiplier..max_n).step_by(*multiplier) {
-            multiples.insert(n);
-        }
-    }
-    multiples.iter().sum::<usize>().to_string()
+    const MAX_N: usize = 1000;
+    (1..MAX_N)
+        .filter(|n| (n % 3 == 0) || (n % 5 == 0))
+        .sum::<usize>()
+        .to_string()
 }
 
 timeit::timeit!(Problem01, solve, p);
