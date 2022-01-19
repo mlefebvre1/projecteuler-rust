@@ -41,6 +41,7 @@ pub fn proper_divisors_sum(n: usize) -> usize {
 
 #[test]
 fn test_factorize() {
+    assert_eq!(factorize(1), [1]);
     assert_eq!(factorize(2), [1, 2]);
     assert_eq!(factorize(10), [1, 2, 5, 10]);
     assert_eq!(factorize(13), [1, 13]);
