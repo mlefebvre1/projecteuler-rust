@@ -1,5 +1,4 @@
 use num::Integer;
-use std::fmt;
 
 #[derive(Debug, PartialEq)]
 pub struct PythagoreanTriple(usize, usize, usize);
@@ -10,12 +9,6 @@ impl PythagoreanTriple {
     }
     pub fn prod(&self) -> usize {
         self.0 * self.1 * self.2
-    }
-}
-
-impl fmt::Display for PythagoreanTriple {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "({}, {}, {})", self.0, self.1, self.2)
     }
 }
 
