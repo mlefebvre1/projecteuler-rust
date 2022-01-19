@@ -15,11 +15,13 @@ where
     let mut primes = Vec::new();
 
     if k <= _2 {
-        primes.push(_2);
+        primes.extend_from_slice(&[_2]);
+        return primes;
     }
 
     if k <= _3 {
-        primes.push(_3);
+        primes.extend_from_slice(&[_2, _3]);
+        return primes;
     }
 
     let end = k.to_f64().unwrap().sqrt().ceil() as usize;
@@ -75,6 +77,8 @@ where
 
 #[test]
 fn test_sieves() {
+    assert_eq!(sieves(2), [2]);
+    assert_eq!(sieves(3), [2, 3]);
     assert_eq!(
         sieves(50),
         [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
@@ -89,12 +93,12 @@ fn test_sieves() {
 }
 #[test]
 fn test_is_prime() {
-    assert_eq!(is_prime(2), true);
-    assert_eq!(is_prime(3), true);
-    assert_eq!(is_prime(5), true);
-    assert_eq!(is_prime(7), true);
-    assert_eq!(is_prime(983), true);
-    assert_eq!(is_prime(4), false);
-    assert_eq!(is_prime(100), false);
-    assert_eq!(is_prime(10000), false);
+    assert!(is_prime(2));
+    assert!(is_prime(3));
+    assert!(is_prime(5));
+    assert!(is_prime(7));
+    assert!(is_prime(983));
+    assert!(!is_prime(4));
+    assert!(!is_prime(100));
+    assert!(!is_prime(10000));
 }
