@@ -48,6 +48,7 @@ const PROBLEMS: [fn() -> String; 42] = [
     problems::problem42::solve,
 ];
 
+#[cfg(not(tarpaulin_include))]
 fn main() {
     for problem in PROBLEMS {
         problem();
