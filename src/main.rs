@@ -52,7 +52,6 @@ fn main() {
     for problem in PROBLEMS {
         problem();
     }
-    // problems::problem42::solve();
 }
 
 #[test]
