@@ -1,2 +1,3 @@
 pub mod fibonacci;
-pub mod geometry;
+pub mod pentagonal;
+pub mod triangular;
