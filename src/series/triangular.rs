@@ -16,12 +16,13 @@ where
     }
 
     #[allow(dead_code)]
-    pub fn from_n(n: T) -> T {
-        &n * &(&n + &num::one()) / (&num::one() + &num::one())
+    pub fn from_n(n: &T) -> T {
+        // t(n) = n * (n + 1) / 2
+        let two = &num::one() + &num::one();
+        n * &(n + &num::one()) / two
     }
 }
 
-#[allow(clippy::just_underscores_and_digits)]
 impl<T> Iterator for Triangular<T>
 where
     T: Clone + One + Num,
@@ -30,8 +31,7 @@ where
 {
     type Item = T;
     fn next(&mut self) -> Option<T> {
-        // t(n) = n * (n + 1) / 2
-        let t = &self.n * &(&self.n + &num::one()) / (&num::one() + &num::one());
+        let t = Self::from_n(&self.n);
         self.n = &self.n + &num::one();
         Some(t)
     }
@@ -50,11 +50,11 @@ fn test_triangular_usize() {
 #[test]
 fn test_triangular_biguint() {
     use num::BigUint;
-    let mut triangular_serie = Triangular::<BigUint>::new();
-    let actual: BigUint = triangular_serie.nth(20).unwrap();
-    assert_eq!(actual, BigUint::from(210usize));
-    assert_eq!(
-        Triangular::from_n(BigUint::parse_bytes(b"573147844013817084101", 10).unwrap()),
-        BigUint::parse_bytes(b"164249225548843399963236858072533962031151", 10).unwrap()
-    );
+    let actual: BigUint = Triangular::<BigUint>::new().nth(20).unwrap();
+    let expected = BigUint::from(210usize);
+    assert_eq!(actual, expected);
+
+    let actual = Triangular::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
+    let expected = BigUint::parse_bytes(b"164249225548843399963236858072533962031151", 10).unwrap();
+    assert_eq!(actual, expected);
 }

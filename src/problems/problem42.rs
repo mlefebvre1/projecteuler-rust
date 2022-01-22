@@ -1,4 +1,4 @@
-use crate::series::geometry::Triangular;
+use crate::series::triangular::Triangular;
 use crate::utils::timeit;
 use std::fs;
 
