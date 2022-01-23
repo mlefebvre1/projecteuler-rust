@@ -1,4 +1,4 @@
-use num::{Num, NumCast, ToPrimitive};
+use num::{Integer, Num, NumCast, ToPrimitive};
 
 #[allow(clippy::just_underscores_and_digits)]
 pub fn sieves<T>(k: T) -> Vec<T>
@@ -50,29 +50,32 @@ where
 #[allow(clippy::just_underscores_and_digits)]
 pub fn is_prime<T>(n: T) -> bool
 where
-    T: Num + PartialOrd + NumCast + Copy,
+    T: Integer + Num + Copy + NumCast,
 {
-    let _0 = num::zero();
-    let _1 = num::one();
-    let _2 = NumCast::from(2usize).unwrap();
-    let _3 = NumCast::from(3usize).unwrap();
-    let _6 = NumCast::from(6usize).unwrap();
+    let one = NumCast::from(1).unwrap();
+    let three = NumCast::from(3).unwrap();
 
-    let mut i = NumCast::from(5usize).unwrap();
-    if n <= _1 {
+    if n <= one {
         return false;
-    } else if n <= _3 {
+    }
+    if n <= three {
         return true;
-    } else if ((n % _2) == _0) || ((n % _3) == _0) {
+    }
+    if n.is_even() || n.is_multiple_of(&three) {
         return false;
     }
-    while (i * i) <= n {
-        if ((n % i) == _0) || ((n % (i + _2)) == _0) {
-            return false;
-        }
-        i = i + _6;
-    }
-    true
+    (5..)
+        .step_by(6)
+        .take_while(|&i| {
+            let _i: T = NumCast::from(i).unwrap();
+            (_i * _i) <= n
+        })
+        .filter(|&i| {
+            n.is_multiple_of(&NumCast::from(i).unwrap())
+                || n.is_multiple_of(&NumCast::from(i + 2).unwrap())
+        })
+        .count()
+        == 0
 }
 
 #[test]
