@@ -33,7 +33,6 @@ where
             }
         }
     }
-
     for (n, sieve_entry) in sieved
         .iter()
         .enumerate()
@@ -52,8 +51,12 @@ pub fn is_prime<T>(n: T) -> bool
 where
     T: Integer + Num + Copy + NumCast,
 {
+    let zero = NumCast::from(0).unwrap();
     let one = NumCast::from(1).unwrap();
+    let two = NumCast::from(2).unwrap();
     let three = NumCast::from(3).unwrap();
+    let five = NumCast::from(5).unwrap();
+    let six = NumCast::from(6).unwrap();
 
     if n <= one {
         return false;
@@ -64,18 +67,14 @@ where
     if n.is_even() || n.is_multiple_of(&three) {
         return false;
     }
-    (5..)
-        .step_by(6)
-        .take_while(|&i| {
-            let _i: T = NumCast::from(i).unwrap();
-            (_i * _i) <= n
-        })
-        .filter(|&i| {
-            n.is_multiple_of(&NumCast::from(i).unwrap())
-                || n.is_multiple_of(&NumCast::from(i + 2).unwrap())
-        })
-        .count()
-        == 0
+    let mut i = five;
+    while (i * i) <= n {
+        if ((n % i) == zero) || ((n % (i + two)) == zero) {
+            return false;
+        }
+        i = i + six;
+    }
+    true
 }
 
 #[test]
