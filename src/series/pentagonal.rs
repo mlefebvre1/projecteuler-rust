@@ -13,6 +13,7 @@ where
         + std::ops::Div<Output = T>
         + std::ops::Sub<Output = T>,
 {
+    #[allow(dead_code)]
     pub fn new() -> Self {
         Self { n: num::zero() }
     }
@@ -65,4 +66,24 @@ fn test_pentagonal_biguint() {
     let actual = Pentagonal::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
     let expected = BigUint::parse_bytes(b"492747676646530199888564278529574251925251", 10).unwrap();
     assert_eq!(actual, expected);
+}
+
+#[allow(dead_code)]
+pub fn is_pentagonal(n: usize) -> bool {
+    let (a, b, c) = (3isize, -1isize, -(2 * n as isize));
+    let discriminant = (b.pow(2) - (4 * a * c)) as f64;
+    let x = (-b as f64 + discriminant.sqrt()) / (2 * a) as f64;
+    if x == (x as usize) as f64 {
+        return true;
+    }
+    false
+}
+
+#[test]
+fn test_is_pentagonal() {
+    assert!(is_pentagonal(1));
+    assert!(is_pentagonal(5));
+    assert!(is_pentagonal(12));
+    assert!(is_pentagonal(40755));
+    assert!(!is_pentagonal(3));
 }

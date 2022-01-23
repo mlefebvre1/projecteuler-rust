@@ -42,3 +42,4 @@ pub mod problem41;
 pub mod problem42;
 pub mod problem43;
 pub mod problem44;
+pub mod problem45;
