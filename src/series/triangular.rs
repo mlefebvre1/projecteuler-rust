@@ -11,6 +11,7 @@ where
     for<'a> &'a T:
         std::ops::Add<Output = T> + std::ops::Mul<Output = T> + std::ops::Div<Output = T>,
 {
+    #[allow(dead_code)]
     pub fn new() -> Self {
         Self { n: num::zero() }
     }
