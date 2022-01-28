@@ -13,3 +13,21 @@ fn test_vec_of_u8_to_int() {
     assert_eq!(vec_of_u8_to_int(&[0, 5, 8]), 58);
     assert_eq!(vec_of_u8_to_int(&[5, 0, 0]), 500);
 }
+
+pub fn int_to_vec_of_u8(n: usize) -> Vec<u8> {
+    let mut vec: Vec<u8> = Vec::new();
+    let mut _n = n;
+    while _n > 0 {
+        vec.push((_n % 10) as u8);
+        _n /= 10;
+    }
+    vec.reverse();
+    vec
+}
+
+#[test]
+fn test_int_to_vec_of_u8() {
+    assert_eq!(int_to_vec_of_u8(123), [1, 2, 3]);
+    assert_eq!(int_to_vec_of_u8(100), [1, 0, 0]);
+    assert_eq!(int_to_vec_of_u8(957327), [9, 5, 7, 3, 2, 7]);
+}
