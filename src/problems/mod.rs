@@ -47,3 +47,4 @@ pub mod problem46;
 pub mod problem47;
 pub mod problem48;
 pub mod problem49;
+pub mod problem50;
