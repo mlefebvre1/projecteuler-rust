@@ -15,6 +15,9 @@ fn test_vec_of_u8_to_int() {
 }
 
 pub fn int_to_vec_of_u8(n: usize) -> Vec<u8> {
+    if n == 0 {
+        return vec![0];
+    }
     let mut vec: Vec<u8> = Vec::new();
     let mut _n = n;
     while _n > 0 {
@@ -27,6 +30,8 @@ pub fn int_to_vec_of_u8(n: usize) -> Vec<u8> {
 
 #[test]
 fn test_int_to_vec_of_u8() {
+    assert_eq!(int_to_vec_of_u8(0), [0]);
+    assert_eq!(int_to_vec_of_u8(1), [1]);
     assert_eq!(int_to_vec_of_u8(123), [1, 2, 3]);
     assert_eq!(int_to_vec_of_u8(100), [1, 0, 0]);
     assert_eq!(int_to_vec_of_u8(957327), [9, 5, 7, 3, 2, 7]);
