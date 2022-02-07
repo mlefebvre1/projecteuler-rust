@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /*
 from pathlib import Path
@@ -25,6 +26,8 @@ if __name__ == "__main__":
     problem54()
 */
 >>>>>>> 94cd8e6 (solve problem54)
+=======
+>>>>>>> 8d638d0 (remove python solution)
 use crate::utils::poker;
 use crate::utils::timeit;
 use std::fs;
