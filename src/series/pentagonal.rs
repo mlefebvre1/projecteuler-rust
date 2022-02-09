@@ -69,11 +69,12 @@ fn test_pentagonal_biguint() {
 }
 
 #[allow(dead_code)]
+#[allow(clippy::many_single_char_names)]
 pub fn is_pentagonal(n: usize) -> bool {
     let (a, b, c) = (3isize, -1isize, -(2 * n as isize));
     let discriminant = (b.pow(2) - (4 * a * c)) as f64;
     let x = (-b as f64 + discriminant.sqrt()) / (2 * a) as f64;
-    if x == (x as usize) as f64 {
+    if (x - (x as usize) as f64).abs() < f64::EPSILON {
         return true;
     }
     false

@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-/*
-from pathlib import Path
-from project_euler.utils import poker
-from project_euler.utils.timeit import timeit
-
-
-@timeit
-def problem54():
-    with open(f"{Path(__file__).parent}/data/problem54.txt", "r") as fp:
-        games = fp.read().splitlines()
-        fp.close()
-
-    nb_win_player1 = 0
-    for game in games:
-        game = game.split(" ")
-        hand_player1, hand_player2 = game[0:5], game[5:]
-        if poker.is_player1_winner(hand_player1, hand_player2):
-            nb_win_player1 += 1
-    return nb_win_player1
-
-
-if __name__ == "__main__":
-    problem54()
-*/
->>>>>>> 94cd8e6 (solve problem54)
-=======
->>>>>>> 8d638d0 (remove python solution)
 use crate::utils::poker;
 use crate::utils::timeit;
 use std::fs;

@@ -33,7 +33,7 @@ fn p() -> String {
                 0.0f64
             }
         };
-        simplified_fraction == fraction
+        (simplified_fraction - fraction).abs() < f64::EPSILON
     }
 
     const MAX: usize = 99;
