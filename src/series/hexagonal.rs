@@ -67,11 +67,12 @@ fn test_hexagonal_biguint() {
 }
 
 #[allow(dead_code)]
+#[allow(clippy::many_single_char_names)]
 pub fn is_hexagonal(n: usize) -> bool {
     let (a, b, c) = (2isize, -1isize, -(n as isize));
     let discriminant = (b.pow(2) - (4 * a * c)) as f64;
     let x = (-b as f64 + discriminant.sqrt()) / (2 * a) as f64;
-    if x == (x as usize) as f64 {
+    if (x - (x as usize) as f64).abs() < f64::EPSILON {
         return true;
     }
     false
