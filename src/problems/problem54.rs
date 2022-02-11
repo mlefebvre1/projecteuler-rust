@@ -46,4 +46,4 @@ fn p() -> String {
     nb_win_player1.to_string()
 }
 
-timeit::timeit!(Problem53, solve, p);
+timeit::timeit!(Problem54, solve, p);

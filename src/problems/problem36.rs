@@ -1,4 +1,4 @@
-use crate::ntheory::palindrome::is_palindrome;
+use crate::ntheory::palindrome::{is_palindrome, is_palindrome_str};
 use crate::utils::timeit;
 
 fn p() -> String {
@@ -13,7 +13,7 @@ fn p() -> String {
     const MAX_N: usize = 1e6 as usize;
     let palindroms = (0..MAX_N).filter(|&n| {
         let n_bin = format!("{:b}", n);
-        is_palindrome(&n.to_string()) && is_palindrome(&n_bin)
+        is_palindrome(n) && is_palindrome_str(&n_bin)
     });
     palindroms.sum::<usize>().to_string()
 }
