@@ -32,23 +32,23 @@ fn p() -> String {
 
     NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
     */
-    const MAX_N: usize = 10000;
-    (0..MAX_N)
+    const MAX_N: u128 = 10000;
+    (1..MAX_N)
         .filter(|&n| is_lynchrel_number(n))
         .count()
         .to_string()
 }
 
-fn is_lynchrel_number(n: usize) -> bool {
-    const MAX_ITER: usize = 50;
-    let mut _n = n;
-    for _ in 0..MAX_ITER {
-        let n_vec = int_to_vec_of_u8(_n);
+fn is_lynchrel_number(n: u128) -> bool {
+    const MAX_ITER: u128 = 50;
+    let mut _n = n as u128;
+    for _ in 1..MAX_ITER {
+        let n_vec = int_to_vec_of_u8(&_n);
         let n_vec_rev: Vec<u8> = n_vec.iter().rev().copied().collect();
-        let n_rev = vec_of_u8_to_int(&n_vec_rev);
+        let n_rev = vec_of_u8_to_int::<u128>(&n_vec_rev);
 
         let original_plus_reverse = _n + n_rev;
-        if is_palindrome(original_plus_reverse) {
+        if is_palindrome::<u128>(&original_plus_reverse) {
             return false;
         }
         _n = original_plus_reverse;

@@ -14,7 +14,7 @@ fn p() -> String {
     const RANGE: std::ops::Range<usize> = 100..999;
     let cartesian_prod = RANGE.cartesian_product(RANGE);
     let products = cartesian_prod.map(|(n1, n2)| n1 * n2);
-    let candidates = products.filter(|&x| palindrome::is_palindrome(x));
+    let candidates = products.filter(|x| palindrome::is_palindrome(x));
     candidates.max().unwrap().to_string()
 }
 

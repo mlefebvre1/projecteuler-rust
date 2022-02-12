@@ -82,7 +82,7 @@ fn p() -> String {
         }
         .unwrap()
         {
-            let i_vec = int_to_vec_of_u8(i);
+            let i_vec = int_to_vec_of_u8(&i);
             for j in [1, 3, 7, 9] {
                 let mut combinations = (0..=9).filter_map(|x| {
                     let n = make_number(&i_vec, j, x, _bitstring);
