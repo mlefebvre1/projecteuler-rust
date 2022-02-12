@@ -11,7 +11,7 @@ fn p() -> String {
     (Please note that the palindromic number, in either base, may not include leading zeros.)
     */
     const MAX_N: usize = 1e6 as usize;
-    let palindroms = (0..MAX_N).filter(|&n| {
+    let palindroms = (0..MAX_N).filter(|n| {
         let n_bin = format!("{:b}", n);
         is_palindrome(n) && is_palindrome_str(&n_bin)
     });

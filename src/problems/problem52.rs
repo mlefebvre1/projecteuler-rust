@@ -30,7 +30,7 @@ fn p() -> String {
 
 fn digit_uniqueness(n: usize) -> bool {
     let mut digit_array = [0usize; 10];
-    for digit in int_to_vec_of_u8(n) {
+    for digit in int_to_vec_of_u8(&n) {
         digit_array[digit as usize] += 1;
     }
     for nb_rep in digit_array {
@@ -42,8 +42,8 @@ fn digit_uniqueness(n: usize) -> bool {
 }
 
 fn same_digits(n1: usize, n2: usize) -> bool {
-    for digit in int_to_vec_of_u8(n1) {
-        if !int_to_vec_of_u8(n2).contains(&(digit)) {
+    for digit in int_to_vec_of_u8(&n1) {
+        if !int_to_vec_of_u8(&n2).contains(&(digit)) {
             return false;
         }
     }

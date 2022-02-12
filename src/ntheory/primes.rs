@@ -133,14 +133,3 @@ fn test_distinct_primes() {
     assert_eq!(distinct_primes(30030, &sieves(30030)), [2, 3, 5, 7, 11, 13]);
     assert_eq!(distinct_primes(1009, &sieves(1009)), [1009]);
 }
-/*
-  primes = iter(primes)
-    while 1:
-        prime = next(primes)
-        if n % prime == 0:
-            yield prime
-        while n % prime == 0:
-            n /= prime
-            if n == 1:
-                return
-*/

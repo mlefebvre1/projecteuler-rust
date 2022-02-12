@@ -17,7 +17,7 @@ fn p() -> String {
     let primes = sieves(MAX_N);
     let four_digit_primes = primes.iter().filter(|&p| *p > 1000);
 
-    let candidates = four_digit_primes.map(|&prime| {
+    let candidates = four_digit_primes.map(|prime| {
         let prime_vec_u8 = int_to_vec_of_u8(prime);
         let permutations = prime_vec_u8.iter().permutations(4);
         let permutations = permutations.map(|permutation| {

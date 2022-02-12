@@ -1,4 +1,5 @@
 use crate::utils::integers::int_to_vec_of_u8;
+use num::{FromPrimitive, Integer, ToPrimitive, Unsigned};
 
 pub fn is_palindrome_str(n: &str) -> bool {
     if n.chars().count() > 1 {
@@ -8,8 +9,12 @@ pub fn is_palindrome_str(n: &str) -> bool {
     true
 }
 
-pub fn is_palindrome(n: usize) -> bool {
-    let n_vec = int_to_vec_of_u8(n);
+pub fn is_palindrome<T>(n: &T) -> bool
+where
+    T: FromPrimitive + ToPrimitive + Integer + Unsigned + Clone,
+    for<'a> &'a T: std::ops::Rem<T> + std::ops::Div<T> + PartialEq,
+{
+    let n_vec = int_to_vec_of_u8::<T>(n);
     if n_vec.len() > 1 {
         let n_vec_reversed: Vec<&u8> = n_vec.iter().rev().collect();
         for (n1, n2) in n_vec.iter().zip(n_vec_reversed) {
@@ -34,11 +39,11 @@ fn test_is_palindrome_str() {
 }
 #[test]
 fn test_is_palindrome() {
-    assert!(!is_palindrome(123));
-    assert!(is_palindrome(121));
-    assert!(is_palindrome(1245421));
-    assert!(is_palindrome(111));
-    assert!(is_palindrome(3333));
-    assert!(is_palindrome(987656789));
-    assert!(!is_palindrome(987656779));
+    assert!(!is_palindrome::<usize>(&123));
+    assert!(is_palindrome::<usize>(&121));
+    assert!(is_palindrome::<usize>(&1245421));
+    assert!(is_palindrome::<usize>(&111));
+    assert!(is_palindrome::<usize>(&3333));
+    assert!(is_palindrome::<usize>(&987656789));
+    assert!(!is_palindrome::<usize>(&987656779));
 }

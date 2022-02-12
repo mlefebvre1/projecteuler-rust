@@ -28,7 +28,10 @@ fn p() -> String {
             return primes
                 .iter()
                 .enumerate()
-                .filter(|(d, &prime)| vec_of_u8_to_int(&n[d + 1..d + 4]) % prime != 0)
+                .filter(|(d, &prime)| {
+                    let a: usize = vec_of_u8_to_int::<usize>(&n[d + 1..d + 4]) % prime;
+                    a != 0
+                })
                 .count()
                 == 0;
         }
@@ -39,12 +42,13 @@ fn p() -> String {
     let a = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     let len = a.len();
     let permutations = a.into_iter().permutations(len);
-    let divisibles =
-        permutations.filter_map(|permutation| match is_divisible(&permutation, &primes) {
+    let divisibles: Vec<usize> = permutations
+        .filter_map(|permutation| match is_divisible(&permutation, &primes) {
             true => Some(vec_of_u8_to_int(&permutation)),
             false => None,
-        });
-    divisibles.sum::<usize>().to_string()
+        })
+        .collect::<Vec<usize>>();
+    divisibles.iter().sum::<usize>().to_string()
 }
 
 timeit::timeit!(Problem43, solve, p);
