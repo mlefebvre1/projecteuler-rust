@@ -106,4 +106,38 @@ impl Spiral {
     }
 }
 
+#[test]
+fn test_get_nb_primes() {
+    assert_eq!(
+        Spiral {
+            down_right: 5,
+            up_right: 7,
+            up_left: 11,
+            down_left: 13
+        }
+        .get_nb_primes(),
+        4
+    );
+    assert_eq!(
+        Spiral {
+            down_right: 5,
+            up_right: 7,
+            up_left: 9,
+            down_left: 13
+        }
+        .get_nb_primes(),
+        3
+    );
+    assert_eq!(
+        Spiral {
+            down_right: 6,
+            up_right: 8,
+            up_left: 10,
+            down_left: 12
+        }
+        .get_nb_primes(),
+        0
+    );
+}
+
 timeit::timeit!(Problem58, solve, p);
