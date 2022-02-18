@@ -64,8 +64,33 @@ const PROBLEMS: [fn() -> String; 58] = [
     problems::problem58::solve,
 ];
 
+fn parser_arguments() -> i32 {
+    use argparse::{ArgumentParser, Store};
+
+    let mut problem_number = -1;
+    {
+        let mut parser = ArgumentParser::new();
+        parser.set_description("ProjectEuler-Rust - Enter a problem number to run that problem or leave it empty to run all problems");
+
+        parser
+            .refer(&mut problem_number)
+            .add_option(&["-n"], Store, "Problem number to execute");
+        parser.parse_args_or_exit();
+    }
+    problem_number
+}
+
 #[cfg(not(tarpaulin_include))]
 fn main() {
+    let problem_number = parser_arguments();
+    if problem_number == -1 {
+        run_all_problems();
+    } else {
+        PROBLEMS[(problem_number - 1) as usize]();
+    }
+}
+
+fn run_all_problems() {
     for problem in PROBLEMS {
         problem();
     }
