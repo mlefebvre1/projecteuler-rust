@@ -13,6 +13,11 @@ $ cargo build --release
 ### Run all problems
 ```shell
 $ cargo run --release
+
+```
+### Run a single problem (ex: run problem #15)
+```shell
+cargo run --release -- -n 15
 ```
 
 ### Testing
