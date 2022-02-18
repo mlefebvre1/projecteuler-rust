@@ -64,6 +64,7 @@ const PROBLEMS: [fn() -> String; 58] = [
     problems::problem58::solve,
 ];
 
+#[cfg(not(tarpaulin_include))]
 fn parser_arguments() -> i32 {
     use argparse::{ArgumentParser, Store};
 
@@ -90,6 +91,7 @@ fn main() {
     }
 }
 
+#[cfg(not(tarpaulin_include))]
 fn run_all_problems() {
     for problem in PROBLEMS {
         problem();
