@@ -26,7 +26,7 @@ fn p() -> String {
         fs::read_to_string("src/problems/data/problem22.txt").expect("Problem opening the file");
     let mut names_raw: Vec<&str> = data.split(',').collect();
     names_raw.sort_unstable();
-    let names = names_raw.iter().map(|&name| name.replace("\"", ""));
+    let names = names_raw.iter().map(|&name| name.replace('\"', ""));
     let names_score = names
         .enumerate()
         .map(|(index, name)| calc_name_score(&name, index));
