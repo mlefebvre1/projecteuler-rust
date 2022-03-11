@@ -54,13 +54,6 @@ fn p() -> String {
 
     Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
     */
-    /*
-    def find_5_concat_primes(_prime1: int, _primes: List[int], nb_primes: int) -> int:
-        """for a given prime, test each prime up to 10000 if the property of concatenation and generate a new primes holds.
-        Keep every primes that holds the property. Pass that new list and the next prime in that new list to this function
-        again. Keep doing this recursively until we get a sequence of 5 primes which holds the property. At that point
-        de-stack and return the value of each prime in the list."""
-    */
     const MAX_N: usize = 10000;
     let primes = sieves(MAX_N);
     for prime in primes.iter() {
@@ -69,11 +62,7 @@ fn p() -> String {
             return ans.to_string();
         }
     }
-    // let ans = primes
-    //     .iter()
-    //     .find(|&prime| find_5_concat_primes(*prime, &primes, 1) != 0)
-    //     .unwrap();
-    String::from("")
+    panic!("A solution should've been found!");
 }
 
 timeit::timeit!(Problem60, solve, p);
