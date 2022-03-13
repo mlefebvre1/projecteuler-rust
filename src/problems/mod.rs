@@ -59,3 +59,4 @@ pub mod problem58;
 pub mod problem59;
 pub mod problem60;
 pub mod problem61;
+pub mod problem62;
