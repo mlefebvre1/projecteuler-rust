@@ -3,7 +3,7 @@ mod problems;
 mod series;
 mod utils;
 
-const PROBLEMS: [fn() -> String; 62] = [
+const PROBLEMS: [fn() -> String; 63] = [
     problems::problem01::solve,
     problems::problem02::solve,
     problems::problem03::solve,
@@ -66,6 +66,7 @@ const PROBLEMS: [fn() -> String; 62] = [
     problems::problem60::solve,
     problems::problem61::solve,
     problems::problem62::solve,
+    problems::problem63::solve,
 ];
 
 #[cfg(not(tarpaulin_include))]
