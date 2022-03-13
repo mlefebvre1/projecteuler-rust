@@ -1,4 +1,5 @@
 pub mod composite;
+pub mod cubic;
 pub mod fibonacci;
 pub mod heptagonal;
 pub mod hexagonal;
