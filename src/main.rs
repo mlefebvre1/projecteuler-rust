@@ -105,7 +105,7 @@ fn run_all_problems() {
 
 #[test]
 fn test_regression() {
-    const SOLUTIONS: [&str; 62] = [
+    const SOLUTIONS: [&str; 63] = [
         "233168",
         "4613732",
         "6857",
@@ -168,6 +168,7 @@ fn test_regression() {
         "26033",
         "28684",
         "127035954683",
+        "49",
     ];
     for (problem, solution) in PROBLEMS.iter().zip(SOLUTIONS.iter()) {
         let result = problem();
