@@ -63,3 +63,4 @@ pub mod problem62;
 pub mod problem63;
 pub mod problem64;
 pub mod problem65;
+pub mod problem66;
