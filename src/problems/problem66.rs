@@ -104,14 +104,15 @@ fn p() -> String {
     let squares: Vec<usize> = Square::new().skip(1).take(max_d_sqrt - 1).collect();
     let ds = (2..=MAX_D as isize).filter(|&d| !squares.contains(&(d as usize)));
     ds.map(|d| {
-        let d_ = BigInt::from(d);
-        let mut steps = apply_shifts((BigInt::from(1isize), BigInt::from(0isize), -d_)).into_iter();
-        let matrix_a = get_matrix_from_step(steps.next().unwrap());
-        let matrix_b = get_matrix_from_step(steps.next().unwrap());
-        let mut matrix_n = matrix_multiply_2d(&matrix_a, &matrix_b);
+        let mut steps =
+            apply_shifts((BigInt::from(1isize), BigInt::from(0isize), BigInt::from(-d)))
+                .into_iter();
+        let mut matrix_n = matrix_multiply_2d(
+            &get_matrix_from_step(steps.next().unwrap()),
+            &get_matrix_from_step(steps.next().unwrap()),
+        );
         for step in steps {
-            let matrix_a = get_matrix_from_step(step);
-            matrix_n = matrix_multiply_2d(&matrix_n, &matrix_a);
+            matrix_n = matrix_multiply_2d(&matrix_n, &get_matrix_from_step(step));
         }
         (d, matrix_n[[0, 0]].clone())
     })
