@@ -22,10 +22,9 @@ fn p() -> String {
     const MAX_N: usize = 100;
     let mut nb_ways = [0usize; MAX_N + 1];
     nb_ways[0] = 1;
-    for multiple in 1..MAX_N {
-        for n in multiple..=MAX_N {
-            nb_ways[n] += nb_ways[n - multiple];
-        }
+    let pairs = (1..MAX_N).flat_map(|multiple| (multiple..=MAX_N).map(move |n| (multiple, n)));
+    for (multiple, n) in pairs {
+        nb_ways[n] += nb_ways[n - multiple];
     }
     nb_ways[MAX_N].to_string()
 }
