@@ -1,4 +1,5 @@
 use crate::utils::timeit;
+use num::Integer;
 
 fn p() -> String {
     /*
@@ -11,7 +12,7 @@ fn p() -> String {
     */
     const MAX_N: usize = 1000;
     (1..MAX_N)
-        .filter(|n| (n % 3 == 0) || (n % 5 == 0))
+        .filter(|n| n.is_multiple_of(&3) || n.is_multiple_of(&5))
         .sum::<usize>()
         .to_string()
 }

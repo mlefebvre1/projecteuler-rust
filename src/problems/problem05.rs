@@ -17,7 +17,7 @@ fn p() -> String {
     let primes = primes::sieves(MAX_N);
     let prime_occurences = primes
         .iter()
-        .map(|x| (MAX_N as f64).log(*x as f64).floor() as usize);
+        .map(|&x| (MAX_N as f64).log(x as f64).floor() as usize);
     let primes_and_occurences = primes.iter().zip(prime_occurences);
     primes_and_occurences
         .fold(1, |acc, (prime, occurence)| {
