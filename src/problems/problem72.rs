@@ -1,4 +1,5 @@
 use crate::utils::timeit;
+use num::Integer;
 
 fn p() -> String {
     /*
@@ -27,7 +28,7 @@ fn p() -> String {
             .filter_map(|(n, distinct_primes)| {
                 if n >= 2 {
                     let phi = distinct_primes.into_iter().fold(n as f64, |acc, prime| {
-                        if (n % prime) == 0 {
+                        if n.is_multiple_of(&prime) {
                             return acc * (1.0 - 1.0 / prime as f64);
                         }
                         acc

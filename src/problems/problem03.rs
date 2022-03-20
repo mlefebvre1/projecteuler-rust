@@ -1,5 +1,6 @@
 use crate::ntheory::primes;
 use crate::utils::timeit;
+use num::Integer;
 
 fn p() -> String {
     /*
@@ -11,7 +12,7 @@ fn p() -> String {
     */
     const K: usize = 600851475143;
     let numbers = 1..(K as f64).sqrt() as usize;
-    let candidates = numbers.filter(|x| primes::is_prime(*x) && (K % x == 0));
+    let candidates = numbers.filter(|&x| primes::is_prime(x) && K.is_multiple_of(&x));
     candidates.max().unwrap().to_string()
 }
 

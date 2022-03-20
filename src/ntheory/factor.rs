@@ -1,3 +1,5 @@
+use num::Integer;
+
 pub fn factorize(n: usize) -> Vec<usize> {
     let mut factors = vec![1];
     if n < 2 {
@@ -5,7 +7,7 @@ pub fn factorize(n: usize) -> Vec<usize> {
     }
     let sqrt_n = (n as f64).sqrt();
     for divider in 2..sqrt_n.ceil() as usize {
-        if n % divider == 0 {
+        if n.is_multiple_of(&divider) {
             factors.push(divider);
             factors.push(n / divider);
         }
@@ -26,7 +28,7 @@ pub fn proper_divisors_sum(n: usize) -> usize {
 
     let sqrt_n = (n as f64).sqrt();
     for divider in 2..sqrt_n.ceil() as usize {
-        if n % divider == 0 {
+        if n.is_multiple_of(&divider) {
             // if it's divisible, we found 2 divisors at once!
             proper_div_sum += divider;
             proper_div_sum += n / divider;

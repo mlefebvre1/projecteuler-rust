@@ -1,4 +1,5 @@
 use crate::utils::timeit;
+use num::Integer;
 use phf::phf_map;
 
 static NB_DAYS_PER_MONTH: phf::Map<&'static str, usize> = phf_map! {
@@ -17,7 +18,7 @@ static NB_DAYS_PER_MONTH: phf::Map<&'static str, usize> = phf_map! {
 };
 
 fn nb_days_in_month(month: &str, year: usize) -> usize {
-    if month == "february" && year % 4 == 0 && year % 400 != 0 {
+    if month == "february" && year.is_multiple_of(&4) && !year.is_multiple_of(&400) {
         return *NB_DAYS_PER_MONTH.get(month).unwrap() + 1;
     }
     return *NB_DAYS_PER_MONTH.get(month).unwrap();
