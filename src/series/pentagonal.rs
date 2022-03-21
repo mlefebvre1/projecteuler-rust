@@ -1,5 +1,6 @@
+use crate::series::triangular::Triangular;
 use num::traits::{One, Zero};
-use num::Num;
+use num::{FromPrimitive, Integer, Num, Signed};
 
 pub struct Pentagonal<T> {
     n: T,
@@ -46,6 +47,56 @@ where
     }
 }
 
+pub struct GeneralizedPentagonal<T> {
+    n: T,
+    pn: T,
+}
+
+impl<T> GeneralizedPentagonal<T>
+where
+    T: Zero + One + Num + FromPrimitive + Integer + Signed,
+    for<'a> &'a T: std::ops::Add<Output = T>
+        + std::ops::Mul<Output = T>
+        + std::ops::Div<Output = T>
+        + std::ops::Sub<Output = T>,
+{
+    #[allow(dead_code)]
+    pub fn new() -> Self {
+        Self {
+            n: num::one(),
+            pn: num::zero(),
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn from_n(n: &T) -> T {
+        // triangular(n) + 2 * triangular(n - 1)
+        let two: T = FromPrimitive::from_usize(2).unwrap();
+        Triangular::from_n(n) + two * Triangular::from_n(&(n - &num::one()))
+    }
+}
+
+impl<T> Iterator for GeneralizedPentagonal<T>
+where
+    T: Clone + One + Num + FromPrimitive + Integer + Signed,
+    for<'a> &'a T: std::ops::Add<Output = T>
+        + std::ops::Mul<Output = T>
+        + std::ops::Div<Output = T>
+        + std::ops::Sub<Output = T>,
+{
+    type Item = T;
+    fn next(&mut self) -> Option<T> {
+        let t = self.pn.clone();
+        self.pn = Self::from_n(&self.n);
+        // n = 0, 1, -1, 2, -2, 3, -3...
+        self.n = match &self.n {
+            n if n > &num::zero() => &num::zero() - &self.n,
+            _ => &num::one() - &self.n,
+        };
+        Some(t)
+    }
+}
+
 #[test]
 fn test_pentagonal_usize() {
     let pentagonal_series = Pentagonal::<usize>::new();
@@ -87,4 +138,27 @@ fn test_is_pentagonal() {
     assert!(is_pentagonal(12));
     assert!(is_pentagonal(40755));
     assert!(!is_pentagonal(3));
+}
+
+#[test]
+fn test_generalized_pentagonal_isize() {
+    let pentagonal_series = GeneralizedPentagonal::<isize>::new();
+    let actual: Vec<isize> = pentagonal_series.take(20).collect();
+    assert_eq!(
+        actual,
+        [0, 1, 2, 5, 7, 12, 15, 22, 26, 35, 40, 51, 57, 70, 77, 92, 100, 117, 126, 145,]
+    );
+}
+
+#[test]
+fn test_generalized_pentagonal_biguint() {
+    use num::BigInt;
+    let actual: BigInt = GeneralizedPentagonal::<BigInt>::new().nth(20).unwrap();
+    let expected = BigInt::from(155usize);
+    assert_eq!(actual, expected);
+
+    let actual =
+        GeneralizedPentagonal::from_n(&BigInt::parse_bytes(b"573147844013817084101", 10).unwrap());
+    let expected = BigInt::parse_bytes(b"492747676646530199888564278529574251925251", 10).unwrap();
+    assert_eq!(actual, expected);
 }

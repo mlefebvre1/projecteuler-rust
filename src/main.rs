@@ -3,7 +3,7 @@ mod problems;
 mod series;
 mod utils;
 
-const PROBLEMS: [fn() -> String; 77] = [
+const PROBLEMS: [fn() -> String; 78] = [
     problems::problem01::solve,
     problems::problem02::solve,
     problems::problem03::solve,
@@ -81,6 +81,7 @@ const PROBLEMS: [fn() -> String; 77] = [
     problems::problem75::solve,
     problems::problem76::solve,
     problems::problem77::solve,
+    problems::problem78::solve,
 ];
 
 #[cfg(not(tarpaulin_include))]
@@ -119,7 +120,7 @@ fn run_all_problems() {
 
 #[test]
 fn test_regression() {
-    const SOLUTIONS: [&str; 77] = [
+    const SOLUTIONS: [&str; 78] = [
         "233168",
         "4613732",
         "6857",
@@ -197,6 +198,7 @@ fn test_regression() {
         "161667",
         "190569291",
         "71",
+        "55374",
     ];
     for (problem, solution) in PROBLEMS.iter().zip(SOLUTIONS.iter()) {
         let result = problem();
