@@ -1,17 +1,5 @@
+use crate::utils::matrix::load_matrix2d_from_file;
 use crate::utils::timeit;
-use std::fs;
-
-fn matrix_from_file() -> [[usize; 20]; 20] {
-    let file =
-        fs::read_to_string("src/problems/data/problem11.txt").expect("Problem opening the file");
-    let mut matrix = [[0usize; 20]; 20];
-    for (y, line) in file.lines().enumerate() {
-        for (x, col) in line.split_ascii_whitespace().enumerate() {
-            matrix[y][x] = col.parse().unwrap();
-        }
-    }
-    matrix
-}
 
 fn p() -> String {
     /*
@@ -46,17 +34,17 @@ fn p() -> String {
     What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally)
     in the 20×20 grid?
     */
-    let matrix = matrix_from_file();
+    let matrix = load_matrix2d_from_file("src/problems/data/problem11.txt", ' ');
     const NB_ADJACENT: usize = 4;
     let mut max_prod = 0usize;
     for row in 0..20 {
         for col in 0..20 {
             // Right
             if col <= (20 - NB_ADJACENT) {
-                let prod = matrix[row][col]
-                    * matrix[row][col + 1]
-                    * matrix[row][col + 2]
-                    * matrix[row][col + 3];
+                let prod = matrix[[row, col]]
+                    * matrix[[row, col + 1]]
+                    * matrix[[row, col + 2]]
+                    * matrix[[row, col + 3]];
                 if prod > max_prod {
                     max_prod = prod;
                 }
@@ -64,10 +52,10 @@ fn p() -> String {
 
             // Down
             if row <= (20 - NB_ADJACENT) {
-                let prod = matrix[row][col]
-                    * matrix[row + 1][col]
-                    * matrix[row + 2][col]
-                    * matrix[row + 3][col];
+                let prod = matrix[[row, col]]
+                    * matrix[[row + 1, col]]
+                    * matrix[[row + 2, col]]
+                    * matrix[[row + 3, col]];
                 if prod > max_prod {
                     max_prod = prod;
                 }
@@ -75,10 +63,10 @@ fn p() -> String {
 
             // Right-Down
             if col <= (20 - NB_ADJACENT) && row <= (20 - NB_ADJACENT) {
-                let prod = matrix[row][col]
-                    * matrix[row + 1][col + 1]
-                    * matrix[row + 2][col + 2]
-                    * matrix[row + 3][col + 3];
+                let prod = matrix[[row, col]]
+                    * matrix[[row + 1, col + 1]]
+                    * matrix[[row + 2, col + 2]]
+                    * matrix[[row + 3, col + 3]];
                 if prod > max_prod {
                     max_prod = prod
                 }
@@ -86,10 +74,10 @@ fn p() -> String {
 
             // Right-up
             if col <= (20 - NB_ADJACENT) && row >= NB_ADJACENT {
-                let prod = matrix[row][col]
-                    * matrix[row - 1][col + 1]
-                    * matrix[row - 2][col + 2]
-                    * matrix[row - 3][col + 3];
+                let prod = matrix[[row, col]]
+                    * matrix[[row - 1, col + 1]]
+                    * matrix[[row - 2, col + 2]]
+                    * matrix[[row - 3, col + 3]];
 
                 if prod > max_prod {
                     max_prod = prod
@@ -98,10 +86,10 @@ fn p() -> String {
 
             // Left-Down
             if col >= NB_ADJACENT && row <= (20 - NB_ADJACENT) {
-                let prod = matrix[row][col]
-                    * matrix[row + 1][col - 1]
-                    * matrix[row + 2][col - 2]
-                    * matrix[row + 3][col - 3];
+                let prod = matrix[[row, col]]
+                    * matrix[[row + 1, col - 1]]
+                    * matrix[[row + 2, col - 2]]
+                    * matrix[[row + 3, col - 3]];
                 if prod > max_prod {
                     max_prod = prod
                 }
@@ -109,10 +97,10 @@ fn p() -> String {
 
             // Left-Up
             if col >= NB_ADJACENT && row >= NB_ADJACENT {
-                let prod = matrix[row][col]
-                    * matrix[row - 1][col - 1]
-                    * matrix[row - 2][col - 2]
-                    * matrix[row - 3][col - 3];
+                let prod = matrix[[row, col]]
+                    * matrix[[row - 1, col - 1]]
+                    * matrix[[row - 2, col - 2]]
+                    * matrix[[row - 3, col - 3]];
                 if prod > max_prod {
                     max_prod = prod;
                 }
