@@ -3,6 +3,32 @@ mod problems;
 mod series;
 mod utils;
 
+use clap::Parser;
+
+#[derive(Parser)]
+struct Args {
+    /// Name of the person to greet
+    #[clap(short, long)]
+    number: isize,
+}
+
+#[cfg(not(tarpaulin_include))]
+fn main() {
+    let args = Args::parse();
+    if args.number == -1 {
+        run_all_problems();
+    } else {
+        PROBLEMS[(args.number - 1) as usize]();
+    }
+}
+
+#[cfg(not(tarpaulin_include))]
+fn run_all_problems() {
+    for problem in PROBLEMS {
+        problem();
+    }
+}
+
 const PROBLEMS: [fn() -> String; 81] = [
     problems::problem01::solve,
     problems::problem02::solve,
@@ -86,40 +112,6 @@ const PROBLEMS: [fn() -> String; 81] = [
     problems::problem80::solve,
     problems::problem81::solve,
 ];
-
-#[cfg(not(tarpaulin_include))]
-fn parser_arguments() -> i32 {
-    use argparse::{ArgumentParser, Store};
-
-    let mut problem_number = -1;
-    {
-        let mut parser = ArgumentParser::new();
-        parser.set_description("ProjectEuler-Rust - Enter a problem number to run that problem or leave it empty to run all problems");
-
-        parser
-            .refer(&mut problem_number)
-            .add_option(&["-n"], Store, "Problem number to execute");
-        parser.parse_args_or_exit();
-    }
-    problem_number
-}
-
-#[cfg(not(tarpaulin_include))]
-fn main() {
-    let problem_number = parser_arguments();
-    if problem_number == -1 {
-        run_all_problems();
-    } else {
-        PROBLEMS[(problem_number - 1) as usize]();
-    }
-}
-
-#[cfg(not(tarpaulin_include))]
-fn run_all_problems() {
-    for problem in PROBLEMS {
-        problem();
-    }
-}
 
 #[test]
 fn test_regression() {

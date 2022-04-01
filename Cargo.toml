@@ -5,15 +5,15 @@ authors = [ "mlefebvre" ]
 edition = "2021"
 
 [dependencies]
-rand = "0.8"
+arrayvec = "^0.7.2"
+bitvec = "1"
+clap = { version = "3.1.8", features = ["derive"] }
+ndarray = "0.15.4"
+factorial = "0.2"
+itertools = "0.10"
 num = "0.4"
 phf = { version = "0.10", features = ["macros"] }
-itertools = "0.10"
-factorial = "0.2"
-bitvec = "1"
-arrayvec = "^0.7.2"
-argparse = "0.2.2"
-ndarray = "0.15.4"
+rand = "0.8"
 
 [profile.release]
 strip = true
