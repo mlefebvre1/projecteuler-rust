@@ -5,17 +5,18 @@ use ndarray::s;
 fn p() -> String {
     /*
     Path sum: two ways
-    Problem 81
-    In the 5 by 5 matrix below, the minimal path sum from the top left to the bottom right,
-    by only moving to the right and down, is indicated in bold red and is equal to 2427.
+    Problem 82
+    The minimal path sum in the 5 by 5 matrix below, by starting in any cell in the left
+    column and finishing in any cell in the right column, and only moving up, down, and
+    right, is indicated in red and bold; the sum is equal to 994.
 
-    https://projecteuler.net/problem=81
+    https://projecteuler.net/problem=82
 
     Find the minimal path sum from the top left to the bottom right by only moving right and down
     in matrix.txt (right click and "Save Link/Target As..."), a 31K text file containing an 80 by 80 matrix.
 
-    The original solution was using dijkstra shortest path algorithm. But it turns out it was much slower than
-    the matrix dynamic programming solution.
+    Find the minimal path sum from the left column to the right column in matrix.txt
+    (right click and "Save Link/Target As..."), a 31K text file containing an 80 by 80 matrix.
     */
     let matrix = load_matrix2d_from_file("src/problems/data/problem81.txt", ',');
     let (y_len, x_len) = (matrix.shape()[0], matrix.shape()[1]);
