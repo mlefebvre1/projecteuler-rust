@@ -8,7 +8,7 @@ use clap::Parser;
 #[derive(Parser)]
 struct Args {
     /// Name of the person to greet
-    #[clap(short, long)]
+    #[clap(short, long, default_value_t=-1)]
     number: isize,
 }
 
