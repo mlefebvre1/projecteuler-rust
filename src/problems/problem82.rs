@@ -18,7 +18,7 @@ fn p() -> String {
     Find the minimal path sum from the left column to the right column in matrix.txt
     (right click and "Save Link/Target As..."), a 31K text file containing an 80 by 80 matrix.
     */
-    let matrix = load_matrix2d_from_file("src/problems/data/problem81.txt", ',');
+    let matrix = load_matrix2d_from_file::<usize>("src/problems/data/problem82.txt", ',');
     let (y_len, x_len) = (matrix.shape()[0], matrix.shape()[1]);
     let mut _matrix = matrix.clone();
 
