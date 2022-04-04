@@ -34,7 +34,7 @@ fn p() -> String {
     What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally)
     in the 20×20 grid?
     */
-    let matrix = load_matrix2d_from_file("src/problems/data/problem11.txt", ' ');
+    let matrix = load_matrix2d_from_file::<usize>("src/problems/data/problem11.txt", ' ');
     const NB_ADJACENT: usize = 4;
     let mut max_prod = 0usize;
     for row in 0..20 {

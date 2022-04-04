@@ -17,7 +17,7 @@ fn p() -> String {
     The original solution was using dijkstra shortest path algorithm. But it turns out it was much slower than
     the matrix dynamic programming solution.
     */
-    let mut matrix = load_matrix2d_from_file("src/problems/data/problem81.txt", ',');
+    let mut matrix = load_matrix2d_from_file::<usize>("src/problems/data/problem81.txt", ',');
     let (y_len, x_len) = (matrix.shape()[0], matrix.shape()[1]);
     for y in 0..y_len {
         for x in 0..x_len {
