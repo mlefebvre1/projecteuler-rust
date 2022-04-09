@@ -83,3 +83,4 @@ pub mod problem82;
 pub mod problem83;
 pub mod problem84;
 pub mod problem85;
+pub mod problem86;

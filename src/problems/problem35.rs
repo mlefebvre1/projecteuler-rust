@@ -9,7 +9,7 @@ impl DigitRotations {
     pub fn new(mut _n: &[char]) -> Self {
         Self { n: _n.to_vec() }
     }
-    fn rotation(_n: &mut Vec<char>) {
+    fn rotation(_n: &mut [char]) {
         for i in 0..(_n.len() - 1) {
             _n.swap(i, i + 1);
         }

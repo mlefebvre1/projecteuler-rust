@@ -1,7 +1,7 @@
 use num::Integer;
 
 #[derive(Debug, PartialEq)]
-pub struct PythagoreanTriple(usize, usize, usize);
+pub struct PythagoreanTriple(pub usize, pub usize, pub usize);
 
 impl PythagoreanTriple {
     pub fn sum(&self) -> usize {
