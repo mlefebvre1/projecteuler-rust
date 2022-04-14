@@ -14,9 +14,9 @@ RUN apk update && apk add \
     musl-dev \
     lld \
     lldb \
+    python3 \
+    py3-pip \
     curl
-
-
 
 USER dev
 WORKDIR /home/dev/
@@ -26,10 +26,8 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 
 # Install rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | zsh -s -- -y
-ENV PATH="/home/dev/.cargo/bin:${PATH}"
+ENV PATH="/home/dev/.cargo/bin:/home/dev/.local/bin:${PATH}"
 
-COPY . .
-
+# COPY . .
 # RUN cargo install --path .
-
 # CMD ["projecteuler-rust"]
