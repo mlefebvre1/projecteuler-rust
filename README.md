@@ -5,19 +5,20 @@
 
 Original solutions from ProjectEuler-Python re-written in Rust for improved speed.
 
-### Build
-```shell
-$ cargo build --release
-```
 
 ### Run all problems
 ```shell
 $ cargo run --release
-
 ```
 ### Run a single problem (ex: run problem #15)
 ```shell
 cargo run --release -- -n 15
+```
+
+### Run using docker (for vscode use devcontainer)
+```shell
+docker build -t projecteuler-rust .
+docker run projecteuler-rust
 ```
 
 ### Testing
