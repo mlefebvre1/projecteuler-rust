@@ -29,7 +29,7 @@ fn run_all_problems() {
     }
 }
 
-const PROBLEMS: [fn() -> String; 87] = [
+const PROBLEMS: [fn() -> String; 88] = [
     problems::problem01::solve,
     problems::problem02::solve,
     problems::problem03::solve,
@@ -117,11 +117,12 @@ const PROBLEMS: [fn() -> String; 87] = [
     problems::problem85::solve,
     problems::problem86::solve,
     problems::problem87::solve,
+    problems::problem88::solve,
 ];
 
 #[test]
 fn test_regression() {
-    const SOLUTIONS: [&str; 87] = [
+    const SOLUTIONS: [&str; 88] = [
         "233168",
         "4613732",
         "6857",
@@ -209,6 +210,7 @@ fn test_regression() {
         "2772",
         "1818",
         "1097343",
+        "7587457",
     ];
     for (problem, solution) in PROBLEMS.iter().zip(SOLUTIONS.iter()) {
         let result = problem();
