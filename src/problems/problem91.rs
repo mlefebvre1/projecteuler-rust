@@ -51,28 +51,5 @@ fn p() -> String {
     }
     (nb_triangles / 2).to_string()
 }
-/*
-k = 50
-nb_triangles = 0
-for y2 in range(0, k + 1):
-    for y1 in range(0, k + 1):
-        for x1 in range(0, k + 1):
-            for x2 in range(0, k + 1):
-                OP2 = x1 ** 2 + y1 ** 2
-                OQ2 = x2 ** 2 + y2 ** 2
-                QP2 = (x2 - x1) ** 2 + (y2 - y1) ** 2
-                if OP2 != 0 and OQ2 != 0 and QP2 != 0:
-                    if OP2 > OQ2 and OP2 > QP2:  # OP is the hyp
-                        if OP2 == (OQ2 + QP2):
-                            nb_triangles += 1
-                    elif OQ2 > OP2 and OQ2 > QP2:  # OQ is the hyp
-                        if OQ2 == (OP2 + QP2):
-                            nb_triangles += 1
-                    else:  # QP is the hyp
-                        if QP2 == (OP2 + OQ2):
-                            nb_triangles += 1
-
-return nb_triangles // 2
-*/
 
 timeit::timeit!(Problem91, solve, p);
