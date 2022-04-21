@@ -18,15 +18,16 @@ fn p() -> String {
     other distance power of 2 (a^2 = b^2 + c^2). If the equation is satisfied, this tells us that the triangle has a
     right angle.
     */
-    const K: usize = 50;
-    let mut nb_triangles = 0;
+    const K: isize = 50;
+    let mut nb_triangles: usize = 0;
     for y2 in 0..=K {
         for y1 in 0..=K {
             for x1 in 0..=K {
                 for x2 in 0..=K {
-                    let op2: usize = x1 * x1 + y1 * y1;
-                    let oq2: usize = x2 * x2 + y2 * y2;
-                    let qp2 = (x2 - x1).pow(2) + (y2 - y1).pow(2);
+                    let op2: isize = x1 * x1 + y1 * y1;
+                    let oq2: isize = x2 * x2 + y2 * y2;
+                    let qp2: isize = (x2 - x1).pow(2) + (y2 - y1).pow(2);
+
                     if op2 != 0 && oq2 != 0 && qp2 != 0 {
                         if op2 > oq2 && op2 > qp2 {
                             //OP is the hyp.
