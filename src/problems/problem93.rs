@@ -21,49 +21,46 @@ fn p() -> String {
     1 to n, can be obtained, giving your answer as a string: abcd.
     */
 
-    const MAX_DIGIT: usize = 9;
+    const MAX_DIGIT: u8 = 9;
     let mut best_score = BestScore {
         score: 0,
-        digits: DigitSet(0, 0, 0, 0),
+        digits: [0, 0, 0, 0],
     };
-    let (a, b) = (1usize, 2usize);
-    for c in (b + 1)..=MAX_DIGIT {
-        for d in (c + 1)..=MAX_DIGIT {
-            let (a, b, c, d) = (a as u8 + 48, b as u8 + 48, c as u8 + 48, d as u8 + 48);
-            let expressions = make_expressions(DigitSet(a, b, c, d));
+    let (a, b) = (1u8, 2u8);
+    for c in (b + 1u8)..=MAX_DIGIT {
+        for d in (c + 1u8)..=MAX_DIGIT {
+            let digit_set = [a, b, c, d].map(|c| c + 48);
+            let expressions = make_expressions(&digit_set);
             let score = get_score(&expressions);
             if score > best_score.score {
-                best_score.digits = DigitSet(a, b, c, d);
+                best_score.digits = [a, b, c, d];
                 best_score.score = score;
             }
         }
     }
-    let DigitSet(a, b, c, d) = best_score.digits;
+    let [a, b, c, d] = best_score.digits.map(|c| c + 48);
     String::from_utf8([a, b, c, d].to_vec()).unwrap()
 }
 
-#[derive(Copy, Clone)]
-struct DigitSet(u8, u8, u8, u8);
-#[derive(Copy, Clone)]
-struct MathOperations(u8, u8, u8);
+type DigitSet = [u8; 4];
+type MathOperations = [u8; 3];
 
 struct BestScore {
     score: usize,
     digits: DigitSet,
 }
 
-fn make_expressions(set: DigitSet) -> Vec<String> {
-    let DigitSet(a, b, c, d) = set;
-    let digits_set = [a, b, c, d];
+fn make_expressions(set: &DigitSet) -> Vec<String> {
+    let digits_set = set.map(|c| c);
     let digits_set_list = digits_set
         .iter()
         .permutations(4)
-        .map(|p| DigitSet(*p[0], *p[1], *p[2], *p[3]));
+        .map(|p| [*p[0], *p[1], *p[2], *p[3]]);
     let math_operators_list = make_math_operators();
     let mut expressions = Vec::new();
     for digits_set in digits_set_list {
         for math_operators in math_operators_list.iter() {
-            let expr = make_expressions_from_digit_set_and_operations(digits_set, *math_operators);
+            let expr = make_expressions_from_digit_set_and_operations(&digits_set, math_operators);
             expressions.push(expr);
         }
     }
@@ -76,11 +73,11 @@ fn make_math_operators() -> Vec<MathOperations> {
     let mut vec_of_operators = Vec::new();
 
     for expr in base_expr {
-        vec_of_operators.push(MathOperations(
+        vec_of_operators.push([
             OPERATIONS[expr[0]],
             OPERATIONS[expr[1]],
             OPERATIONS[expr[2]],
-        ));
+        ]);
     }
     vec_of_operators
 }
@@ -115,8 +112,8 @@ fn make_base_expr() -> Vec<[usize; 3]> {
 }
 
 fn make_expressions_from_digit_set_and_operations(
-    digits: DigitSet,
-    operations: MathOperations,
+    digits: &DigitSet,
+    operations: &MathOperations,
 ) -> Vec<String> {
     /*
     Generating the following expressions : (+ can be any operations of +,-,*,/)
@@ -131,8 +128,8 @@ fn make_expressions_from_digit_set_and_operations(
     (a+(b+c))+d
     ((a+b)+c)+d
     */
-    let DigitSet(a, b, c, d) = digits;
-    let MathOperations(op1, op2, op3) = operations;
+    let [a, b, c, d] = digits.map(|c| c);
+    let [op1, op2, op3] = operations.map(|c| c);
     let expressions = [
         vec![a, op1, b, op2, c, op3, d],
         vec![b'(', a, op1, b, b')', op2, c, op3, d],
