@@ -12,6 +12,7 @@ fn generate_digit_sum_values(max_digit_sum: usize) -> Vec<usize> {
                 .into_iter()
                 .map(|d| (d as usize).pow(2))
                 .sum();
+
             if digit_sum == 89 || mem[digit_sum] == 89 {
                 mem[n] = 89;
                 for id in stack.iter() {
