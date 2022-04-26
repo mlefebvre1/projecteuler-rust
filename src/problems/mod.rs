@@ -91,3 +91,4 @@ pub mod problem90;
 pub mod problem91;
 pub mod problem92;
 pub mod problem93;
+pub mod problem94;
