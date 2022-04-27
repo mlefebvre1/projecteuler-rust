@@ -54,11 +54,11 @@ fn p() -> String {
     We can simply make the value of n change and compute the new values of m with the constraints.
     */
     let perimeters = get_all_almost_equilateral_perimeters();
-    perimeters.iter().sum::<usize>().to_string()
+    perimeters.sum::<usize>().to_string()
 }
 type Triplet = [usize; 3];
 
-fn get_all_almost_equilateral_perimeters() -> Vec<usize> {
+fn get_all_almost_equilateral_perimeters() -> impl Iterator<Item = usize> {
     const MAX_PERIMETER: usize = 1e9 as usize;
     // test constraint 2*a = c+
     let perimeters_constraint_1 = (1usize..)
@@ -95,9 +95,7 @@ fn get_all_almost_equilateral_perimeters() -> Vec<usize> {
             }
             Some(perimeter)
         });
-    perimeters_constraint_1
-        .chain(perimeters_constraint_2)
-        .collect::<Vec<usize>>()
+    perimeters_constraint_1.chain(perimeters_constraint_2)
 }
 
 fn calc_triplet(m: usize, n: usize) -> Triplet {
