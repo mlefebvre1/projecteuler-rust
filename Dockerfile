@@ -16,6 +16,6 @@ RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -
 
 # Copy and install program
 WORKDIR /usr/share/projecteuler-rust
-COPY . .
-RUN cargo install --path .
-CMD ["projecteuler-rust"]
+# COPY . .
+# RUN cargo install --path .
+# CMD ["projecteuler-rust"]
