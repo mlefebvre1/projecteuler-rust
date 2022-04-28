@@ -19,7 +19,8 @@ fn p() -> String {
     (right click and "Save Link/Target As..."), a 31K text file containing an 80 by 80 matrix.
     */
     let matrix = load_matrix2d_from_file::<usize>("src/problems/data/problem82.txt", ',');
-    let (y_len, x_len) = (matrix.shape()[0], matrix.shape()[1]);
+    let shape = matrix.shape();
+    let [y_len, x_len] = [shape[0], shape[1]];
     let mut _matrix = matrix.clone();
 
     for y in 0..y_len {

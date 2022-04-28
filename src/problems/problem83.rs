@@ -33,7 +33,8 @@ struct MatrixGraph {
 impl MatrixGraph {
     pub fn new(file: &str) -> Self {
         let matrix = load_matrix2d_from_file::<isize>(file, ',');
-        let (y_len, x_len) = (matrix.shape()[0], matrix.shape()[1]);
+        let shape = matrix.shape();
+        let [y_len, x_len] = [shape[0], shape[1]];
         Self {
             graph: Dgraph::new(x_len * y_len),
             matrix,
@@ -41,7 +42,8 @@ impl MatrixGraph {
     }
 
     fn build_graph(&mut self) {
-        let (y_len, x_len) = (self.matrix.shape()[0], self.matrix.shape()[1]);
+        let shape = self.matrix.shape();
+        let [y_len, x_len] = [shape[0], shape[1]];
         for vertex_id in 0..self.graph.vertices.len() {
             let (x, y) = (vertex_id % x_len, vertex_id / x_len);
             if y == 0 {
@@ -80,7 +82,8 @@ impl MatrixGraph {
     }
 
     fn append_edges(&mut self, vertex_id: usize, right: bool, left: bool, down: bool, up: bool) {
-        let (_, x_len) = (self.matrix.shape()[0], self.matrix.shape()[1]);
+        let shape = self.matrix.shape();
+        let [_, x_len] = [shape[0], shape[1]];
         let (x, y) = (vertex_id % x_len, vertex_id / x_len);
         if right {
             self.graph

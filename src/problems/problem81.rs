@@ -18,7 +18,8 @@ fn p() -> String {
     the matrix dynamic programming solution.
     */
     let mut matrix = load_matrix2d_from_file::<usize>("src/problems/data/problem81.txt", ',');
-    let (y_len, x_len) = (matrix.shape()[0], matrix.shape()[1]);
+    let shape = matrix.shape();
+    let [y_len, x_len] = [shape[0], shape[1]];
     for y in 0..y_len {
         for x in 0..x_len {
             if x == 0 && y == 0 {
