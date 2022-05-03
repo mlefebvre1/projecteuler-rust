@@ -96,3 +96,4 @@ pub mod problem95;
 pub mod problem96;
 pub mod problem97;
 pub mod problem98;
+pub mod problem99;
