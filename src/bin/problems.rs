@@ -1,8 +1,4 @@
-mod graph;
-mod ntheory;
-mod problems;
-mod series;
-mod utils;
+use projecteuler::problems;
 
 use clap::Parser;
 

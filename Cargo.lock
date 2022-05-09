@@ -383,7 +383,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "projecteuler-rust"
+name = "projecteuler"
 version = "0.0.1"
 dependencies = [
  "arrayvec",

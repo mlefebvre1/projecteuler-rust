@@ -8,11 +8,11 @@ Original solutions from ProjectEuler-Python re-written in Rust for improved spee
 
 ### Run all problems
 ```shell
-$ cargo run --release
+$ cargo run --release --bin problems
 ```
 ### Run a single problem (ex: run problem #15)
 ```shell
-cargo run --release -- -n 15
+cargo run --release --bin problems -- -n 15
 ```
 
 ### Run using docker (for vscode use devcontainer)

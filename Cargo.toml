@@ -1,5 +1,5 @@
 [package]
-name = "projecteuler-rust"
+name = "projecteuler"
 version = "0.0.1"
 authors = ["mlefebvre"]
 edition = "2021"
