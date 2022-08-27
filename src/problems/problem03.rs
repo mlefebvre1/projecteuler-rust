@@ -1,6 +1,5 @@
 use crate::ntheory::primes;
 use crate::utils::timeit;
-use num::Integer;
 
 fn p() -> String {
     /*
@@ -11,9 +10,10 @@ fn p() -> String {
     What is the largest prime factor of the number 600851475143 ?
     */
     const K: usize = 600851475143;
-    let numbers = 1..(K as f64).sqrt() as usize;
-    let candidates = numbers.filter(|&x| primes::is_prime(x) && K.is_multiple_of(&x));
-    candidates.max().unwrap().to_string()
+    let k_sqrt: usize = (K as f64).sqrt() as usize;
+
+    let candidates = primes::distinct_primes(K, &primes::sieves(k_sqrt));
+    candidates.iter().max().unwrap().to_string()
 }
 
 timeit::timeit!(Problem03, solve, p);
