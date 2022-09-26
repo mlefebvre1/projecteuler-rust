@@ -24,7 +24,7 @@ fn p() -> String {
     for m in 2..K {
         for n in m..K {
             let rect2d = triangles[m] * triangles[n]; // For 2D rect it is simply the multiplication of both value in 1D rect.
-            let err: usize = (2e6 as isize - rect2d as isize).abs() as usize;
+            let err: usize = (2e6 as isize - rect2d as isize).unsigned_abs();
             if err < best_rec.err {
                 best_rec.err = err;
                 best_rec.shape = (m, n);

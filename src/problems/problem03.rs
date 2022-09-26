@@ -12,8 +12,11 @@ fn p() -> String {
     const K: usize = 600851475143;
     let k_sqrt: usize = (K as f64).sqrt() as usize;
 
-    let candidates = primes::distinct_primes(K, &primes::sieves(k_sqrt));
-    candidates.iter().max().unwrap().to_string()
+    (1..k_sqrt)
+        .filter(|&n| K % n == 0 && primes::is_prime(n))
+        .max()
+        .unwrap()
+        .to_string()
 }
 
 timeit::timeit!(Problem03, solve, p);

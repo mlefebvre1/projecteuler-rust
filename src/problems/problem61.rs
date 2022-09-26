@@ -46,9 +46,9 @@ fn make_polygonals() -> Vec<Vec<usize>> {
         .take(MAX_N)
         .filter(|&t| t > 1000 && t < 10000)
         .collect();
-    return vec![
+    vec![
         triangular, square, pentagonal, hexagonal, heptagonal, octagonal,
-    ];
+    ]
 }
 
 fn generate_next_candidates(

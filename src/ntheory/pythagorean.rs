@@ -1,6 +1,6 @@
 use num::Integer;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PythagoreanTriple(pub usize, pub usize, pub usize);
 
 impl PythagoreanTriple {

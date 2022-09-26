@@ -19,13 +19,13 @@ fn is_first_node_the_smallest_external_node(gon_ring: &[(u8, u8, u8)]) -> bool {
 }
 
 fn build_magic_gon_ring(nodes: &[&u8]) -> Vec<(u8, u8, u8)> {
-    return vec![
+    vec![
         (6, *nodes[0], *nodes[1]),
         (*nodes[2], *nodes[1], *nodes[3]),
         (*nodes[4], *nodes[3], *nodes[5]),
         (*nodes[6], *nodes[5], *nodes[7]),
         (*nodes[8], *nodes[7], *nodes[0]),
-    ];
+    ]
 }
 
 fn build_string_from_gon_ring(gon_ring: &[(u8, u8, u8)]) -> Vec<u8> {

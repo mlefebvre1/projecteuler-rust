@@ -18,8 +18,8 @@ fn p() -> String {
         let digits = prime.to_string();
         let nb_digits = digits.chars().count();
         for digit in 1..nb_digits {
-            let trunc_left_to_right = (&digits[digit..nb_digits]).parse::<usize>().unwrap();
-            let trunc_right_to_left = (&digits[0..nb_digits - digit]).parse::<usize>().unwrap();
+            let trunc_left_to_right = digits[digit..nb_digits].parse::<usize>().unwrap();
+            let trunc_right_to_left = digits[0..nb_digits - digit].parse::<usize>().unwrap();
             if !is_prime(trunc_left_to_right) || !is_prime(trunc_right_to_left) {
                 return false;
             }
