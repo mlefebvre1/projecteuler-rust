@@ -6,11 +6,13 @@ edition = "2021"
 
 [dependencies]
 arrayvec = "^0.7.2"
+anyhow = "1"
 bitvec = "1"
 clap = { version = "3.1.8", features = ["derive"] }
 ndarray = "0.15.4"
 factorial = "0.2"
 itertools = "0.10"
+lazy_static = "1.4"
 num = "0.4"
 phf = { version = "0.10", features = ["macros"] }
 rand = "0.8"

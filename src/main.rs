@@ -6,239 +6,31 @@ mod utils;
 
 use clap::Parser;
 
+use problems::{run_all_problems, PROBLEMS};
+
 #[derive(Parser)]
 struct Args {
-    #[clap(short, long, default_value_t=-1)]
-    number: isize,
+    #[clap(short, long)]
+    number: Option<usize>,
 }
 
 #[cfg(not(tarpaulin_include))]
 fn main() {
     let args = Args::parse();
-    if args.number == -1 {
-        run_all_problems();
+    if let Some(problem_number) = args.number {
+        PROBLEMS[problem_number - 1].0();
     } else {
-        PROBLEMS[(args.number - 1) as usize]();
+        run_all_problems();
     }
 }
-
-#[cfg(not(tarpaulin_include))]
-fn run_all_problems() {
-    for problem in PROBLEMS {
-        problem();
-    }
-}
-
-const PROBLEMS: [fn() -> String; 100] = [
-    problems::problem01::solve,
-    problems::problem02::solve,
-    problems::problem03::solve,
-    problems::problem04::solve,
-    problems::problem05::solve,
-    problems::problem06::solve,
-    problems::problem07::solve,
-    problems::problem08::solve,
-    problems::problem09::solve,
-    problems::problem10::solve,
-    problems::problem11::solve,
-    problems::problem12::solve,
-    problems::problem13::solve,
-    problems::problem14::solve,
-    problems::problem15::solve,
-    problems::problem16::solve,
-    problems::problem17::solve,
-    problems::problem18::solve,
-    problems::problem19::solve,
-    problems::problem20::solve,
-    problems::problem21::solve,
-    problems::problem22::solve,
-    problems::problem23::solve,
-    problems::problem24::solve,
-    problems::problem25::solve,
-    problems::problem26::solve,
-    problems::problem27::solve,
-    problems::problem28::solve,
-    problems::problem29::solve,
-    problems::problem30::solve,
-    problems::problem31::solve,
-    problems::problem32::solve,
-    problems::problem33::solve,
-    problems::problem34::solve,
-    problems::problem35::solve,
-    problems::problem36::solve,
-    problems::problem37::solve,
-    problems::problem38::solve,
-    problems::problem39::solve,
-    problems::problem40::solve,
-    problems::problem41::solve,
-    problems::problem42::solve,
-    problems::problem43::solve,
-    problems::problem44::solve,
-    problems::problem45::solve,
-    problems::problem46::solve,
-    problems::problem47::solve,
-    problems::problem48::solve,
-    problems::problem49::solve,
-    problems::problem50::solve,
-    problems::problem51::solve,
-    problems::problem52::solve,
-    problems::problem53::solve,
-    problems::problem54::solve,
-    problems::problem55::solve,
-    problems::problem56::solve,
-    problems::problem57::solve,
-    problems::problem58::solve,
-    problems::problem59::solve,
-    problems::problem60::solve,
-    problems::problem61::solve,
-    problems::problem62::solve,
-    problems::problem63::solve,
-    problems::problem64::solve,
-    problems::problem65::solve,
-    problems::problem66::solve,
-    problems::problem67::solve,
-    problems::problem68::solve,
-    problems::problem69::solve,
-    problems::problem70::solve,
-    problems::problem71::solve,
-    problems::problem72::solve,
-    problems::problem73::solve,
-    problems::problem74::solve,
-    problems::problem75::solve,
-    problems::problem76::solve,
-    problems::problem77::solve,
-    problems::problem78::solve,
-    problems::problem79::solve,
-    problems::problem80::solve,
-    problems::problem81::solve,
-    problems::problem82::solve,
-    problems::problem83::solve,
-    problems::problem84::solve,
-    problems::problem85::solve,
-    problems::problem86::solve,
-    problems::problem87::solve,
-    problems::problem88::solve,
-    problems::problem89::solve,
-    problems::problem90::solve,
-    problems::problem91::solve,
-    problems::problem92::solve,
-    problems::problem93::solve,
-    problems::problem94::solve,
-    problems::problem95::solve,
-    problems::problem96::solve,
-    problems::problem97::solve,
-    problems::problem98::solve,
-    problems::problem99::solve,
-    problems::problem100::solve,
-];
 
 #[test]
 fn test_regression() {
-    const SOLUTIONS: [&str; 100] = [
-        "233168",
-        "4613732",
-        "6857",
-        "906609",
-        "232792560",
-        "25164150",
-        "104743",
-        "23514624000",
-        "31875000",
-        "142913828922",
-        "70600674",
-        "76576500",
-        "5537376230",
-        "837799",
-        "137846528820",
-        "1366",
-        "21124",
-        "1074",
-        "171",
-        "648",
-        "31626",
-        "871198282",
-        "4179871",
-        "2783915460",
-        "4782",
-        "983",
-        "-59231",
-        "669171001",
-        "9183",
-        "443839",
-        "73682",
-        "45228",
-        "100",
-        "40730",
-        "55",
-        "872187",
-        "748317",
-        "932718654",
-        "840",
-        "210",
-        "7652413",
-        "162",
-        "16695334890",
-        "5482660",
-        "1533776805",
-        "5777",
-        "134043",
-        "9110846700",
-        "296962999629",
-        "997651",
-        "121313",
-        "142857",
-        "4075",
-        "376",
-        "249",
-        "972",
-        "153",
-        "26241",
-        "129448",
-        "26033",
-        "28684",
-        "127035954683",
-        "49",
-        "1322",
-        "272",
-        "661",
-        "7273",
-        "6531031914842725",
-        "510510",
-        "8319823",
-        "428570",
-        "303963552391",
-        "7295372",
-        "402",
-        "161667",
-        "190569291",
-        "71",
-        "55374",
-        "73162890",
-        "40886",
-        "427337",
-        "260324",
-        "425185",
-        "101524",
-        "2772",
-        "1818",
-        "1097343",
-        "7587457",
-        "743",
-        "1217",
-        "14234",
-        "8581146",
-        "1258",
-        "518408346",
-        "14316",
-        "24702",
-        "8739992577",
-        "18769",
-        "709",
-        "756872327473",
-    ];
-    for (problem, solution) in PROBLEMS.iter().zip(SOLUTIONS.iter()) {
-        let result = problem();
-        println!("{}", result);
-        assert_eq!(result, *solution);
-    }
+    use problems::Problem;
+    PROBLEMS.iter().for_each(|problem| {
+        let Problem(solve, solution) = problem;
+        let ans = solve();
+        println!("{ans}");
+        assert_eq!(ans, *solution);
+    });
 }
