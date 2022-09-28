@@ -34,24 +34,33 @@ where
     }
 }
 
-#[test]
-fn test_square_usize() {
-    let serie = Square::<usize>::new();
-    let actual: Vec<usize> = serie.take(20).collect();
-    assert_eq!(
-        actual,
-        [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361]
-    );
-}
+#[cfg(test)]
+mod test {
+    use super::*;
 
-#[test]
-fn test_square_biguint() {
-    use num::BigUint;
-    let actual: BigUint = Square::<BigUint>::new().nth(20).unwrap();
-    let expected = BigUint::from(400usize);
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_square_usize() {
+        let serie = Square::<usize>::new();
+        let actual: Vec<usize> = serie.take(20).collect();
+        assert_eq!(
+            actual,
+            [
+                0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324,
+                361
+            ]
+        );
+    }
 
-    let actual = Square::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
-    let expected = BigUint::parse_bytes(b"328498451097686799925900568301054106978201", 10).unwrap();
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_square_biguint() {
+        use num::BigUint;
+        let actual: BigUint = Square::<BigUint>::new().nth(20).unwrap();
+        let expected = BigUint::from(400usize);
+        assert_eq!(actual, expected);
+
+        let actual = Square::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
+        let expected =
+            BigUint::parse_bytes(b"328498451097686799925900568301054106978201", 10).unwrap();
+        assert_eq!(actual, expected);
+    }
 }

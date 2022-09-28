@@ -41,23 +41,31 @@ pub fn proper_divisors_sum(n: usize) -> usize {
     proper_div_sum
 }
 
-#[test]
-fn test_factorize() {
-    assert_eq!(factorize(1), [1]);
-    assert_eq!(factorize(2), [1, 2]);
-    assert_eq!(factorize(10), [1, 2, 5, 10]);
-    assert_eq!(factorize(13), [1, 13]);
-    assert_eq!(factorize(28), [1, 2, 4, 7, 14, 28]);
-    assert_eq!(factorize(788), [1, 2, 4, 197, 394, 788]);
-    assert_eq!(factorize(512), [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]);
-}
+#[cfg(test)]
+mod test {
+    use super::*;
+    use rstest::*;
 
-#[test]
-fn test_proper_divisors_sum() {
-    assert_eq!(proper_divisors_sum(2), 1);
-    assert_eq!(proper_divisors_sum(10), 8);
-    assert_eq!(proper_divisors_sum(13), 1);
-    assert_eq!(proper_divisors_sum(28), 28);
-    assert_eq!(proper_divisors_sum(788), 598);
-    assert_eq!(proper_divisors_sum(512), 511);
+    #[rstest]
+    #[case(1,&[1])]
+    #[case(2,&[1,2])]
+    #[case(10, &[1, 2, 5, 10])]
+    #[case(13, &[1, 13])]
+    #[case(28, &[1, 2, 4, 7, 14, 28])]
+    #[case(788, &[1, 2, 4, 197, 394, 788])]
+    #[case(512, &[1, 2, 4, 8, 16, 32, 64, 128, 256, 512])]
+    fn test_factorize(#[case] n: usize, #[case] output: &[usize]) {
+        assert_eq!(factorize(n), output);
+    }
+
+    #[rstest]
+    #[case(2, 1)]
+    #[case(10, 8)]
+    #[case(13, 1)]
+    #[case(28, 28)]
+    #[case(788, 598)]
+    #[case(512, 511)]
+    fn test_proper_divisors_sum(#[case] input: usize, #[case] output: usize) {
+        assert_eq!(proper_divisors_sum(input), output);
+    }
 }

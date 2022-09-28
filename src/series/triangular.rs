@@ -38,24 +38,31 @@ where
     }
 }
 
-#[test]
-fn test_triangular_usize() {
-    let triangular_serie = Triangular::<usize>::new();
-    let actual: Vec<usize> = triangular_serie.take(20).collect();
-    assert_eq!(
-        actual,
-        [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190]
-    );
-}
+#[cfg(test)]
+mod test {
+    use super::*;
 
-#[test]
-fn test_triangular_biguint() {
-    use num::BigUint;
-    let actual: BigUint = Triangular::<BigUint>::new().nth(20).unwrap();
-    let expected = BigUint::from(210usize);
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_triangular_usize() {
+        let triangular_serie = Triangular::<usize>::new();
+        let actual: Vec<usize> = triangular_serie.take(20).collect();
+        assert_eq!(
+            actual,
+            [0, 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 66, 78, 91, 105, 120, 136, 153, 171, 190]
+        );
+    }
 
-    let actual = Triangular::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
-    let expected = BigUint::parse_bytes(b"164249225548843399963236858072533962031151", 10).unwrap();
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_triangular_biguint() {
+        use num::BigUint;
+        let actual: BigUint = Triangular::<BigUint>::new().nth(20).unwrap();
+        let expected = BigUint::from(210usize);
+        assert_eq!(actual, expected);
+
+        let actual =
+            Triangular::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
+        let expected =
+            BigUint::parse_bytes(b"164249225548843399963236858072533962031151", 10).unwrap();
+        assert_eq!(actual, expected);
+    }
 }

@@ -18,3 +18,13 @@ fn p() -> String {
 }
 
 timeit::timeit!(Problem01, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve(), "233168");
+    }
+}

@@ -97,28 +97,6 @@ where
     }
 }
 
-#[test]
-fn test_pentagonal_usize() {
-    let pentagonal_series = Pentagonal::<usize>::new();
-    let actual: Vec<usize> = pentagonal_series.take(20).collect();
-    assert_eq!(
-        actual,
-        [0, 1, 5, 12, 22, 35, 51, 70, 92, 117, 145, 176, 210, 247, 287, 330, 376, 425, 477, 532,]
-    );
-}
-
-#[test]
-fn test_pentagonal_biguint() {
-    use num::BigUint;
-    let actual: BigUint = Pentagonal::<BigUint>::new().nth(20).unwrap();
-    let expected = BigUint::from(590usize);
-    assert_eq!(actual, expected);
-
-    let actual = Pentagonal::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
-    let expected = BigUint::parse_bytes(b"492747676646530199888564278529574251925251", 10).unwrap();
-    assert_eq!(actual, expected);
-}
-
 #[allow(dead_code)]
 #[allow(clippy::many_single_char_names)]
 pub fn is_pentagonal(n: usize) -> bool {
@@ -131,34 +109,70 @@ pub fn is_pentagonal(n: usize) -> bool {
     false
 }
 
-#[test]
-fn test_is_pentagonal() {
-    assert!(is_pentagonal(1));
-    assert!(is_pentagonal(5));
-    assert!(is_pentagonal(12));
-    assert!(is_pentagonal(40755));
-    assert!(!is_pentagonal(3));
-}
+#[cfg(test)]
+mod test {
+    use super::*;
+    use rstest::*;
 
-#[test]
-fn test_generalized_pentagonal_isize() {
-    let pentagonal_series = GeneralizedPentagonal::<isize>::new();
-    let actual: Vec<isize> = pentagonal_series.take(20).collect();
-    assert_eq!(
-        actual,
-        [0, 1, 2, 5, 7, 12, 15, 22, 26, 35, 40, 51, 57, 70, 77, 92, 100, 117, 126, 145,]
-    );
-}
+    #[test]
+    fn test_pentagonal_usize() {
+        let pentagonal_series = Pentagonal::<usize>::new();
+        let actual: Vec<usize> = pentagonal_series.take(20).collect();
+        assert_eq!(
+            actual,
+            [
+                0, 1, 5, 12, 22, 35, 51, 70, 92, 117, 145, 176, 210, 247, 287, 330, 376, 425, 477,
+                532,
+            ]
+        );
+    }
 
-#[test]
-fn test_generalized_pentagonal_biguint() {
-    use num::BigInt;
-    let actual: BigInt = GeneralizedPentagonal::<BigInt>::new().nth(20).unwrap();
-    let expected = BigInt::from(155usize);
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_pentagonal_biguint() {
+        use num::BigUint;
+        let actual: BigUint = Pentagonal::<BigUint>::new().nth(20).unwrap();
+        let expected = BigUint::from(590usize);
+        assert_eq!(actual, expected);
 
-    let actual =
-        GeneralizedPentagonal::from_n(&BigInt::parse_bytes(b"573147844013817084101", 10).unwrap());
-    let expected = BigInt::parse_bytes(b"492747676646530199888564278529574251925251", 10).unwrap();
-    assert_eq!(actual, expected);
+        let actual =
+            Pentagonal::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
+        let expected =
+            BigUint::parse_bytes(b"492747676646530199888564278529574251925251", 10).unwrap();
+        assert_eq!(actual, expected);
+    }
+
+    #[rstest]
+    #[case(1, true)]
+    #[case(5, true)]
+    #[case(12, true)]
+    #[case(40755, true)]
+    #[case(3, false)]
+    fn test_is_pentagonal(#[case] input: usize, #[case] output: bool) {
+        assert_eq!(is_pentagonal(input), output);
+    }
+
+    #[test]
+    fn test_generalized_pentagonal_isize() {
+        let pentagonal_series = GeneralizedPentagonal::<isize>::new();
+        let actual: Vec<isize> = pentagonal_series.take(20).collect();
+        assert_eq!(
+            actual,
+            [0, 1, 2, 5, 7, 12, 15, 22, 26, 35, 40, 51, 57, 70, 77, 92, 100, 117, 126, 145,]
+        );
+    }
+
+    #[test]
+    fn test_generalized_pentagonal_biguint() {
+        use num::BigInt;
+        let actual: BigInt = GeneralizedPentagonal::<BigInt>::new().nth(20).unwrap();
+        let expected = BigInt::from(155usize);
+        assert_eq!(actual, expected);
+
+        let actual = GeneralizedPentagonal::from_n(
+            &BigInt::parse_bytes(b"573147844013817084101", 10).unwrap(),
+        );
+        let expected =
+            BigInt::parse_bytes(b"492747676646530199888564278529574251925251", 10).unwrap();
+        assert_eq!(actual, expected);
+    }
 }

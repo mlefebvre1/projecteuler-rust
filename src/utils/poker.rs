@@ -275,542 +275,547 @@ fn is_full_house(hand: &PokerHand) -> Option<[u8; 2]> {
     None
 }
 
-// Unittest tests below
-#[test]
-fn test_poker_hand_from_string() {
-    let hand = ["5H", "5C", "6S", "7S", "KD"];
-    let expected = [
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 13,
-            color: CardColor::Diamonds,
-        },
-    ];
-    assert_eq!(poker_hand_from_string(&hand), expected as PokerHand);
-}
+#[cfg(test)]
+mod test {
+    use super::*;
 
-#[test]
-fn test_poker_hand_value_occurences() {
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 13,
-            color: CardColor::Diamonds,
-        },
-    ];
-    let expected = [0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 1, 0];
-    assert_eq!(poker_hand_value_occurences(&hand), expected);
-}
+    // Unittest tests below
+    #[test]
+    fn test_poker_hand_from_string() {
+        let hand = ["5H", "5C", "6S", "7S", "KD"];
+        let expected = [
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 13,
+                color: CardColor::Diamonds,
+            },
+        ];
+        assert_eq!(poker_hand_from_string(&hand), expected as PokerHand);
+    }
 
-#[test]
-fn test_is_straight() {
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 8,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Diamonds,
-        },
-    ];
-    assert_eq!(is_straight(&hand), Some(5));
+    #[test]
+    fn test_poker_hand_value_occurences() {
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 13,
+                color: CardColor::Diamonds,
+            },
+        ];
+        let expected = [0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 1, 0];
+        assert_eq!(poker_hand_value_occurences(&hand), expected);
+    }
 
-    let hand = [
-        Card {
-            value: 9,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 11,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 12,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 13,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 14,
-            color: CardColor::Diamonds,
-        },
-    ];
-    assert_eq!(is_straight(&hand), None);
-}
+    #[test]
+    fn test_is_straight() {
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 8,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Diamonds,
+            },
+        ];
+        assert_eq!(is_straight(&hand), Some(5));
 
-#[test]
-fn test_is_flush() {
-    let hand = [
-        Card {
-            value: 2,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 4,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Heart,
-        },
-    ];
-    assert_eq!(is_flush(&hand), Some(7));
+        let hand = [
+            Card {
+                value: 9,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 11,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 12,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 13,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 14,
+                color: CardColor::Diamonds,
+            },
+        ];
+        assert_eq!(is_straight(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 2,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 4,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-    ];
-    assert_eq!(is_flush(&hand), None);
-}
+    #[test]
+    fn test_is_flush() {
+        let hand = [
+            Card {
+                value: 2,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 4,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Heart,
+            },
+        ];
+        assert_eq!(is_flush(&hand), Some(7));
 
-#[test]
-fn test_is_royal_flush() {
-    let hand = [
-        Card {
-            value: 10,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 11,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 12,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 13,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 14,
-            color: CardColor::Heart,
-        },
-    ];
-    assert_eq!(is_royal_flush(&hand), Some(10));
+        let hand = [
+            Card {
+                value: 2,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 4,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+        ];
+        assert_eq!(is_flush(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 9,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 10,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 11,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 12,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 13,
-            color: CardColor::Heart,
-        },
-    ];
-    assert_eq!(is_royal_flush(&hand), None);
-}
+    #[test]
+    fn test_is_royal_flush() {
+        let hand = [
+            Card {
+                value: 10,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 11,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 12,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 13,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 14,
+                color: CardColor::Heart,
+            },
+        ];
+        assert_eq!(is_royal_flush(&hand), Some(10));
 
-#[test]
-fn test_is_straight_flush() {
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 8,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_straight_flush(&hand), Some(5));
+        let hand = [
+            Card {
+                value: 9,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 10,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 11,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 12,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 13,
+                color: CardColor::Heart,
+            },
+        ];
+        assert_eq!(is_royal_flush(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 8,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Spades,
-        },
-    ];
-    assert_eq!(is_straight_flush(&hand), None);
-}
+    #[test]
+    fn test_is_straight_flush() {
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 8,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_straight_flush(&hand), Some(5));
 
-#[test]
-fn test_is_four_a_kind() {
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_four_of_a_kind(&hand), Some(5));
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 8,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Spades,
+            },
+        ];
+        assert_eq!(is_straight_flush(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_four_of_a_kind(&hand), None);
-}
+    #[test]
+    fn test_is_four_a_kind() {
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_four_of_a_kind(&hand), Some(5));
 
-#[test]
-fn test_is_three_of_a_kind() {
-    let hand = [
-        Card {
-            value: 5,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 5,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_three_of_a_kind(&hand), None);
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_four_of_a_kind(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 6,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_three_of_a_kind(&hand), Some(6));
+    #[test]
+    fn test_is_three_of_a_kind() {
+        let hand = [
+            Card {
+                value: 5,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 5,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_three_of_a_kind(&hand), None);
 
-    let hand = [
-        Card {
-            value: 6,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 6,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 2,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_three_of_a_kind(&hand), None);
-}
+        let hand = [
+            Card {
+                value: 6,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_three_of_a_kind(&hand), Some(6));
 
-#[test]
-fn test_is_a_pair() {
-    let hand = [
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 2,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_a_pair(&hand), Some(7));
+        let hand = [
+            Card {
+                value: 6,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 6,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 2,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_three_of_a_kind(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_a_pair(&hand), None);
-}
+    #[test]
+    fn test_is_a_pair() {
+        let hand = [
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 2,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_a_pair(&hand), Some(7));
 
-#[test]
-fn test_is_a_two_pair() {
-    let hand = [
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_a_two_pair(&hand), Some(vec![3, 7]));
+        let hand = [
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_a_pair(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 4,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_a_two_pair(&hand), None);
-}
+    #[test]
+    fn test_is_a_two_pair() {
+        let hand = [
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_a_two_pair(&hand), Some(vec![3, 7]));
 
-#[test]
-fn test_is_full_house() {
-    let hand = [
-        Card {
-            value: 4,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 4,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 4,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_full_house(&hand), Some([4, 3]));
+        let hand = [
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 4,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_a_two_pair(&hand), None);
+    }
 
-    let hand = [
-        Card {
-            value: 7,
-            color: CardColor::Clubs,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Spades,
-        },
-        Card {
-            value: 7,
-            color: CardColor::Diamonds,
-        },
-        Card {
-            value: 3,
-            color: CardColor::Heart,
-        },
-        Card {
-            value: 9,
-            color: CardColor::Clubs,
-        },
-    ];
-    assert_eq!(is_full_house(&hand), None);
+    #[test]
+    fn test_is_full_house() {
+        let hand = [
+            Card {
+                value: 4,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 4,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 4,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_full_house(&hand), Some([4, 3]));
+
+        let hand = [
+            Card {
+                value: 7,
+                color: CardColor::Clubs,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Spades,
+            },
+            Card {
+                value: 7,
+                color: CardColor::Diamonds,
+            },
+            Card {
+                value: 3,
+                color: CardColor::Heart,
+            },
+            Card {
+                value: 9,
+                color: CardColor::Clubs,
+            },
+        ];
+        assert_eq!(is_full_house(&hand), None);
+    }
 }

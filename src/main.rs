@@ -24,13 +24,17 @@ fn main() {
     }
 }
 
-#[test]
-fn test_regression() {
-    use problems::Problem;
-    PROBLEMS.iter().for_each(|problem| {
-        let Problem(solve, solution) = problem;
-        let ans = solve();
-        println!("{ans}");
-        assert_eq!(ans, *solution);
-    });
+#[cfg(test)]
+mod test {
+    use crate::problems::{Problem, PROBLEMS};
+
+    #[test]
+    fn test_regression() {
+        PROBLEMS.iter().for_each(|problem| {
+            let Problem(solve, solution) = problem;
+            let ans = solve();
+            println!("{ans}");
+            assert_eq!(ans, *solution);
+        });
+    }
 }

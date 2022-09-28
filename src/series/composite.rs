@@ -34,9 +34,14 @@ where
     }
 }
 
-#[test]
-fn test_composite_iter() {
-    let actual: Vec<usize> = OddComposite::new().take(10).collect();
-    let expected = [9, 15, 21, 25, 27, 33, 35, 39, 45, 49];
-    assert_eq!(actual, expected);
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_composite_iter() {
+        let actual: Vec<usize> = OddComposite::new().take(10).collect();
+        let expected = [9, 15, 21, 25, 27, 33, 35, 39, 45, 49];
+        assert_eq!(actual, expected);
+    }
 }

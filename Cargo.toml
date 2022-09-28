@@ -18,5 +18,8 @@ phf = { version = "0.10", features = ["macros"] }
 rand = "0.8"
 eval = "^0.4"
 
+[dev-dependencies]
+rstest = "0.15"
+
 [profile.release]
 strip = true

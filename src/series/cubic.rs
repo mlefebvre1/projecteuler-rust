@@ -34,31 +34,36 @@ where
     }
 }
 
-#[test]
-fn test_cubic_usize() {
-    let serie = Cubic::<usize>::new();
-    let actual: Vec<usize> = serie.take(20).collect();
-    assert_eq!(
-        actual,
-        [
-            0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331, 1728, 2197, 2744, 3375, 4096,
-            4913, 5832, 6859,
-        ]
-    );
-}
+#[cfg(test)]
+mod test {
+    use super::*;
 
-#[test]
-fn test_cubic_biguint() {
-    use num::BigUint;
-    let actual: BigUint = Cubic::<BigUint>::new().nth(20).unwrap();
-    let expected = BigUint::from(8000usize);
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_cubic_usize() {
+        let serie = Cubic::<usize>::new();
+        let actual: Vec<usize> = serie.take(20).collect();
+        assert_eq!(
+            actual,
+            [
+                0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331, 1728, 2197, 2744, 3375, 4096,
+                4913, 5832, 6859,
+            ]
+        );
+    }
 
-    let actual = Cubic::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
-    let expected = BigUint::parse_bytes(
-        b"188278179008517513490654244761257633062280617431713254190682301",
-        10,
-    )
-    .unwrap();
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_cubic_biguint() {
+        use num::BigUint;
+        let actual: BigUint = Cubic::<BigUint>::new().nth(20).unwrap();
+        let expected = BigUint::from(8000usize);
+        assert_eq!(actual, expected);
+
+        let actual = Cubic::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
+        let expected = BigUint::parse_bytes(
+            b"188278179008517513490654244761257633062280617431713254190682301",
+            10,
+        )
+        .unwrap();
+        assert_eq!(actual, expected);
+    }
 }

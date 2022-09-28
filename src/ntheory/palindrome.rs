@@ -27,23 +27,32 @@ where
     true
 }
 
-#[test]
-fn test_is_palindrome_str() {
-    assert!(!is_palindrome_str("123"));
-    assert!(is_palindrome_str("121"));
-    assert!(is_palindrome_str("1245421"));
-    assert!(is_palindrome_str("111"));
-    assert!(is_palindrome_str("3333"));
-    assert!(is_palindrome_str("987656789"));
-    assert!(!is_palindrome_str("987656779"));
-}
-#[test]
-fn test_is_palindrome() {
-    assert!(!is_palindrome::<usize>(&123));
-    assert!(is_palindrome::<usize>(&121));
-    assert!(is_palindrome::<usize>(&1245421));
-    assert!(is_palindrome::<usize>(&111));
-    assert!(is_palindrome::<usize>(&3333));
-    assert!(is_palindrome::<usize>(&987656789));
-    assert!(!is_palindrome::<usize>(&987656779));
+#[cfg(test)]
+mod test {
+    use super::*;
+    use rstest::*;
+
+    #[rstest]
+    #[case("123", false)]
+    #[case("121", true)]
+    #[case("1245421", true)]
+    #[case("111", true)]
+    #[case("3333", true)]
+    #[case("987656789", true)]
+    #[case("987656779", false)]
+    fn test_is_palindrome_str(#[case] input: &str, #[case] output: bool) {
+        assert_eq!(is_palindrome_str(input), output);
+    }
+
+    #[rstest]
+    #[case(123, false)]
+    #[case(121, true)]
+    #[case(1245421, true)]
+    #[case(111, true)]
+    #[case(3333, true)]
+    #[case(987656789, true)]
+    #[case(987656779, false)]
+    fn test_is_palindrome(#[case] input: usize, #[case] output: bool) {
+        assert_eq!(is_palindrome(&input), output);
+    }
 }

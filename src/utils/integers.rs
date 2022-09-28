@@ -53,16 +53,28 @@ where
     vec
 }
 
-#[test]
-fn test_int_to_vec_of_u8() {
-    use num::BigUint;
-    assert_eq!(int_to_vec_of_u8::<usize>(&0), [0]);
-    assert_eq!(int_to_vec_of_u8::<usize>(&1), [1]);
-    assert_eq!(int_to_vec_of_u8::<usize>(&123), [1, 2, 3]);
-    assert_eq!(int_to_vec_of_u8::<usize>(&100), [1, 0, 0]);
-    assert_eq!(int_to_vec_of_u8::<usize>(&957327), [9, 5, 7, 3, 2, 7]);
-    assert_eq!(
-        int_to_vec_of_u8::<BigUint>(&BigUint::from(957327usize)),
-        [9, 5, 7, 3, 2, 7]
-    );
+#[cfg(test)]
+mod test {
+
+    use super::*;
+    use rstest::*;
+
+    #[rstest]
+    #[case(0, &[0])]
+    #[case(1, &[1])]
+    #[case(123, &[1,2,3])]
+    #[case(100, &[1,0,0])]
+    #[case(957327, &[9,5,7,3,2,7])]
+    fn test_int_to_vec_of_u8_for_usize(#[case] input: usize, #[case] output: &[u8]) {
+        assert_eq!(int_to_vec_of_u8::<usize>(&input), output);
+    }
+
+    #[test]
+    fn test_int_to_vec_of_u8_for_bigint() {
+        use num::BigUint;
+        assert_eq!(
+            int_to_vec_of_u8::<BigUint>(&BigUint::from(957327usize)),
+            [9, 5, 7, 3, 2, 7]
+        );
+    }
 }

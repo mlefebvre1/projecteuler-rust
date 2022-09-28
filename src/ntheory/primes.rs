@@ -46,23 +46,6 @@ where
     primes
 }
 
-#[test]
-fn test_sieves() {
-    assert_eq!(sieves(2), [2]);
-    assert_eq!(sieves(3), [2, 3]);
-    assert_eq!(
-        sieves(50),
-        [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
-    );
-    assert_eq!(
-        sieves(97),
-        [
-            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83,
-            89, 97
-        ]
-    );
-}
-
 #[allow(clippy::just_underscores_and_digits)]
 pub fn is_prime<T>(n: T) -> bool
 where
@@ -94,18 +77,6 @@ where
     true
 }
 
-#[test]
-fn test_is_prime() {
-    assert!(is_prime(2));
-    assert!(is_prime(3));
-    assert!(is_prime(5));
-    assert!(is_prime(7));
-    assert!(is_prime(983));
-    assert!(!is_prime(4));
-    assert!(!is_prime(100));
-    assert!(!is_prime(10000));
-}
-
 pub fn distinct_primes<T>(n: T, primes: &[T]) -> Vec<T>
 where
     T: Integer + Num + NumCast + Copy,
@@ -127,9 +98,39 @@ where
     }
 }
 
-#[test]
-fn test_distinct_primes() {
-    assert_eq!(distinct_primes::<usize>(28, &sieves(28)), [2, 7]);
-    assert_eq!(distinct_primes(30030, &sieves(30030)), [2, 3, 5, 7, 11, 13]);
-    assert_eq!(distinct_primes(1009, &sieves(1009)), [1009]);
+#[cfg(test)]
+mod test {
+    use super::*;
+    use rstest::*;
+
+    #[rstest]
+    #[case(2,&[2])]
+    #[case(3,&[2,3])]
+    #[case(50,&[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47])]
+    #[case(97,&[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79,
+        83, 89, 97])]
+    fn test_sieves(#[case] input: usize, #[case] output: &[usize]) {
+        assert_eq!(sieves(input), output);
+    }
+
+    #[rstest]
+    #[case(2, true)]
+    #[case(3, true)]
+    #[case(4, false)]
+    #[case(5, true)]
+    #[case(7, true)]
+    #[case(100, false)]
+    #[case(983, true)]
+    #[case(10000, false)]
+    fn test_is_prime(#[case] input: usize, #[case] output: bool) {
+        assert_eq!(is_prime(input), output);
+    }
+
+    #[rstest]
+    #[case(28,&[2,7])]
+    #[case(30030,&[2,3,5,7,11,13])]
+    #[case(1009,&[1009])]
+    fn test_distinct_primes(#[case] input: usize, #[case] output: &[usize]) {
+        assert_eq!(distinct_primes(input, &sieves(input)), output);
+    }
 }

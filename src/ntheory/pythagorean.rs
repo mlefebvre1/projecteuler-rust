@@ -53,92 +53,97 @@ pub fn pythagorean_triples(max_h: usize) -> Vec<PythagoreanTriple> {
     triples
 }
 
-#[test]
-fn test_primitives_pythagorean_triples() {
-    let max_h = 100usize;
-    let mut actual = primitive_pythagorean_triples(max_h);
-    actual.sort_by_key(|k| k.0);
-    let expected = vec![
-        PythagoreanTriple(3, 4, 5),
-        PythagoreanTriple(5, 12, 13),
-        PythagoreanTriple(7, 24, 25),
-        PythagoreanTriple(8, 15, 17),
-        PythagoreanTriple(9, 40, 41),
-        PythagoreanTriple(11, 60, 61),
-        PythagoreanTriple(12, 35, 37),
-        PythagoreanTriple(13, 84, 85),
-        PythagoreanTriple(15, 112, 113),
-        PythagoreanTriple(16, 63, 65),
-        PythagoreanTriple(17, 144, 145),
-        PythagoreanTriple(20, 21, 29),
-        PythagoreanTriple(28, 45, 53),
-        PythagoreanTriple(33, 56, 65),
-        PythagoreanTriple(36, 77, 85),
-        PythagoreanTriple(39, 80, 89),
-        PythagoreanTriple(48, 55, 73),
-        PythagoreanTriple(65, 72, 97),
-    ];
-    assert_eq!(actual, expected);
-}
+#[cfg(test)]
+mod test {
+    use super::*;
 
-#[test]
-fn test_pythagorean_triples() {
-    let max_h = 100usize;
-    let mut actual = pythagorean_triples(max_h);
-    actual.sort_by_key(|k| k.0);
-    let expected = vec![
-        PythagoreanTriple(3, 4, 5),
-        PythagoreanTriple(5, 12, 13),
-        PythagoreanTriple(6, 8, 10),
-        PythagoreanTriple(7, 24, 25),
-        PythagoreanTriple(8, 15, 17),
-        PythagoreanTriple(9, 12, 15),
-        PythagoreanTriple(9, 40, 41),
-        PythagoreanTriple(10, 24, 26),
-        PythagoreanTriple(11, 60, 61),
-        PythagoreanTriple(12, 16, 20),
-        PythagoreanTriple(12, 35, 37),
-        PythagoreanTriple(13, 84, 85),
-        PythagoreanTriple(14, 48, 50),
-        PythagoreanTriple(15, 20, 25),
-        PythagoreanTriple(15, 36, 39),
-        PythagoreanTriple(16, 30, 34),
-        PythagoreanTriple(16, 63, 65),
-        PythagoreanTriple(18, 24, 30),
-        PythagoreanTriple(18, 80, 82),
-        PythagoreanTriple(20, 48, 52),
-        PythagoreanTriple(20, 21, 29),
-        PythagoreanTriple(21, 28, 35),
-        PythagoreanTriple(21, 72, 75),
-        PythagoreanTriple(24, 32, 40),
-        PythagoreanTriple(24, 45, 51),
-        PythagoreanTriple(24, 70, 74),
-        PythagoreanTriple(25, 60, 65),
-        PythagoreanTriple(27, 36, 45),
-        PythagoreanTriple(28, 96, 100),
-        PythagoreanTriple(28, 45, 53),
-        PythagoreanTriple(30, 40, 50),
-        PythagoreanTriple(30, 72, 78),
-        PythagoreanTriple(32, 60, 68),
-        PythagoreanTriple(33, 44, 55),
-        PythagoreanTriple(33, 56, 65),
-        PythagoreanTriple(35, 84, 91),
-        PythagoreanTriple(36, 48, 60),
-        PythagoreanTriple(36, 77, 85),
-        PythagoreanTriple(39, 52, 65),
-        PythagoreanTriple(39, 80, 89),
-        PythagoreanTriple(40, 75, 85),
-        PythagoreanTriple(40, 42, 58),
-        PythagoreanTriple(42, 56, 70),
-        PythagoreanTriple(45, 60, 75),
-        PythagoreanTriple(48, 64, 80),
-        PythagoreanTriple(48, 55, 73),
-        PythagoreanTriple(51, 68, 85),
-        PythagoreanTriple(54, 72, 90),
-        PythagoreanTriple(57, 76, 95),
-        PythagoreanTriple(60, 80, 100),
-        PythagoreanTriple(60, 63, 87),
-        PythagoreanTriple(65, 72, 97),
-    ];
-    assert_eq!(actual, expected);
+    #[test]
+    fn test_primitives_pythagorean_triples() {
+        let max_h = 100usize;
+        let mut actual = primitive_pythagorean_triples(max_h);
+        actual.sort_by_key(|k| k.0);
+        let expected = vec![
+            PythagoreanTriple(3, 4, 5),
+            PythagoreanTriple(5, 12, 13),
+            PythagoreanTriple(7, 24, 25),
+            PythagoreanTriple(8, 15, 17),
+            PythagoreanTriple(9, 40, 41),
+            PythagoreanTriple(11, 60, 61),
+            PythagoreanTriple(12, 35, 37),
+            PythagoreanTriple(13, 84, 85),
+            PythagoreanTriple(15, 112, 113),
+            PythagoreanTriple(16, 63, 65),
+            PythagoreanTriple(17, 144, 145),
+            PythagoreanTriple(20, 21, 29),
+            PythagoreanTriple(28, 45, 53),
+            PythagoreanTriple(33, 56, 65),
+            PythagoreanTriple(36, 77, 85),
+            PythagoreanTriple(39, 80, 89),
+            PythagoreanTriple(48, 55, 73),
+            PythagoreanTriple(65, 72, 97),
+        ];
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn test_pythagorean_triples() {
+        let max_h = 100usize;
+        let mut actual = pythagorean_triples(max_h);
+        actual.sort_by_key(|k| k.0);
+        let expected = vec![
+            PythagoreanTriple(3, 4, 5),
+            PythagoreanTriple(5, 12, 13),
+            PythagoreanTriple(6, 8, 10),
+            PythagoreanTriple(7, 24, 25),
+            PythagoreanTriple(8, 15, 17),
+            PythagoreanTriple(9, 12, 15),
+            PythagoreanTriple(9, 40, 41),
+            PythagoreanTriple(10, 24, 26),
+            PythagoreanTriple(11, 60, 61),
+            PythagoreanTriple(12, 16, 20),
+            PythagoreanTriple(12, 35, 37),
+            PythagoreanTriple(13, 84, 85),
+            PythagoreanTriple(14, 48, 50),
+            PythagoreanTriple(15, 20, 25),
+            PythagoreanTriple(15, 36, 39),
+            PythagoreanTriple(16, 30, 34),
+            PythagoreanTriple(16, 63, 65),
+            PythagoreanTriple(18, 24, 30),
+            PythagoreanTriple(18, 80, 82),
+            PythagoreanTriple(20, 48, 52),
+            PythagoreanTriple(20, 21, 29),
+            PythagoreanTriple(21, 28, 35),
+            PythagoreanTriple(21, 72, 75),
+            PythagoreanTriple(24, 32, 40),
+            PythagoreanTriple(24, 45, 51),
+            PythagoreanTriple(24, 70, 74),
+            PythagoreanTriple(25, 60, 65),
+            PythagoreanTriple(27, 36, 45),
+            PythagoreanTriple(28, 96, 100),
+            PythagoreanTriple(28, 45, 53),
+            PythagoreanTriple(30, 40, 50),
+            PythagoreanTriple(30, 72, 78),
+            PythagoreanTriple(32, 60, 68),
+            PythagoreanTriple(33, 44, 55),
+            PythagoreanTriple(33, 56, 65),
+            PythagoreanTriple(35, 84, 91),
+            PythagoreanTriple(36, 48, 60),
+            PythagoreanTriple(36, 77, 85),
+            PythagoreanTriple(39, 52, 65),
+            PythagoreanTriple(39, 80, 89),
+            PythagoreanTriple(40, 75, 85),
+            PythagoreanTriple(40, 42, 58),
+            PythagoreanTriple(42, 56, 70),
+            PythagoreanTriple(45, 60, 75),
+            PythagoreanTriple(48, 64, 80),
+            PythagoreanTriple(48, 55, 73),
+            PythagoreanTriple(51, 68, 85),
+            PythagoreanTriple(54, 72, 90),
+            PythagoreanTriple(57, 76, 95),
+            PythagoreanTriple(60, 80, 100),
+            PythagoreanTriple(60, 63, 87),
+            PythagoreanTriple(65, 72, 97),
+        ];
+        assert_eq!(actual, expected);
+    }
 }

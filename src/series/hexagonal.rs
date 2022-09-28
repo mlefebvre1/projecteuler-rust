@@ -41,31 +41,6 @@ where
     }
 }
 
-#[test]
-fn test_hexagonal_usize() {
-    let hexagonal_series = Hexagonal::<usize>::new();
-    let actual: Vec<usize> = hexagonal_series.take(20).collect();
-    assert_eq!(
-        actual,
-        [
-            0, 1, 6, 15, 28, 45, 66, 91, 120, 153, 190, 231, 276, 325, 378, 435, 496, 561, 630,
-            703,
-        ]
-    );
-}
-
-#[test]
-fn test_hexagonal_biguint() {
-    use num::BigUint;
-    let actual: BigUint = Hexagonal::<BigUint>::new().nth(20).unwrap();
-    let expected = BigUint::from(780usize);
-    assert_eq!(actual, expected);
-
-    let actual = Hexagonal::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
-    let expected = BigUint::parse_bytes(b"656996902195373599851227988758094396872301", 10).unwrap();
-    assert_eq!(actual, expected);
-}
-
 #[allow(dead_code)]
 #[allow(clippy::many_single_char_names)]
 pub fn is_hexagonal(n: usize) -> bool {
@@ -78,11 +53,43 @@ pub fn is_hexagonal(n: usize) -> bool {
     false
 }
 
-#[test]
-fn test_is_hexagonal() {
-    assert!(is_hexagonal(1));
-    assert!(is_hexagonal(6));
-    assert!(is_hexagonal(15));
-    assert!(is_hexagonal(40755));
-    assert!(!is_hexagonal(3));
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_hexagonal_usize() {
+        let hexagonal_series = Hexagonal::<usize>::new();
+        let actual: Vec<usize> = hexagonal_series.take(20).collect();
+        assert_eq!(
+            actual,
+            [
+                0, 1, 6, 15, 28, 45, 66, 91, 120, 153, 190, 231, 276, 325, 378, 435, 496, 561, 630,
+                703,
+            ]
+        );
+    }
+
+    #[test]
+    fn test_hexagonal_biguint() {
+        use num::BigUint;
+        let actual: BigUint = Hexagonal::<BigUint>::new().nth(20).unwrap();
+        let expected = BigUint::from(780usize);
+        assert_eq!(actual, expected);
+
+        let actual =
+            Hexagonal::from_n(&BigUint::parse_bytes(b"573147844013817084101", 10).unwrap());
+        let expected =
+            BigUint::parse_bytes(b"656996902195373599851227988758094396872301", 10).unwrap();
+        assert_eq!(actual, expected);
+    }
+
+    #[test]
+    fn test_is_hexagonal() {
+        assert!(is_hexagonal(1));
+        assert!(is_hexagonal(6));
+        assert!(is_hexagonal(15));
+        assert!(is_hexagonal(40755));
+        assert!(!is_hexagonal(3));
+    }
 }
