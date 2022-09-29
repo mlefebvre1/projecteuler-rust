@@ -1,6 +1,7 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Sum square difference
     Problem 6
@@ -19,7 +20,17 @@ fn p() -> String {
     let range = 0..=MAX_N;
     let sum_of_square: usize = range.map(|x| x * x).sum();
     let square_of_sum = (MAX_N * (MAX_N + 1) / 2).pow(2);
-    (square_of_sum - sum_of_square).to_string()
+    Ok((square_of_sum - sum_of_square).to_string())
 }
 
 timeit::timeit!(Problem06, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "25164150");
+    }
+}

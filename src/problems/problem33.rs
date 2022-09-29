@@ -2,7 +2,8 @@ use crate::utils::timeit;
 use itertools::Itertools;
 use num::Integer;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Digit cancelling fractions
     Problem 33
@@ -52,7 +53,17 @@ fn p() -> String {
             (acc_num * num, acc_denom * denom)
         });
     let (num_prod, denom_prod) = fraction_product;
-    (denom_prod / denom_prod.gcd(&num_prod)).to_string()
+    Ok((denom_prod / denom_prod.gcd(&num_prod)).to_string())
 }
 
 timeit::timeit!(Problem33, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "100");
+    }
+}

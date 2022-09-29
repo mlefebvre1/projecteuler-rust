@@ -2,7 +2,8 @@ use crate::series::fibonacci::Fibonacci;
 use crate::utils::timeit;
 use num::BigUint;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     The Fibonacci sequence is defined by the recurrence relation:
 
@@ -32,7 +33,17 @@ fn p() -> String {
         .take_while(|x| x.to_radix_be(10).len() < 1000)
         .count()
         + 1; // +1 because the Fibonacci generator starts at f(1)
-    index.to_string()
+    Ok(index.to_string())
 }
 
 timeit::timeit!(Problem25, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "4782");
+    }
+}

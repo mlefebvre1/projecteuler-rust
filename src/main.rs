@@ -6,6 +6,7 @@ mod utils;
 
 use clap::Parser;
 
+use anyhow::Result;
 use problems::{run_all_problems, PROBLEMS};
 
 #[derive(Parser)]
@@ -15,26 +16,12 @@ struct Args {
 }
 
 #[cfg(not(tarpaulin_include))]
-fn main() {
+fn main() -> Result<()> {
     let args = Args::parse();
     if let Some(problem_number) = args.number {
-        PROBLEMS[problem_number - 1].0();
+        PROBLEMS[problem_number - 1].0()?;
     } else {
-        run_all_problems();
+        run_all_problems()?;
     }
-}
-
-#[cfg(test)]
-mod test {
-    use crate::problems::{Problem, PROBLEMS};
-
-    #[test]
-    fn test_regression() {
-        PROBLEMS.iter().for_each(|problem| {
-            let Problem(solve, solution) = problem;
-            let ans = solve();
-            println!("{ans}");
-            assert_eq!(ans, *solution);
-        });
-    }
+    Ok(())
 }

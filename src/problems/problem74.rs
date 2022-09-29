@@ -3,6 +3,45 @@ use crate::utils::timeit;
 use factorial::Factorial;
 use phf::phf_map;
 
+use anyhow::Result;
+
+fn p() -> Result<String> {
+    /*
+    Digit factorial chains
+    Problem 74
+
+    The number 145 is well known for the property that the sum of the factorial of its digits is equal to 145:
+
+    1! + 4! + 5! = 1 + 24 + 120 = 145
+
+    Perhaps less well known is 169, in that it produces the longest chain of numbers that link back to 169; it turns out
+    that there are only three such loops that exist:
+
+    169 → 363601 → 1454 → 169
+    871 → 45361 → 871
+    872 → 45362 → 872
+
+    It is not difficult to prove that EVERY starting number will eventually get stuck in a loop. For example,
+
+    69 → 363600 → 1454 → 169 → 363601 (→ 1454)
+    78 → 45360 → 871 → 45361 (→ 871)
+    540 → 145 (→ 145)
+
+    Starting with 69 produces a chain of five non-repeating terms, but the longest non-repeating chain with a starting
+    number below one million is sixty terms.
+
+    How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
+    */
+    const MAX_N: usize = 1e6 as usize;
+    const NB_TERMS: usize = 60;
+    let chain_map_size: usize = 6 * 9.factorial(); // worst case is the starting number 999999 -> 6 * 9!
+    let mut chain_map = ChainMap::new(chain_map_size);
+    Ok((0..MAX_N)
+        .filter(|&n| chain_map.chain(n) == NB_TERMS)
+        .count()
+        .to_string())
+}
+
 static CHAIN_ENDING_VALUE: phf::Map<&'static str, usize> = phf_map! {
     "1"=> 1,
     "2"=> 1,
@@ -57,41 +96,14 @@ impl ChainMap {
     }
 }
 
-fn p() -> String {
-    /*
-    Digit factorial chains
-    Problem 74
-
-    The number 145 is well known for the property that the sum of the factorial of its digits is equal to 145:
-
-    1! + 4! + 5! = 1 + 24 + 120 = 145
-
-    Perhaps less well known is 169, in that it produces the longest chain of numbers that link back to 169; it turns out
-    that there are only three such loops that exist:
-
-    169 → 363601 → 1454 → 169
-    871 → 45361 → 871
-    872 → 45362 → 872
-
-    It is not difficult to prove that EVERY starting number will eventually get stuck in a loop. For example,
-
-    69 → 363600 → 1454 → 169 → 363601 (→ 1454)
-    78 → 45360 → 871 → 45361 (→ 871)
-    540 → 145 (→ 145)
-
-    Starting with 69 produces a chain of five non-repeating terms, but the longest non-repeating chain with a starting
-    number below one million is sixty terms.
-
-    How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
-    */
-    const MAX_N: usize = 1e6 as usize;
-    const NB_TERMS: usize = 60;
-    let chain_map_size: usize = 6 * 9.factorial(); // worst case is the starting number 999999 -> 6 * 9!
-    let mut chain_map = ChainMap::new(chain_map_size);
-    (0..MAX_N)
-        .filter(|&n| chain_map.chain(n) == NB_TERMS)
-        .count()
-        .to_string()
-}
-
 timeit::timeit!(Problem74, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "402");
+    }
+}

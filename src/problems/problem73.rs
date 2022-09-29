@@ -1,7 +1,9 @@
 use crate::utils::timeit;
 use num::Integer;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Counting fractions in a range
     Problem 73
@@ -24,7 +26,7 @@ fn p() -> String {
     let lower_bound = 1.0 / 3.0;
     let upper_bound = 1.0 / 2.0;
 
-    (4..=MAX_D)
+    Ok((4..=MAX_D)
         .flat_map(|d| {
             let n_lower_bound = (d as f64 * lower_bound).ceil() as usize;
             let n_upper_bound = (d as f64 * upper_bound).ceil() as usize;
@@ -36,7 +38,17 @@ fn p() -> String {
             })
         })
         .count()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem73, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "7295372");
+    }
+}

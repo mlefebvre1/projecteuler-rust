@@ -1,6 +1,7 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Champernowne's constant
     Problem 40
@@ -44,7 +45,17 @@ fn p() -> String {
             .unwrap()
     });
     let prod: u32 = ds.iter().product();
-    prod.to_string()
+    Ok(prod.to_string())
 }
 
 timeit::timeit!(Problem40, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "210");
+    }
+}

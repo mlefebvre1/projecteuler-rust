@@ -1,7 +1,8 @@
 use crate::ntheory::pythagorean;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Special Pythagorean triplet
     Problem 9
@@ -16,7 +17,17 @@ fn p() -> String {
     */
     let triples = pythagorean::pythagorean_triples(2000);
     let triple = triples.iter().find(|triple| triple.sum() == 1000).unwrap();
-    triple.prod().to_string()
+    Ok(triple.prod().to_string())
 }
 
 timeit::timeit!(Problem09, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "31875000");
+    }
+}

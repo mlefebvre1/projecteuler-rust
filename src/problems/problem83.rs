@@ -2,7 +2,9 @@ use crate::graph::dgraph::{Dgraph, Edge};
 use crate::utils::matrix::load_matrix2d_from_file;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Path sum: four ways
     Problem 83
@@ -22,7 +24,7 @@ fn p() -> String {
         .graph
         .disjktra_shortest_path(0, matrix_graph.graph.vertices.len() - 1)
         + matrix_graph.matrix[[0, 0]];
-    shortest_dist.to_string()
+    Ok(shortest_dist.to_string())
 }
 
 struct MatrixGraph {
@@ -111,3 +113,13 @@ impl MatrixGraph {
 }
 
 timeit::timeit!(Problem83, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "425185");
+    }
+}

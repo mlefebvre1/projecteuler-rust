@@ -1,44 +1,9 @@
 use crate::utils::timeit;
 use itertools::Itertools;
 
-fn is_all_arms_sum_equal(gon_ring: &[(u8, u8, u8)]) -> bool {
-    let mut arm_sums = gon_ring.iter().map(|&arm| arm.0 + arm.1 + arm.2);
-    let arm_sum_to_match = arm_sums.next().unwrap();
-    for arm_sum in arm_sums {
-        if arm_sum != arm_sum_to_match {
-            return false;
-        }
-    }
-    true
-}
+use anyhow::Result;
 
-fn is_first_node_the_smallest_external_node(gon_ring: &[(u8, u8, u8)]) -> bool {
-    let external_nodes = gon_ring.iter().map(|&arm| arm.0).collect::<Vec<u8>>();
-    let min_external_node = external_nodes.iter().min().unwrap();
-    external_nodes[0] == *min_external_node
-}
-
-fn build_magic_gon_ring(nodes: &[&u8]) -> Vec<(u8, u8, u8)> {
-    vec![
-        (6, *nodes[0], *nodes[1]),
-        (*nodes[2], *nodes[1], *nodes[3]),
-        (*nodes[4], *nodes[3], *nodes[5]),
-        (*nodes[6], *nodes[5], *nodes[7]),
-        (*nodes[8], *nodes[7], *nodes[0]),
-    ]
-}
-
-fn build_string_from_gon_ring(gon_ring: &[(u8, u8, u8)]) -> Vec<u8> {
-    let mut result = Vec::new();
-    for arm in gon_ring {
-        result.push(arm.0);
-        result.push(arm.1);
-        result.push(arm.2);
-    }
-    result
-}
-
-fn p() -> String {
+fn p() -> Result<String> {
     /*
     Magic 5-gon ring
     Problem 68
@@ -88,7 +53,54 @@ fn p() -> String {
         }
         s.parse::<usize>().unwrap()
     });
-    solutions_as_int.max().unwrap().to_string()
+    Ok(solutions_as_int.max().unwrap().to_string())
+}
+
+fn is_all_arms_sum_equal(gon_ring: &[(u8, u8, u8)]) -> bool {
+    let mut arm_sums = gon_ring.iter().map(|&arm| arm.0 + arm.1 + arm.2);
+    let arm_sum_to_match = arm_sums.next().unwrap();
+    for arm_sum in arm_sums {
+        if arm_sum != arm_sum_to_match {
+            return false;
+        }
+    }
+    true
+}
+
+fn is_first_node_the_smallest_external_node(gon_ring: &[(u8, u8, u8)]) -> bool {
+    let external_nodes = gon_ring.iter().map(|&arm| arm.0).collect::<Vec<u8>>();
+    let min_external_node = external_nodes.iter().min().unwrap();
+    external_nodes[0] == *min_external_node
+}
+
+fn build_magic_gon_ring(nodes: &[&u8]) -> Vec<(u8, u8, u8)> {
+    vec![
+        (6, *nodes[0], *nodes[1]),
+        (*nodes[2], *nodes[1], *nodes[3]),
+        (*nodes[4], *nodes[3], *nodes[5]),
+        (*nodes[6], *nodes[5], *nodes[7]),
+        (*nodes[8], *nodes[7], *nodes[0]),
+    ]
+}
+
+fn build_string_from_gon_ring(gon_ring: &[(u8, u8, u8)]) -> Vec<u8> {
+    let mut result = Vec::new();
+    for arm in gon_ring {
+        result.push(arm.0);
+        result.push(arm.1);
+        result.push(arm.2);
+    }
+    result
 }
 
 timeit::timeit!(Problem68, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "6531031914842725");
+    }
+}

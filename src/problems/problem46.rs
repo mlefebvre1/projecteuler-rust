@@ -2,7 +2,8 @@ use crate::ntheory::primes::sieves;
 use crate::series::composite::OddComposite;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Goldbach's other conjecture
     Problem 46
@@ -30,7 +31,7 @@ fn p() -> String {
     let primes = sieves(MAX_N);
     let mut odd_composites = OddComposite::<usize>::new();
 
-    odd_composites
+    Ok(odd_composites
         .find(|&composite| {
             for prime in primes.iter() {
                 for square_times2 in square_times_2_vec.iter() {
@@ -42,7 +43,17 @@ fn p() -> String {
             true
         })
         .unwrap()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem46, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "5777");
+    }
+}

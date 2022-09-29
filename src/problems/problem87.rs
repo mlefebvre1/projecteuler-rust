@@ -1,7 +1,9 @@
 use crate::ntheory::primes::sieves;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Prime power triples
     Problem 87
@@ -32,7 +34,17 @@ fn p() -> String {
             }
         }
     }
-    cache.into_iter().filter(|&n| n != 0).count().to_string()
+    Ok(cache.into_iter().filter(|&n| n != 0).count().to_string())
 }
 
 timeit::timeit!(Problem87, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1097343");
+    }
+}

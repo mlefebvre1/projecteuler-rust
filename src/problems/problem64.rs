@@ -16,7 +16,9 @@ fn sqrt_continued_fraction_expansion_len(n: usize) -> usize {
     len
 }
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Odd period square roots
     Problem 64
@@ -37,7 +39,17 @@ fn p() -> String {
     let candidates = (2..=MAX_N).filter(|n| !squares.contains(n));
     let odd_period_sqrts =
         candidates.filter(|&n| sqrt_continued_fraction_expansion_len(n).is_odd());
-    odd_period_sqrts.count().to_string()
+    Ok(odd_period_sqrts.count().to_string())
 }
 
 timeit::timeit!(Problem64, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1322");
+    }
+}

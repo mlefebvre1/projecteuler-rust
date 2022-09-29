@@ -1,18 +1,8 @@
 use crate::ntheory::{factor, primes};
 use crate::utils::timeit;
 
-fn root(a: isize, b: isize, c: isize) -> f64 {
-    // calculate : root = (-b + sqrt(b^2-4*a*c)) / (2*a)
-    let det = b.pow(2) - (4 * a * c);
-    (-(b as f64) + (det as f64).sqrt()) / (2f64 * a as f64)
-}
-
-fn t(n: isize) -> f64 {
-    // calculate : t(n) = n * (n+1) / 2
-    n as f64 * (n as f64 + 1f64) / 2f64
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Highly divisible triangular number
     Problem 12
@@ -55,7 +45,28 @@ fn p() -> String {
         n += 1;
         k += n as f64;
     }
-    (k as usize).to_string()
+    Ok((k as usize).to_string())
+}
+
+fn root(a: isize, b: isize, c: isize) -> f64 {
+    // calculate : root = (-b + sqrt(b^2-4*a*c)) / (2*a)
+    let det = b.pow(2) - (4 * a * c);
+    (-(b as f64) + (det as f64).sqrt()) / (2f64 * a as f64)
+}
+
+fn t(n: isize) -> f64 {
+    // calculate : t(n) = n * (n+1) / 2
+    n as f64 * (n as f64 + 1f64) / 2f64
 }
 
 timeit::timeit!(Problem12, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "76576500");
+    }
+}

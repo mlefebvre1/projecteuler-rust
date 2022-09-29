@@ -3,23 +3,8 @@ use crate::utils::timeit;
 use itertools::Itertools;
 use num::Integer;
 
-fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
-    let mut n = 0;
-    loop {
-        let s = num::pow(n, 2) + a * n + b;
-        if s.is_odd() {
-            if !is_prime(s) {
-                break;
-            }
-        } else {
-            break;
-        }
-        n += 1;
-    }
-    n
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Quadratic primes
     Problem 27
@@ -51,7 +36,33 @@ fn p() -> String {
         candidates.map(|(a, b)| (a, b, quadratic_consecutive_primes(a, b)));
     let (a, b, _) = quad_consecutive_primes.max_by_key(|k| k.2).unwrap();
 
-    (a * b).to_string()
+    Ok((a * b).to_string())
+}
+
+fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
+    let mut n = 0;
+    loop {
+        let s = num::pow(n, 2) + a * n + b;
+        if s.is_odd() {
+            if !is_prime(s) {
+                break;
+            }
+        } else {
+            break;
+        }
+        n += 1;
+    }
+    n
 }
 
 timeit::timeit!(Problem27, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "-59231");
+    }
+}

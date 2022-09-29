@@ -2,7 +2,9 @@ use crate::utils::matrix::load_matrix2d_from_file;
 use crate::utils::timeit;
 use std::cmp::min;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Path sum: two ways
     Problem 81
@@ -33,7 +35,17 @@ fn p() -> String {
             }
         }
     }
-    matrix[[y_len - 1, x_len - 1]].to_string()
+    Ok(matrix[[y_len - 1, x_len - 1]].to_string())
 }
 
 timeit::timeit!(Problem81, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "427337");
+    }
+}

@@ -1,7 +1,9 @@
 use crate::utils::timeit;
 use num::BigUint;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Large non-Mersenne prime
     Problem 97
@@ -18,7 +20,17 @@ fn p() -> String {
     let exp = BigUint::from(7830457usize);
     let base = BigUint::from(2usize);
     let ans = (BigUint::from(28433usize) * base.modpow(&exp, &m) + BigUint::from(1usize)) % m;
-    ans.to_string()
+    Ok(ans.to_string())
 }
 
 timeit::timeit!(Problem97, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "8739992577");
+    }
+}

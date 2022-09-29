@@ -1,7 +1,10 @@
 use crate::utils::integers::int_to_vec_of_u8;
 use crate::utils::timeit;
 use num::BigUint;
-fn p() -> String {
+
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Square root digital expansion
     Problem 80
@@ -25,14 +28,14 @@ fn p() -> String {
     let nb_numbers_sqrt: usize = (NB_NUMBERS as f64).sqrt().floor() as usize;
     let exclude = (1..nb_numbers_sqrt).map(|i| i * i).collect::<Vec<usize>>();
     let numbers = (1..NB_NUMBERS).filter(|n| !exclude.contains(n));
-    numbers
+    Ok(numbers
         .map(|n| {
             let mut sqrt_digit_expansion = SqrtDigitExpansion::new(NB_DIGITS);
             let digits = sqrt_digit_expansion.calculate(n);
             digits.into_iter().map(|d| d as usize).sum::<usize>()
         })
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 struct SqrtDigitExpansion {
@@ -89,3 +92,13 @@ impl SqrtDigitExpansion {
 }
 
 timeit::timeit!(Problem80, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "40886");
+    }
+}

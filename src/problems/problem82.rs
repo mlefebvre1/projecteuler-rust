@@ -2,7 +2,9 @@ use crate::utils::matrix::load_matrix2d_from_file;
 use crate::utils::timeit;
 use ndarray::s;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Path sum: two ways
     Problem 82
@@ -75,7 +77,17 @@ fn p() -> String {
     }
 
     let matrix_slice = _matrix.slice(s![.., x_len - 1]);
-    matrix_slice.into_iter().min().unwrap().to_string()
+    Ok(matrix_slice.into_iter().min().unwrap().to_string())
 }
 
 timeit::timeit!(Problem82, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "260324");
+    }
+}

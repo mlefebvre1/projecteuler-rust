@@ -1,15 +1,8 @@
 use crate::utils::timeit;
 use std::fs;
 
-fn calc_name_score(name: &str, index: usize) -> usize {
-    const REBASE: usize = 'A' as usize - 1; // 'A' is worth 1 instead of 65 so rebase every characters
-    let name_score = (name.chars().map(|c| c as usize).sum::<usize>()
-        - REBASE * name.chars().count())
-        * (index + 1);
-    name_score
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Names scores
     Problem 22
@@ -31,7 +24,25 @@ fn p() -> String {
         .enumerate()
         .map(|(index, name)| calc_name_score(&name, index));
     let total: usize = names_score.sum();
-    total.to_string()
+    Ok(total.to_string())
+}
+
+fn calc_name_score(name: &str, index: usize) -> usize {
+    const REBASE: usize = 'A' as usize - 1; // 'A' is worth 1 instead of 65 so rebase every characters
+    let name_score = (name.chars().map(|c| c as usize).sum::<usize>()
+        - REBASE * name.chars().count())
+        * (index + 1);
+    name_score
 }
 
 timeit::timeit!(Problem22, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "871198282");
+    }
+}

@@ -1,6 +1,7 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Coin sums
     Problem 31
@@ -30,7 +31,17 @@ fn p() -> String {
             nb_ways[amount] += nb_ways[amount - coin];
         }
     }
-    nb_ways[AMOUNT_MAX].to_string()
+    Ok(nb_ways[AMOUNT_MAX].to_string())
 }
 
 timeit::timeit!(Problem31, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "73682");
+    }
+}

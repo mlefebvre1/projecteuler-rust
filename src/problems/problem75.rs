@@ -1,7 +1,9 @@
 use crate::ntheory::pythagorean::{pythagorean_triples, PythagoreanTriple};
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Singular integer right triangles
     Problem 75
@@ -29,7 +31,7 @@ fn p() -> String {
     let triples = pythagorean_triples(MAX_LEN);
     let l_cnt = nb_repetitions_for_each_length(&triples, MAX_LEN);
     let l_cnt_singular = l_cnt.into_iter().filter(|&len| len == 1);
-    l_cnt_singular.sum::<usize>().to_string()
+    Ok(l_cnt_singular.sum::<usize>().to_string())
 }
 
 fn nb_repetitions_for_each_length(triples: &[PythagoreanTriple], max_len: usize) -> Vec<usize> {
@@ -45,3 +47,13 @@ fn nb_repetitions_for_each_length(triples: &[PythagoreanTriple], max_len: usize)
 }
 
 timeit::timeit!(Problem75, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "161667");
+    }
+}

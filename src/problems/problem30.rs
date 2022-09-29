@@ -1,6 +1,7 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Digit fifth powers
     Problem 30
@@ -29,7 +30,17 @@ fn p() -> String {
     let solutions = fifth_powers_sum
         .zip(RANGE)
         .filter(|(fifth_power, n)| *fifth_power == *n);
-    solutions.fold(0, |acc, (_, n)| acc + n).to_string()
+    Ok(solutions.fold(0, |acc, (_, n)| acc + n).to_string())
 }
 
 timeit::timeit!(Problem30, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "443839");
+    }
+}

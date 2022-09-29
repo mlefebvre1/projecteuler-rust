@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Almost equilateral triangles
     Problem 94
@@ -54,7 +56,7 @@ fn p() -> String {
     We can simply make the value of n change and compute the new values of m with the constraints.
     */
     let perimeters = get_all_almost_equilateral_perimeters();
-    perimeters.sum::<usize>().to_string()
+    Ok(perimeters.sum::<usize>().to_string())
 }
 type Triplet = [usize; 3];
 
@@ -109,3 +111,13 @@ fn calc_perimeter(shortest: usize, largest: usize) -> usize {
 }
 
 timeit::timeit!(Problem94, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "518408346");
+    }
+}

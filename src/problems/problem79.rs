@@ -1,7 +1,9 @@
 use crate::utils::timeit;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Passcode derivation
     Problem 79
@@ -26,7 +28,7 @@ fn p() -> String {
         digits_to_place.remove(index);
         passcode += &digit.to_string();
     }
-    passcode
+    Ok(passcode)
 }
 
 fn generate_digit_candidates(logins: &[&str]) -> Vec<usize> {
@@ -91,3 +93,13 @@ fn find_largest_digit(logins: &[&str], digits_to_place: &[usize]) -> usize {
 }
 
 timeit::timeit!(Problem79, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "73162890");
+    }
+}

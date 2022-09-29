@@ -2,7 +2,8 @@ use crate::ntheory::palindrome::is_palindrome;
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Lychrel numbers
     Problem 55
@@ -33,10 +34,10 @@ fn p() -> String {
     NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
     */
     const MAX_N: u128 = 10000;
-    (1..MAX_N)
+    Ok((1..MAX_N)
         .filter(|&n| is_lynchrel_number(n))
         .count()
-        .to_string()
+        .to_string())
 }
 
 fn is_lynchrel_number(n: u128) -> bool {
@@ -57,3 +58,13 @@ fn is_lynchrel_number(n: u128) -> bool {
 }
 
 timeit::timeit!(Problem55, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "249");
+    }
+}

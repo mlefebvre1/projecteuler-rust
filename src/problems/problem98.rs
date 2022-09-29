@@ -3,7 +3,9 @@ use crate::utils::timeit;
 use itertools::Itertools;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Anagramic squares
     Problem 98
@@ -56,7 +58,7 @@ fn p() -> String {
             }
         }
     }
-    largest_square.to_string()
+    Ok(largest_square.to_string())
 }
 
 type NumDigits = Vec<u8>;
@@ -149,3 +151,13 @@ fn anagram_squared_validate(anagrams: &[String], square_a: &NumDigits) -> NumDig
 }
 
 timeit::timeit!(Problem98, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "18769");
+    }
+}

@@ -1,41 +1,8 @@
 use crate::ntheory::primes::{is_prime, sieves};
 use crate::utils::timeit;
 
-struct DigitRotations {
-    n: Vec<char>,
-}
-
-impl DigitRotations {
-    pub fn new(mut _n: &[char]) -> Self {
-        Self { n: _n.to_vec() }
-    }
-    fn rotation(_n: &mut [char]) {
-        for i in 0..(_n.len() - 1) {
-            _n.swap(i, i + 1);
-        }
-    }
-}
-
-impl Iterator for DigitRotations {
-    type Item = Vec<char>;
-    fn next(&mut self) -> Option<Vec<char>> {
-        let _n = self.n.clone();
-        Self::rotation(&mut self.n);
-        Some(_n)
-    }
-}
-
-#[test]
-fn rotation_test() {
-    let n = vec!['9', '0', '7'];
-    let rotations: Vec<Vec<char>> = DigitRotations::new(&n).take(n.len()).collect();
-    assert_eq!(
-        rotations,
-        [['9', '0', '7'], ['0', '7', '9'], ['7', '9', '0']]
-    )
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Circular primes
     Problem 35
@@ -62,7 +29,51 @@ fn p() -> String {
     let primes = sieves(MAX_PRIME);
     let circulars = primes.iter().filter(|&n| is_circular(*n));
     let nb_circulars = circulars.count();
-    nb_circulars.to_string()
+    Ok(nb_circulars.to_string())
+}
+
+struct DigitRotations {
+    n: Vec<char>,
+}
+
+impl DigitRotations {
+    pub fn new(mut _n: &[char]) -> Self {
+        Self { n: _n.to_vec() }
+    }
+    fn rotation(_n: &mut [char]) {
+        for i in 0..(_n.len() - 1) {
+            _n.swap(i, i + 1);
+        }
+    }
+}
+
+impl Iterator for DigitRotations {
+    type Item = Vec<char>;
+    fn next(&mut self) -> Option<Vec<char>> {
+        let _n = self.n.clone();
+        Self::rotation(&mut self.n);
+        Some(_n)
+    }
 }
 
 timeit::timeit!(Problem35, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn rotation_test() {
+        let n = vec!['9', '0', '7'];
+        let rotations: Vec<Vec<char>> = DigitRotations::new(&n).take(n.len()).collect();
+        assert_eq!(
+            rotations,
+            [['9', '0', '7'], ['0', '7', '9'], ['7', '9', '0']]
+        )
+    }
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "55");
+    }
+}

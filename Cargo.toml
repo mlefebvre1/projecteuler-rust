@@ -16,6 +16,7 @@ lazy_static = "1.4"
 num = "0.4"
 phf = { version = "0.10", features = ["macros"] }
 rand = "0.8"
+thiserror = "1"
 eval = "^0.4"
 
 [dev-dependencies]

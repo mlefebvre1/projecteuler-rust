@@ -1,7 +1,8 @@
 use crate::ntheory::{arithmetic, primes};
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Reciprocal cycles
     Problem 26
@@ -31,7 +32,17 @@ fn p() -> String {
         .map(|p| arithmetic::nb_decimal_recurring_len(*p));
     let both = primes.iter().zip(decimal_recurring);
     let (max_prime, _) = both.max_by_key(|k| k.1).unwrap();
-    (*max_prime).to_string()
+    Ok((*max_prime).to_string())
 }
 
 timeit::timeit!(Problem26, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "983");
+    }
+}

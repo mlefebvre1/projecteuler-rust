@@ -1,7 +1,8 @@
 use crate::utils::timeit;
 use num::BigUint;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Self powers
     Problem 48
@@ -19,7 +20,17 @@ fn p() -> String {
 
     let sum: BigUint = self_powers.sum();
     let last_ten_digits = sum % m;
-    last_ten_digits.to_str_radix(10)
+    Ok(last_ten_digits.to_str_radix(10))
 }
 
 timeit::timeit!(Problem48, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "9110846700");
+    }
+}

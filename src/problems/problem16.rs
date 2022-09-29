@@ -1,7 +1,8 @@
 use crate::utils::timeit;
 use num::BigUint;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Power digit sum
     Problem 16
@@ -11,11 +12,21 @@ fn p() -> String {
     What is the sum of the digits of the number 2^1000?
     */
     let n: BigUint = BigUint::from(2usize).pow(1000);
-    n.to_radix_be(10)
+    Ok(n.to_radix_be(10)
         .iter()
         .map(|x| *x as usize)
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem16, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1366");
+    }
+}

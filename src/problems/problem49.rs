@@ -3,7 +3,8 @@ use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
 use crate::utils::timeit;
 use itertools::Itertools;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Prime permutations
     Problem 49
@@ -56,7 +57,7 @@ fn p() -> String {
     let final_candidate = candidates_with_all_criterias
         .find(|&candidate| !candidate.contains(&1487))
         .unwrap();
-    extract_the_correct_terms_and_concat(final_candidate)
+    Ok(extract_the_correct_terms_and_concat(final_candidate))
 }
 
 fn extract_the_correct_terms_and_concat(candidate: &[usize]) -> String {
@@ -75,3 +76,13 @@ fn extract_the_correct_terms_and_concat(candidate: &[usize]) -> String {
 }
 
 timeit::timeit!(Problem49, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "296962999629");
+    }
+}

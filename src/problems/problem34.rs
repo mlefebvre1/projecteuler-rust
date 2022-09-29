@@ -1,7 +1,8 @@
 use crate::utils::timeit;
 use factorial::Factorial;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Digit factorials
     Problem 34
@@ -18,10 +19,20 @@ fn p() -> String {
     }
 
     const MAX_N: usize = 50000;
-    (3..=MAX_N)
+    Ok((3..=MAX_N)
         .filter(|n| is_curious_number(*n))
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem34, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "40730");
+    }
+}

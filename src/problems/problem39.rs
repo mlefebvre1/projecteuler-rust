@@ -1,7 +1,8 @@
 use crate::ntheory::pythagorean::pythagorean_triples;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Integer right triangles
     Problem 39
@@ -28,7 +29,17 @@ fn p() -> String {
         perimeters[p] += 1;
     }
     let (max_index, _) = perimeters.iter().enumerate().max_by_key(|p| p.1).unwrap();
-    max_index.to_string()
+    Ok(max_index.to_string())
 }
 
 timeit::timeit!(Problem39, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "840");
+    }
+}

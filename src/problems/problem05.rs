@@ -1,7 +1,8 @@
 use crate::ntheory::primes;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Smallest multiple
     Problem 5
@@ -19,11 +20,21 @@ fn p() -> String {
         .iter()
         .map(|&x| (MAX_N as f64).log(x as f64).floor() as usize);
     let primes_and_occurences = primes.iter().zip(prime_occurences);
-    primes_and_occurences
+    Ok(primes_and_occurences
         .fold(1, |acc, (prime, occurence)| {
             acc * prime.pow(occurence as u32)
         })
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem05, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "232792560");
+    }
+}

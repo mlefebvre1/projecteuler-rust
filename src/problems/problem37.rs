@@ -1,7 +1,8 @@
 use crate::ntheory::primes::{is_prime, sieves};
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Truncatable primes
     Problem 37
@@ -34,7 +35,17 @@ fn p() -> String {
     let truncatables = primes_range
         .filter(|&prime| is_truncatable(*prime))
         .take(MAX_TRUNC);
-    truncatables.sum::<usize>().to_string()
+    Ok(truncatables.sum::<usize>().to_string())
 }
 
 timeit::timeit!(Problem37, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "748317");
+    }
+}

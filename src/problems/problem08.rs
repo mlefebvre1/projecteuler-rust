@@ -1,6 +1,7 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Largest product in a series
     Problem 8
@@ -40,7 +41,17 @@ fn p() -> String {
             .chars()
             .fold(1, |acc, x| acc * x.to_digit(10).unwrap() as usize)
     });
-    products.max().unwrap().to_string()
+    Ok(products.max().unwrap().to_string())
 }
 
 timeit::timeit!(Problem08, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "23514624000");
+    }
+}

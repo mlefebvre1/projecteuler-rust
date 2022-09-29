@@ -1,23 +1,8 @@
 use crate::utils::timeit;
 use num::Integer;
 
-fn chain(n: usize) -> usize {
-    let mut chain_len = 0usize;
-    let mut n = n;
-    while n != 1 {
-        if n.is_odd() {
-            // Skip a step since for an odd number : 3*n+1 always gives a even number
-            n = (3 * n + 1) / 2;
-            chain_len += 2
-        } else {
-            n /= 2;
-            chain_len += 1
-        }
-    }
-    chain_len
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Longest Collatz sequence
     Problem 14
@@ -42,7 +27,33 @@ fn p() -> String {
     const RANGE: std::ops::Range<usize> = (END / 2)..END;
     let chains = RANGE.map(chain).zip(RANGE);
     let (_, max_n) = chains.max().unwrap();
-    max_n.to_string()
+    Ok(max_n.to_string())
+}
+
+fn chain(n: usize) -> usize {
+    let mut chain_len = 0usize;
+    let mut n = n;
+    while n != 1 {
+        if n.is_odd() {
+            // Skip a step since for an odd number : 3*n+1 always gives a even number
+            n = (3 * n + 1) / 2;
+            chain_len += 2
+        } else {
+            n /= 2;
+            chain_len += 1
+        }
+    }
+    chain_len
 }
 
 timeit::timeit!(Problem14, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "837799");
+    }
+}

@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Counting summations
     Problem 76
@@ -26,7 +28,17 @@ fn p() -> String {
     for (multiple, n) in pairs {
         nb_ways[n] += nb_ways[n - multiple];
     }
-    nb_ways[MAX_N].to_string()
+    Ok(nb_ways[MAX_N].to_string())
 }
 
 timeit::timeit!(Problem76, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "190569291");
+    }
+}

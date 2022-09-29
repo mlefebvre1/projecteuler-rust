@@ -2,7 +2,8 @@ use crate::utils::timeit;
 use num::BigUint;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Large sum
     Problem 13
@@ -119,7 +120,17 @@ fn p() -> String {
         })
         .sum();
     let total_str = total.to_str_radix(10);
-    String::from(&total_str[0..10])
+    Ok(String::from(&total_str[0..10]))
 }
 
 timeit::timeit!(Problem13, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "5537376230");
+    }
+}

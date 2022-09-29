@@ -1,7 +1,8 @@
 use crate::utils::integers::int_to_vec_of_u8;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Permuted multiples
     Problem 52
@@ -25,7 +26,7 @@ fn p() -> String {
         .last()
         .unwrap()
         + 1; // +1 because take_while returns the iterator up to n-1 that found the predicate
-    ans.to_string()
+    Ok(ans.to_string())
 }
 
 fn digit_uniqueness(n: usize) -> bool {
@@ -51,3 +52,13 @@ fn same_digits(n1: usize, n2: usize) -> bool {
 }
 
 timeit::timeit!(Problem52, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "142857");
+    }
+}

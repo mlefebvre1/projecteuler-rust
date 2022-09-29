@@ -1,7 +1,8 @@
 use crate::ntheory::primes::is_prime;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Spiral primes
     Problem 58
@@ -71,7 +72,7 @@ fn p() -> String {
             break;
         }
     }
-    (2 * side_len + 1).to_string()
+    Ok((2 * side_len + 1).to_string())
 }
 
 struct Spiral {
@@ -141,3 +142,13 @@ fn test_get_nb_primes() {
 }
 
 timeit::timeit!(Problem58, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "26241");
+    }
+}

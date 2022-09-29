@@ -2,7 +2,8 @@ use crate::utils::poker;
 use crate::utils::timeit;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Poker hands
     Problem 54
@@ -43,7 +44,17 @@ fn p() -> String {
             poker::is_player1_winner(&hand_player1, &hand_player2)
         })
         .count();
-    nb_win_player1.to_string()
+    Ok(nb_win_player1.to_string())
 }
 
 timeit::timeit!(Problem54, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "376");
+    }
+}

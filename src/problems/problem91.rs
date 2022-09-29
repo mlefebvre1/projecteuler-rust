@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Right triangles with integer coordinates
     Problem 91
@@ -50,7 +52,17 @@ fn p() -> String {
             }
         }
     }
-    (nb_triangles / 2).to_string()
+    Ok((nb_triangles / 2).to_string())
 }
 
 timeit::timeit!(Problem91, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "14234");
+    }
+}

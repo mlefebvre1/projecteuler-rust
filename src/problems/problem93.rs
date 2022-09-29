@@ -2,7 +2,9 @@ use crate::utils::timeit;
 use eval::{eval, Value::Null};
 use itertools::Itertools;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Arithmetic expressions
     Problem 93
@@ -39,7 +41,7 @@ fn p() -> String {
         }
     }
     let [a, b, c, d] = best_score.digits.map(|c| c + 48);
-    String::from_utf8([a, b, c, d].to_vec()).unwrap()
+    Ok(String::from_utf8([a, b, c, d].to_vec())?)
 }
 
 type DigitSet = [u8; 4];
@@ -173,3 +175,13 @@ fn get_score(expressions: &[String]) -> usize {
 }
 
 timeit::timeit!(Problem93, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1258");
+    }
+}

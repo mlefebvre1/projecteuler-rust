@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Ordered fractions
     Problem 71
@@ -34,7 +36,17 @@ fn p() -> String {
         .min_by(|(_, distance_a), (_, distance_b)| distance_a.partial_cmp(distance_b).unwrap())
         .unwrap();
     let ans = n_and_closest_to_target.0;
-    ans.to_string()
+    Ok(ans.to_string())
 }
 
 timeit::timeit!(Problem71, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "428570");
+    }
+}

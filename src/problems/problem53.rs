@@ -2,7 +2,8 @@ use crate::utils::timeit;
 use factorial::Factorial;
 use num::BigUint;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Combinatoric selections
     Problem 53
@@ -23,7 +24,17 @@ fn p() -> String {
     let combinatorics =
         combinations.map(|(n, r)| &factorials[n] / (&factorials[r] * &factorials[n - r]));
     let combinatorics_greater_than_target = combinatorics.filter(|c| c > &BigUint::from(TARGET));
-    combinatorics_greater_than_target.count().to_string()
+    Ok(combinatorics_greater_than_target.count().to_string())
 }
 
 timeit::timeit!(Problem53, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "4075");
+    }
+}

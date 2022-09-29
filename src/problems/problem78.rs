@@ -1,7 +1,9 @@
 use crate::series::pentagonal::GeneralizedPentagonal;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Coin partitions
     Problem 78
@@ -25,7 +27,7 @@ fn p() -> String {
         .take(MAX_N)
         .collect::<Vec<isize>>();
     partitions[0] = 1;
-    (1..MAX_N)
+    Ok((1..MAX_N)
         .find(|&n| {
             let part = partition(n as isize, &partitions, &generalized_pentagonal);
             if part == 0 {
@@ -35,8 +37,9 @@ fn p() -> String {
             false
         })
         .unwrap()
-        .to_string()
+        .to_string())
 }
+
 fn partition(n: isize, partitions: &[isize], pentagonals: &[isize]) -> isize {
     /*
     Return Number partition p(n) using the Euler Function
@@ -64,3 +67,13 @@ fn partition(n: isize, partitions: &[isize], pentagonals: &[isize]) -> isize {
 }
 
 timeit::timeit!(Problem78, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "55374");
+    }
+}

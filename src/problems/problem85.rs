@@ -1,7 +1,9 @@
 use crate::series::triangular::Triangular;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Counting rectangles
     Problem 85
@@ -33,7 +35,7 @@ fn p() -> String {
     }
     let (m, n) = best_rec.shape;
     let area = m * n;
-    area.to_string()
+    Ok(area.to_string())
 }
 
 struct BestRectangle {
@@ -42,3 +44,13 @@ struct BestRectangle {
 }
 
 timeit::timeit!(Problem85, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "2772");
+    }
+}

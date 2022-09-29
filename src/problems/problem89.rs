@@ -2,7 +2,9 @@ use crate::utils::timeit;
 use phf::phf_map;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     For a number written in Roman numerals to be considered valid there are basic rules which must be followed.
     Even though the rules allow some numbers to be expressed in more than one way there is always a "best" way of
@@ -40,7 +42,7 @@ fn p() -> String {
         let roman_number_optimized = arab_to_roman_number(arab_number);
         nb_character_after_opt += roman_number_optimized.chars().count();
     }
-    (nb_initial_character - nb_character_after_opt).to_string()
+    Ok((nb_initial_character - nb_character_after_opt).to_string())
 }
 
 static ROMAN_VALUES: phf::Map<char, usize> = phf_map! {
@@ -133,3 +135,13 @@ fn arab_to_roman_number(arab_number: usize) -> String {
 }
 
 timeit::timeit!(Problem89, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "743");
+    }
+}

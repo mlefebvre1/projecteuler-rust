@@ -16,7 +16,8 @@ fn get_array_of_sum_of_two_abundants(abundants: &[usize]) -> [bool; MAX_N] {
     numbers_written_as_sum_of_2_abundants
 }
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Non-abundant sums
     Problem 23
@@ -45,7 +46,17 @@ fn p() -> String {
         .iter()
         .enumerate()
         .fold(0, |acc, (i, x)| if !(*x) { acc + i } else { acc });
-    sum_of_non_two_abundants.to_string()
+    Ok(sum_of_non_two_abundants.to_string())
 }
 
 timeit::timeit!(Problem23, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "4179871");
+    }
+}

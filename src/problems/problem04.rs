@@ -2,7 +2,8 @@ use crate::ntheory::palindrome;
 use crate::utils::timeit;
 use itertools::Itertools;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Largest palindrome product
     Problem 4
@@ -15,7 +16,17 @@ fn p() -> String {
     let cartesian_prod = RANGE.cartesian_product(RANGE);
     let products = cartesian_prod.map(|(n1, n2)| n1 * n2);
     let candidates = products.filter(|x| palindrome::is_palindrome(x));
-    candidates.max().unwrap().to_string()
+    Ok(candidates.max().unwrap().to_string())
 }
 
 timeit::timeit!(Problem04, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "906609");
+    }
+}

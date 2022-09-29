@@ -2,7 +2,8 @@ use crate::series::fibonacci::Fibonacci;
 use crate::utils::timeit;
 use num::Integer;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Even Fibonacci numbers
     Problem 2
@@ -16,11 +17,21 @@ fn p() -> String {
     */
     const MAX_F_VALUE: usize = 4e6 as usize;
     let fib_iter = Fibonacci::<usize>::new();
-    fib_iter
+    Ok(fib_iter
         .take_while(|x| *x <= MAX_F_VALUE)
         .filter(|x| x.is_even())
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem02, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "4613732");
+    }
+}

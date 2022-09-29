@@ -3,7 +3,8 @@ use itertools::Itertools;
 use num::BigUint;
 use std::collections::HashSet;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Distinct powers
     Problem 29
@@ -25,7 +26,17 @@ fn p() -> String {
     const RANGE: std::ops::RangeInclusive<usize> = 2..=100;
     let space = RANGE.cartesian_product(RANGE);
     let terms = space.map(|(a, b)| BigUint::from(a).pow(b as u32));
-    terms.collect::<HashSet<BigUint>>().len().to_string()
+    Ok(terms.collect::<HashSet<BigUint>>().len().to_string())
 }
 
 timeit::timeit!(Problem29, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "9183");
+    }
+}

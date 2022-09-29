@@ -1,7 +1,9 @@
 use crate::utils::timeit;
 use num::Integer;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Counting fractions
     Problem 72
@@ -37,7 +39,7 @@ fn p() -> String {
                 }
                 None
             });
-    phi_by_n.sum::<usize>().to_string()
+    Ok(phi_by_n.sum::<usize>().to_string())
 }
 
 #[allow(clippy::needless_range_loop)]
@@ -60,3 +62,13 @@ fn make_distinct_primes_by_n(max_n: usize) -> Vec<Vec<usize>> {
 }
 
 timeit::timeit!(Problem72, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "303963552391");
+    }
+}

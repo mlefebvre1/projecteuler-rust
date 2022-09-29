@@ -1,7 +1,9 @@
 use crate::ntheory::pythagorean::{pythagorean_triples, PythagoreanTriple};
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Cuboid route
     Problem 86
@@ -27,7 +29,7 @@ fn p() -> String {
             prev = solution;
         }
     }
-    prev.to_string()
+    Ok(prev.to_string())
 }
 
 fn all_pythagorean_splits(m: usize) -> Vec<usize> {
@@ -71,3 +73,13 @@ fn pythagorean_splits(triple: &PythagoreanTriple) -> Vec<usize> {
     v
 }
 timeit::timeit!(Problem86, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1818");
+    }
+}

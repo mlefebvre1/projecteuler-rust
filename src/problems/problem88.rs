@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Product-sum numbers
     Problem 88
@@ -29,7 +31,8 @@ fn p() -> String {
     for k in 2..prod_sum_table.len() {
         mem[prod_sum_table[k]] = true;
     }
-    mem.iter()
+    Ok(mem
+        .iter()
         .enumerate()
         .filter_map(|(i, m)| {
             if *m {
@@ -38,7 +41,7 @@ fn p() -> String {
             None
         })
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 fn calc_k(arr: &[usize]) -> (usize, usize) {
@@ -96,3 +99,13 @@ fn comb_k(max_accepted: usize, arr_len: usize, table: &mut [usize], max_k: usize
 }
 
 timeit::timeit!(Problem88, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "7587457");
+    }
+}

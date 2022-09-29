@@ -3,6 +3,61 @@ use crate::utils::timeit;
 use ndarray::{arr2, Array2};
 use num::BigInt;
 
+use anyhow::Result;
+
+fn p() -> Result<String> {
+    /*
+    Diophantine equation
+
+    Problem 66
+
+    Consider quadratic Diophantine equations of the form:
+
+    x^2 – Dy^2 = 1
+
+    For example, when D=13, the minimal solution in x is 649^2 – 13×180^2 = 1.
+
+    It can be assumed that there are no solutions in positive integers when D is square.
+
+    By finding minimal solutions in x for D = {2, 3, 5, 6, 7}, we obtain the following:
+
+    32 – 2×22 = 1
+    22 – 3×12 = 1
+    92 – 5×42 = 1
+    52 – 6×22 = 1
+    82 – 7×32 = 1
+
+    Hence, by considering minimal solutions in x for D ≤ 7, the largest x is obtained when D=5.
+
+    Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
+
+    The solution is based on this paper by N.J. Wilberger : https://arxiv.org/pdf/0806.2490.pdf
+    */
+    const MAX_D: usize = 1000;
+    let max_d_sqrt: usize = ((MAX_D as f64).sqrt().ceil()) as usize;
+    let squares: Vec<usize> = Square::new().skip(1).take(max_d_sqrt - 1).collect();
+    let ds = (2..=MAX_D as isize).filter(|&d| !squares.contains(&(d as usize)));
+    let ans = ds
+        .map(|d| {
+            let mut steps =
+                apply_shifts((BigInt::from(1isize), BigInt::from(0isize), BigInt::from(-d)))
+                    .into_iter();
+            let mut matrix_n = matrix_multiply_2d(
+                &get_matrix_from_step(steps.next().unwrap()),
+                &get_matrix_from_step(steps.next().unwrap()),
+            );
+            for step in steps {
+                matrix_n = matrix_multiply_2d(&matrix_n, &get_matrix_from_step(step));
+            }
+            (d, matrix_n[[0, 0]].clone())
+        })
+        .max_by_key(|elem| elem.1.clone())
+        .unwrap()
+        .0
+        .to_string();
+    Ok(ans)
+}
+
 enum ShiftType {
     Right,
     Left,
@@ -71,55 +126,14 @@ fn matrix_multiply_2d(matrix_a: &Array2<BigInt>, matrix_b: &Array2<BigInt>) -> A
     arr2(&[[m00, m01], [m10, m11]])
 }
 
-fn p() -> String {
-    /*
-    Diophantine equation
-
-    Problem 66
-
-    Consider quadratic Diophantine equations of the form:
-
-    x^2 – Dy^2 = 1
-
-    For example, when D=13, the minimal solution in x is 649^2 – 13×180^2 = 1.
-
-    It can be assumed that there are no solutions in positive integers when D is square.
-
-    By finding minimal solutions in x for D = {2, 3, 5, 6, 7}, we obtain the following:
-
-    32 – 2×22 = 1
-    22 – 3×12 = 1
-    92 – 5×42 = 1
-    52 – 6×22 = 1
-    82 – 7×32 = 1
-
-    Hence, by considering minimal solutions in x for D ≤ 7, the largest x is obtained when D=5.
-
-    Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
-
-    The solution is based on this paper by N.J. Wilberger : https://arxiv.org/pdf/0806.2490.pdf
-    */
-    const MAX_D: usize = 1000;
-    let max_d_sqrt: usize = ((MAX_D as f64).sqrt().ceil()) as usize;
-    let squares: Vec<usize> = Square::new().skip(1).take(max_d_sqrt - 1).collect();
-    let ds = (2..=MAX_D as isize).filter(|&d| !squares.contains(&(d as usize)));
-    ds.map(|d| {
-        let mut steps =
-            apply_shifts((BigInt::from(1isize), BigInt::from(0isize), BigInt::from(-d)))
-                .into_iter();
-        let mut matrix_n = matrix_multiply_2d(
-            &get_matrix_from_step(steps.next().unwrap()),
-            &get_matrix_from_step(steps.next().unwrap()),
-        );
-        for step in steps {
-            matrix_n = matrix_multiply_2d(&matrix_n, &get_matrix_from_step(step));
-        }
-        (d, matrix_n[[0, 0]].clone())
-    })
-    .max_by_key(|elem| elem.1.clone())
-    .unwrap()
-    .0
-    .to_string()
-}
-
 timeit::timeit!(Problem66, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "661");
+    }
+}

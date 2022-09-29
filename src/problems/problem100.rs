@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Arranged probability
     Problem 100
@@ -35,7 +37,7 @@ fn p() -> String {
         }
         nb_disk_total += 1;
     }
-    nb_blue_disk.to_string()
+    Ok(nb_blue_disk.to_string())
 }
 
 fn is_chance_is_50_50(x: u128, y: u128) -> bool {
@@ -48,3 +50,13 @@ fn is_chance_is_50_50(x: u128, y: u128) -> bool {
 }
 
 timeit::timeit!(Problem100, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "756872327473");
+    }
+}

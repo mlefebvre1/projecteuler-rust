@@ -2,29 +2,8 @@ use crate::utils::timeit;
 use num::Integer;
 use phf::phf_map;
 
-static NB_DAYS_PER_MONTH: phf::Map<&'static str, usize> = phf_map! {
-    "january"=> 31,
-    "february"=> 28,
-    "march"=> 31,
-    "april"=> 30,
-    "may"=> 31,
-    "june"=> 30,
-    "july"=> 31,
-    "august"=> 31,
-    "september"=> 30,
-    "october"=> 31,
-    "november"=> 30,
-    "december"=> 31,
-};
-
-fn nb_days_in_month(month: &str, year: usize) -> usize {
-    if month == "february" && year.is_multiple_of(&4) && !year.is_multiple_of(&400) {
-        return *NB_DAYS_PER_MONTH.get(month).unwrap() + 1;
-    }
-    return *NB_DAYS_PER_MONTH.get(month).unwrap();
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Counting Sundays
     Problem 19
@@ -70,7 +49,39 @@ fn p() -> String {
             }
         }
     }
-    nb_sundays.to_string()
+    Ok(nb_sundays.to_string())
+}
+
+static NB_DAYS_PER_MONTH: phf::Map<&'static str, usize> = phf_map! {
+    "january"=> 31,
+    "february"=> 28,
+    "march"=> 31,
+    "april"=> 30,
+    "may"=> 31,
+    "june"=> 30,
+    "july"=> 31,
+    "august"=> 31,
+    "september"=> 30,
+    "october"=> 31,
+    "november"=> 30,
+    "december"=> 31,
+};
+
+fn nb_days_in_month(month: &str, year: usize) -> usize {
+    if month == "february" && year.is_multiple_of(&4) && !year.is_multiple_of(&400) {
+        return *NB_DAYS_PER_MONTH.get(month).unwrap() + 1;
+    }
+    return *NB_DAYS_PER_MONTH.get(month).unwrap();
 }
 
 timeit::timeit!(Problem19, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "171");
+    }
+}

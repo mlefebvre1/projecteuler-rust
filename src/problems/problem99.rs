@@ -3,7 +3,9 @@ use itertools::Itertools;
 use crate::utils::timeit;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Largest exponential
     Problem 99
@@ -39,7 +41,17 @@ fn p() -> String {
     let (_, line) = calculated_nums
         .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap())
         .unwrap();
-    line.to_string()
+    Ok(line.to_string())
 }
 
 timeit::timeit!(Problem99, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "709");
+    }
+}

@@ -1,7 +1,9 @@
 use crate::utils::timeit;
 use num::Integer;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Amicable chains
     Problem 95
@@ -30,7 +32,7 @@ fn p() -> String {
     let proper_divisor_sums = get_proper_divisor_sums(MAX_N);
     let chains = make_chains(MAX_N, &proper_divisor_sums);
     let (n, _) = chains.iter().rev().max_by_key(|k| k.1).unwrap();
-    n.to_string()
+    Ok(n.to_string())
 }
 
 fn get_proper_divisor_sums(max_n: usize) -> Vec<usize> {
@@ -77,3 +79,13 @@ fn make_chains(max_n: usize, div_sums: &[usize]) -> Vec<(usize, usize)> {
 }
 
 timeit::timeit!(Problem95, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "14316");
+    }
+}

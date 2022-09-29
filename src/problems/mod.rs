@@ -1,216 +1,218 @@
-pub mod problem01;
-pub mod problem02;
-pub mod problem03;
-pub mod problem04;
-pub mod problem05;
-pub mod problem06;
-pub mod problem07;
-pub mod problem08;
-pub mod problem09;
-pub mod problem10;
-pub mod problem100;
-pub mod problem11;
-pub mod problem12;
-pub mod problem13;
-pub mod problem14;
-pub mod problem15;
-pub mod problem16;
-pub mod problem17;
-pub mod problem18;
-pub mod problem19;
-pub mod problem20;
-pub mod problem21;
-pub mod problem22;
-pub mod problem23;
-pub mod problem24;
-pub mod problem25;
-pub mod problem26;
-pub mod problem27;
-pub mod problem28;
-pub mod problem29;
-pub mod problem30;
-pub mod problem31;
-pub mod problem32;
-pub mod problem33;
-pub mod problem34;
-pub mod problem35;
-pub mod problem36;
-pub mod problem37;
-pub mod problem38;
-pub mod problem39;
-pub mod problem40;
-pub mod problem41;
-pub mod problem42;
-pub mod problem43;
-pub mod problem44;
-pub mod problem45;
-pub mod problem46;
-pub mod problem47;
-pub mod problem48;
-pub mod problem49;
-pub mod problem50;
-pub mod problem51;
-pub mod problem52;
-pub mod problem53;
-pub mod problem54;
-pub mod problem55;
-pub mod problem56;
-pub mod problem57;
-pub mod problem58;
-pub mod problem59;
-pub mod problem60;
-pub mod problem61;
-pub mod problem62;
-pub mod problem63;
-pub mod problem64;
-pub mod problem65;
-pub mod problem66;
-pub mod problem67;
-pub mod problem68;
-pub mod problem69;
-pub mod problem70;
-pub mod problem71;
-pub mod problem72;
-pub mod problem73;
-pub mod problem74;
-pub mod problem75;
-pub mod problem76;
-pub mod problem77;
-pub mod problem78;
-pub mod problem79;
-pub mod problem80;
-pub mod problem81;
-pub mod problem82;
-pub mod problem83;
-pub mod problem84;
-pub mod problem85;
-pub mod problem86;
-pub mod problem87;
-pub mod problem88;
-pub mod problem89;
-pub mod problem90;
-pub mod problem91;
-pub mod problem92;
-pub mod problem93;
-pub mod problem94;
-pub mod problem95;
-pub mod problem96;
-pub mod problem97;
-pub mod problem98;
-pub mod problem99;
-
+use anyhow::Result;
 use lazy_static::lazy_static;
 
-pub struct Problem(pub fn() -> String, pub &'static str);
+mod problem01;
+mod problem02;
+mod problem03;
+mod problem04;
+mod problem05;
+mod problem06;
+mod problem07;
+mod problem08;
+mod problem09;
+mod problem10;
+mod problem100;
+mod problem11;
+mod problem12;
+mod problem13;
+mod problem14;
+mod problem15;
+mod problem16;
+mod problem17;
+mod problem18;
+mod problem19;
+mod problem20;
+mod problem21;
+mod problem22;
+mod problem23;
+mod problem24;
+mod problem25;
+mod problem26;
+mod problem27;
+mod problem28;
+mod problem29;
+mod problem30;
+mod problem31;
+mod problem32;
+mod problem33;
+mod problem34;
+mod problem35;
+mod problem36;
+mod problem37;
+mod problem38;
+mod problem39;
+mod problem40;
+mod problem41;
+mod problem42;
+mod problem43;
+mod problem44;
+mod problem45;
+mod problem46;
+mod problem47;
+mod problem48;
+mod problem49;
+mod problem50;
+mod problem51;
+mod problem52;
+mod problem53;
+mod problem54;
+mod problem55;
+mod problem56;
+mod problem57;
+mod problem58;
+mod problem59;
+mod problem60;
+mod problem61;
+mod problem62;
+mod problem63;
+mod problem64;
+mod problem65;
+mod problem66;
+mod problem67;
+mod problem68;
+mod problem69;
+mod problem70;
+mod problem71;
+mod problem72;
+mod problem73;
+mod problem74;
+mod problem75;
+mod problem76;
+mod problem77;
+mod problem78;
+mod problem79;
+mod problem80;
+mod problem81;
+mod problem82;
+mod problem83;
+mod problem84;
+mod problem85;
+mod problem86;
+mod problem87;
+mod problem88;
+mod problem89;
+mod problem90;
+mod problem91;
+mod problem92;
+mod problem93;
+mod problem94;
+mod problem95;
+mod problem96;
+mod problem97;
+mod problem98;
+mod problem99;
+
+pub struct Problem(pub fn() -> Result<String>);
 
 lazy_static! {
     pub static ref PROBLEMS: Vec<Problem> = vec![
-        Problem(problem01::solve, "233168"),
-        Problem(problem02::solve, "4613732"),
-        Problem(problem03::solve, "6857"),
-        Problem(problem04::solve, "906609"),
-        Problem(problem05::solve, "232792560"),
-        Problem(problem06::solve, "25164150"),
-        Problem(problem07::solve, "104743"),
-        Problem(problem08::solve, "23514624000"),
-        Problem(problem09::solve, "31875000"),
-        Problem(problem10::solve, "142913828922"),
-        Problem(problem11::solve, "70600674"),
-        Problem(problem12::solve, "76576500"),
-        Problem(problem13::solve, "5537376230"),
-        Problem(problem14::solve, "837799"),
-        Problem(problem15::solve, "137846528820"),
-        Problem(problem16::solve, "1366"),
-        Problem(problem17::solve, "21124"),
-        Problem(problem18::solve, "1074"),
-        Problem(problem19::solve, "171"),
-        Problem(problem20::solve, "648"),
-        Problem(problem21::solve, "31626"),
-        Problem(problem22::solve, "871198282"),
-        Problem(problem23::solve, "4179871"),
-        Problem(problem24::solve, "2783915460"),
-        Problem(problem25::solve, "4782"),
-        Problem(problem26::solve, "983"),
-        Problem(problem27::solve, "-59231"),
-        Problem(problem28::solve, "669171001"),
-        Problem(problem29::solve, "9183"),
-        Problem(problem30::solve, "443839"),
-        Problem(problem31::solve, "73682"),
-        Problem(problem32::solve, "45228"),
-        Problem(problem33::solve, "100"),
-        Problem(problem34::solve, "40730"),
-        Problem(problem35::solve, "55"),
-        Problem(problem36::solve, "872187"),
-        Problem(problem37::solve, "748317"),
-        Problem(problem38::solve, "932718654"),
-        Problem(problem39::solve, "840"),
-        Problem(problem40::solve, "210"),
-        Problem(problem41::solve, "7652413"),
-        Problem(problem42::solve, "162"),
-        Problem(problem43::solve, "16695334890"),
-        Problem(problem44::solve, "5482660"),
-        Problem(problem45::solve, "1533776805"),
-        Problem(problem46::solve, "5777"),
-        Problem(problem47::solve, "134043"),
-        Problem(problem48::solve, "9110846700"),
-        Problem(problem49::solve, "296962999629"),
-        Problem(problem50::solve, "997651"),
-        Problem(problem51::solve, "121313"),
-        Problem(problem52::solve, "142857"),
-        Problem(problem53::solve, "4075"),
-        Problem(problem54::solve, "376"),
-        Problem(problem55::solve, "249"),
-        Problem(problem56::solve, "972"),
-        Problem(problem57::solve, "153"),
-        Problem(problem58::solve, "26241"),
-        Problem(problem59::solve, "129448"),
-        Problem(problem60::solve, "26033"),
-        Problem(problem61::solve, "28684"),
-        Problem(problem62::solve, "127035954683"),
-        Problem(problem63::solve, "49"),
-        Problem(problem64::solve, "1322"),
-        Problem(problem65::solve, "272"),
-        Problem(problem66::solve, "661"),
-        Problem(problem67::solve, "7273"),
-        Problem(problem68::solve, "6531031914842725"),
-        Problem(problem69::solve, "510510"),
-        Problem(problem70::solve, "8319823"),
-        Problem(problem71::solve, "428570"),
-        Problem(problem72::solve, "303963552391"),
-        Problem(problem73::solve, "7295372"),
-        Problem(problem74::solve, "402"),
-        Problem(problem75::solve, "161667"),
-        Problem(problem76::solve, "190569291"),
-        Problem(problem77::solve, "71"),
-        Problem(problem78::solve, "55374"),
-        Problem(problem79::solve, "73162890"),
-        Problem(problem80::solve, "40886"),
-        Problem(problem81::solve, "427337"),
-        Problem(problem82::solve, "260324"),
-        Problem(problem83::solve, "425185"),
-        Problem(problem84::solve, "101524"),
-        Problem(problem85::solve, "2772"),
-        Problem(problem86::solve, "1818"),
-        Problem(problem87::solve, "1097343"),
-        Problem(problem88::solve, "7587457"),
-        Problem(problem89::solve, "743"),
-        Problem(problem90::solve, "1217"),
-        Problem(problem91::solve, "14234"),
-        Problem(problem92::solve, "8581146"),
-        Problem(problem93::solve, "1258"),
-        Problem(problem94::solve, "518408346"),
-        Problem(problem95::solve, "14316"),
-        Problem(problem96::solve, "24702"),
-        Problem(problem97::solve, "8739992577"),
-        Problem(problem98::solve, "18769"),
-        Problem(problem99::solve, "709"),
-        Problem(problem100::solve, "756872327473")
+        Problem(problem01::solve),
+        Problem(problem02::solve),
+        Problem(problem03::solve),
+        Problem(problem04::solve),
+        Problem(problem05::solve),
+        Problem(problem06::solve),
+        Problem(problem07::solve),
+        Problem(problem08::solve),
+        Problem(problem09::solve),
+        Problem(problem10::solve),
+        Problem(problem11::solve),
+        Problem(problem12::solve),
+        Problem(problem13::solve),
+        Problem(problem14::solve),
+        Problem(problem15::solve),
+        Problem(problem16::solve),
+        Problem(problem17::solve),
+        Problem(problem18::solve),
+        Problem(problem19::solve),
+        Problem(problem20::solve),
+        Problem(problem21::solve),
+        Problem(problem22::solve),
+        Problem(problem23::solve),
+        Problem(problem24::solve),
+        Problem(problem25::solve),
+        Problem(problem26::solve),
+        Problem(problem27::solve),
+        Problem(problem28::solve),
+        Problem(problem29::solve),
+        Problem(problem30::solve),
+        Problem(problem31::solve),
+        Problem(problem32::solve),
+        Problem(problem33::solve),
+        Problem(problem34::solve),
+        Problem(problem35::solve),
+        Problem(problem36::solve),
+        Problem(problem37::solve),
+        Problem(problem38::solve),
+        Problem(problem39::solve),
+        Problem(problem40::solve),
+        Problem(problem41::solve),
+        Problem(problem42::solve),
+        Problem(problem43::solve),
+        Problem(problem44::solve),
+        Problem(problem45::solve),
+        Problem(problem46::solve),
+        Problem(problem47::solve),
+        Problem(problem48::solve),
+        Problem(problem49::solve),
+        Problem(problem50::solve),
+        Problem(problem51::solve),
+        Problem(problem52::solve),
+        Problem(problem53::solve),
+        Problem(problem54::solve),
+        Problem(problem55::solve),
+        Problem(problem56::solve),
+        Problem(problem57::solve),
+        Problem(problem58::solve),
+        Problem(problem59::solve),
+        Problem(problem60::solve),
+        Problem(problem61::solve),
+        Problem(problem62::solve),
+        Problem(problem63::solve),
+        Problem(problem64::solve),
+        Problem(problem65::solve),
+        Problem(problem66::solve),
+        Problem(problem67::solve),
+        Problem(problem68::solve),
+        Problem(problem69::solve),
+        Problem(problem70::solve),
+        Problem(problem71::solve),
+        Problem(problem72::solve),
+        Problem(problem73::solve),
+        Problem(problem74::solve),
+        Problem(problem75::solve),
+        Problem(problem76::solve),
+        Problem(problem77::solve),
+        Problem(problem78::solve),
+        Problem(problem79::solve),
+        Problem(problem80::solve),
+        Problem(problem81::solve),
+        Problem(problem82::solve),
+        Problem(problem83::solve),
+        Problem(problem84::solve),
+        Problem(problem85::solve),
+        Problem(problem86::solve),
+        Problem(problem87::solve),
+        Problem(problem88::solve),
+        Problem(problem89::solve),
+        Problem(problem90::solve),
+        Problem(problem91::solve),
+        Problem(problem92::solve),
+        Problem(problem93::solve),
+        Problem(problem94::solve),
+        Problem(problem95::solve),
+        Problem(problem96::solve),
+        Problem(problem97::solve),
+        Problem(problem98::solve),
+        Problem(problem99::solve),
+        Problem(problem100::solve)
     ];
 }
 
 #[cfg(not(tarpaulin_include))]
-pub fn run_all_problems() {
-    for Problem(solve, _) in PROBLEMS.iter() {
-        solve();
+pub fn run_all_problems() -> Result<()> {
+    for Problem(solve) in PROBLEMS.iter() {
+        solve()?;
     }
+    Ok(())
 }

@@ -1,6 +1,30 @@
 use crate::ntheory::primes::{is_prime, sieves};
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
 use crate::utils::timeit;
+use anyhow::Result;
+
+fn p() -> Result<String> {
+    /*
+    Prime pair sets
+    Problem 60
+    The primes 3, 7, 109, and 673, are quite remarkable. By taking any two primes and concatenating them in any
+    order the result will always be prime. For example, taking 7 and 109, both 7109 and 1097 are prime. The sum
+    of these four primes, 792, represents the lowest sum for a set of four primes with this property.
+
+    Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
+    */
+    const MAX_N: usize = 10000;
+    let primes = sieves(MAX_N);
+    for prime in primes.iter() {
+        let ans = find_5_concat_primes(*prime, &primes, 1);
+        if ans != 0 {
+            return Ok(ans.to_string());
+        }
+    }
+    panic!();
+}
+
+timeit::timeit!(Problem60, solve, p);
 
 fn find_5_concat_primes(prime: usize, primes: &[usize], nb_primes: usize) -> usize {
     const TARGET: usize = 5;
@@ -44,25 +68,12 @@ fn find_5_concat_primes(prime: usize, primes: &[usize], nb_primes: usize) -> usi
     0
 }
 
-fn p() -> String {
-    /*
-    Prime pair sets
-    Problem 60
-    The primes 3, 7, 109, and 673, are quite remarkable. By taking any two primes and concatenating them in any
-    order the result will always be prime. For example, taking 7 and 109, both 7109 and 1097 are prime. The sum
-    of these four primes, 792, represents the lowest sum for a set of four primes with this property.
+#[cfg(test)]
+mod test {
+    use super::*;
 
-    Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
-    */
-    const MAX_N: usize = 10000;
-    let primes = sieves(MAX_N);
-    for prime in primes.iter() {
-        let ans = find_5_concat_primes(*prime, &primes, 1);
-        if ans != 0 {
-            return ans.to_string();
-        }
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "26033");
     }
-    panic!("A solution should've been found!");
 }
-
-timeit::timeit!(Problem60, solve, p);

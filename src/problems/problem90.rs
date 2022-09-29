@@ -1,6 +1,8 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Cube digit pairs
     Problem 90
@@ -34,7 +36,7 @@ fn p() -> String {
             }
         }
     }
-    arrangements.len().to_string()
+    Ok(arrangements.len().to_string())
 }
 
 type Dice = [usize; 6]; // 6 faces
@@ -115,3 +117,13 @@ fn squares_validation(dice1: &Dice, dice2: &Dice) -> bool {
 }
 
 timeit::timeit!(Problem90, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1217");
+    }
+}

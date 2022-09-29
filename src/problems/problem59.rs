@@ -1,7 +1,8 @@
 use crate::utils::timeit;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     XOR decryption
     Problem 59
@@ -34,10 +35,10 @@ fn p() -> String {
         let encoded_space = repetitions.max_by_key(|ch| ch.1).unwrap();
         keys[i] = encoded_space.0 as u8 ^ b' ';
     }
-    decode_text(&cipher, &keys)
+    Ok(decode_text(&cipher, &keys)
         .chars()
         .fold(0usize, |acc, ch| acc + ch as usize)
-        .to_string()
+        .to_string())
 }
 
 fn seperate_cipher_into_3_streams<'a>(cipher: &'a std::str::Split<char>) -> [Vec<&'a str>; 3] {
@@ -67,3 +68,13 @@ fn count_repetitions(stream: &[&str]) -> [usize; 256] {
 }
 
 timeit::timeit!(Problem59, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "129448");
+    }
+}

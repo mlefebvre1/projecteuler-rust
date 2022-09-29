@@ -1,23 +1,8 @@
 use crate::utils::timeit;
 use std::fs;
 
-fn prepare_matrix() -> Vec<Vec<usize>> {
-    let mut matrix = Vec::new();
-
-    let data =
-        fs::read_to_string("src/problems/data/problem18.txt").expect("Problem opening the file");
-    for line in data.lines() {
-        let mut line_vec = Vec::new();
-        for col in line.split_ascii_whitespace() {
-            line_vec.push(col.parse::<usize>().unwrap());
-        }
-        matrix.push(line_vec);
-    }
-
-    matrix
-}
-
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Maximum path sum I
     Problem 18
@@ -64,7 +49,33 @@ fn p() -> String {
         }
     }
     let last_line = &matrix[matrix.len() - 1];
-    (*last_line.iter().max().unwrap()).to_string()
+    Ok((*last_line.iter().max().unwrap()).to_string())
+}
+
+fn prepare_matrix() -> Vec<Vec<usize>> {
+    let mut matrix = Vec::new();
+
+    let data =
+        fs::read_to_string("src/problems/data/problem18.txt").expect("Problem opening the file");
+    for line in data.lines() {
+        let mut line_vec = Vec::new();
+        for col in line.split_ascii_whitespace() {
+            line_vec.push(col.parse::<usize>().unwrap());
+        }
+        matrix.push(line_vec);
+    }
+
+    matrix
 }
 
 timeit::timeit!(Problem18, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1074");
+    }
+}

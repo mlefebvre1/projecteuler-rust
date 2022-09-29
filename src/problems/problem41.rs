@@ -2,7 +2,8 @@ use crate::ntheory::primes::is_prime;
 use crate::utils::timeit;
 use itertools::Itertools;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Pandigital prime
     Problem 41
@@ -31,7 +32,17 @@ fn p() -> String {
         });
         prime_permutations.collect::<Vec<usize>>()
     });
-    candidates.into_iter().flatten().max().unwrap().to_string()
+    Ok(candidates.into_iter().flatten().max().unwrap().to_string())
 }
 
 timeit::timeit!(Problem41, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "7652413");
+    }
+}

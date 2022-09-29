@@ -1,7 +1,9 @@
 use crate::utils::timeit;
+
 use num::Integer;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Multiples of 3 and 5
     Problem 1
@@ -11,10 +13,10 @@ fn p() -> String {
     Find the sum of all the multiples of 3 or 5 below 1000.
     */
     const MAX_N: usize = 1000;
-    (1..MAX_N)
+    Ok((1..MAX_N)
         .filter(|n| n.is_multiple_of(&3) || n.is_multiple_of(&5))
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem01, solve, p);
@@ -25,6 +27,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve(), "233168");
+        assert_eq!(solve().unwrap(), "233168");
     }
 }

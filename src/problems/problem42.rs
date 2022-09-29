@@ -2,7 +2,8 @@ use crate::series::triangular::Triangular;
 use crate::utils::timeit;
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Coded triangle numbers
     Problem 42
@@ -38,7 +39,17 @@ fn p() -> String {
     let triangular_word_sum = words_sum
         .iter()
         .filter(|word_sum| triangulars.contains(word_sum));
-    triangular_word_sum.count().to_string()
+    Ok(triangular_word_sum.count().to_string())
 }
 
 timeit::timeit!(Problem42, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "162");
+    }
+}

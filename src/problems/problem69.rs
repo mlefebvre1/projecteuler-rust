@@ -1,7 +1,9 @@
 use crate::ntheory::primes::is_prime;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Totient maximum
     Problem 69
@@ -37,7 +39,17 @@ fn p() -> String {
         }
         false
     });
-    (max_totient / n.unwrap()).to_string()
+    Ok((max_totient / n.unwrap()).to_string())
 }
 
 timeit::timeit!(Problem69, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "510510");
+    }
+}

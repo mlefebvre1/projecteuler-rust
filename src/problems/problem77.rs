@@ -1,7 +1,9 @@
 use crate::ntheory::primes::sieves;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Prime summations
     Problem 77
@@ -33,7 +35,17 @@ fn p() -> String {
         }
         None
     });
-    candidates.min().unwrap().to_string()
+    Ok(candidates.min().unwrap().to_string())
 }
 
 timeit::timeit!(Problem77, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "71");
+    }
+}

@@ -1,6 +1,7 @@
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Lattice paths
     Problem 15
@@ -35,7 +36,17 @@ fn p() -> String {
             tab[row][col] = tab[row - 1][col] + tab[row][col - 1];
         }
     }
-    tab[20][20].to_string()
+    Ok(tab[20][20].to_string())
 }
 
 timeit::timeit!(Problem15, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "137846528820");
+    }
+}

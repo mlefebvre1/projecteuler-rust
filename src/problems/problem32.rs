@@ -2,7 +2,8 @@ use crate::ntheory::arithmetic::pandigital_validation;
 use crate::utils::timeit;
 use itertools::Itertools;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Pandigital products
     Problem 32
@@ -27,11 +28,21 @@ fn p() -> String {
     let pandigital_products = products
         .filter(|(n, _prod)| pandigital_validation(n, 1, 9))
         .map(|(_n, prod)| prod);
-    pandigital_products
+    Ok(pandigital_products
         .collect::<std::collections::HashSet<usize>>()
         .iter()
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem32, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "45228");
+    }
+}

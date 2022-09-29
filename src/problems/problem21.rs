@@ -1,7 +1,8 @@
 use crate::ntheory::factor;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Amicable numbers
     Problem 21
@@ -16,7 +17,7 @@ fn p() -> String {
     Evaluate the sum of all the amicable numbers under 10000.
     */
     const MAX_A: usize = 10000;
-    (1..MAX_A)
+    Ok((1..MAX_A)
         .map(|a| {
             let b = factor::proper_divisors_sum(a);
             if (factor::proper_divisors_sum(b) == a) && (a != b) {
@@ -26,7 +27,17 @@ fn p() -> String {
             }
         })
         .sum::<usize>()
-        .to_string()
+        .to_string())
 }
 
 timeit::timeit!(Problem21, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "31626");
+    }
+}

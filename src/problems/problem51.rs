@@ -3,7 +3,8 @@ use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
 use crate::utils::timeit;
 use bitvec::prelude::*;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Prime digit replacements
     Problem 51
@@ -94,12 +95,22 @@ fn p() -> String {
                 let ans = combinations.next();
                 // Here avoid collecting for every number, instead grab the first value and check TARGET-1
                 if combinations.count() == TARGET - 1 {
-                    return ans.unwrap().to_string();
+                    return Ok(ans.unwrap().to_string());
                 }
             }
         }
     }
-    String::from("Answer not found..")
+    panic!();
 }
 
 timeit::timeit!(Problem51, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "121313");
+    }
+}

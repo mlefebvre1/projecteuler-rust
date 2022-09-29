@@ -4,6 +4,31 @@ use crate::utils::timeit;
 use itertools::Itertools;
 use std::collections::HashMap;
 
+use anyhow::Result;
+
+fn p() -> Result<String> {
+    /*
+    Cubic permutations
+    Problem 62
+    The cube, 41063625 (3453), can be permuted to produce two other cubes: 56623104 (3843) and 66430125 (4053). In fact,
+    41063625 is the smallest cube which has exactly three permutations of its digits which are also cube.
+    Find the smallest cube for which exactly five permutations of its digits are cube.
+    */
+    const NB_PERMUTATIONS_TARGET: usize = 5;
+    let mut cubics_gen = CubicsGenerator::new();
+    Ok(cubics_gen
+        .find_map(|cubics| {
+            let hashmap = map_by_sorted_digits(&cubics);
+            let candidates =
+                search_hash_with_correct_nb_permutations(hashmap, NB_PERMUTATIONS_TARGET);
+            if !candidates.is_empty() {
+                return Some(candidates.iter().min().unwrap().to_string());
+            }
+            None
+        })
+        .unwrap())
+}
+
 struct CubicsGenerator {
     nb_digits: usize,
 }
@@ -54,27 +79,14 @@ fn search_hash_with_correct_nb_permutations(
     ans
 }
 
-fn p() -> String {
-    /*
-    Cubic permutations
-    Problem 62
-    The cube, 41063625 (3453), can be permuted to produce two other cubes: 56623104 (3843) and 66430125 (4053). In fact,
-    41063625 is the smallest cube which has exactly three permutations of its digits which are also cube.
-    Find the smallest cube for which exactly five permutations of its digits are cube.
-    */
-    const NB_PERMUTATIONS_TARGET: usize = 5;
-    let mut cubics_gen = CubicsGenerator::new();
-    cubics_gen
-        .find_map(|cubics| {
-            let hashmap = map_by_sorted_digits(&cubics);
-            let candidates =
-                search_hash_with_correct_nb_permutations(hashmap, NB_PERMUTATIONS_TARGET);
-            if !candidates.is_empty() {
-                return Some(candidates.iter().min().unwrap().to_string());
-            }
-            None
-        })
-        .unwrap()
-}
-
 timeit::timeit!(Problem62, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "127035954683");
+    }
+}

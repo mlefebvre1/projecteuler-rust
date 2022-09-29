@@ -3,7 +3,8 @@ use crate::series::pentagonal::is_pentagonal;
 use crate::series::triangular::Triangular;
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+fn p() -> Result<String> {
     /*
     Triangular, pentagonal, and hexagonal
     Problem 45
@@ -23,7 +24,17 @@ fn p() -> String {
     let triangular = triangulars
         .find(|&t| is_hexagonal(t) && is_pentagonal(t) && t > 40755)
         .unwrap();
-    triangular.to_string()
+    Ok(triangular.to_string())
 }
 
 timeit::timeit!(Problem45, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "1533776805");
+    }
+}

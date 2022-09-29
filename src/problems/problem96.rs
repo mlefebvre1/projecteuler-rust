@@ -4,7 +4,9 @@ use itertools::Itertools;
 use ndarray::{self, s};
 use std::fs;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Su Doku
     Problem 96
@@ -38,7 +40,7 @@ fn p() -> String {
             .collect();
         vec_of_u8_to_int::<usize>(&digits)
     });
-    grid_solved_digits.sum::<usize>().to_string()
+    Ok(grid_solved_digits.sum::<usize>().to_string())
 }
 
 type Grid = ndarray::Array2<usize>;
@@ -150,3 +152,13 @@ impl Sudoku {
 }
 
 timeit::timeit!(Problem96, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "24702");
+    }
+}

@@ -1,7 +1,9 @@
 use crate::utils::monopoly::{Game, NB_SQUARES};
 use crate::utils::timeit;
 
-fn p() -> String {
+use anyhow::Result;
+
+fn p() -> Result<String> {
     /*
     Monopoly odds
     Problem 84
@@ -59,7 +61,17 @@ fn p() -> String {
         .take(3)
         .map(|(square, _nb_visits)| square.to_string())
         .collect::<Vec<String>>();
-    three_most_popular_squares.join("")
+    Ok(three_most_popular_squares.join(""))
 }
 
 timeit::timeit!(Problem84, solve, p);
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_solution() {
+        assert_eq!(solve().unwrap(), "101524");
+    }
+}
