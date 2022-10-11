@@ -9,6 +9,8 @@ mod problem08;
 mod problem09;
 mod problem10;
 mod problem100;
+mod problem101;
+mod problem102;
 mod problem11;
 mod problem12;
 mod problem13;

@@ -8,16 +8,17 @@ edition = "2021"
 arrayvec = "^0.7.2"
 anyhow = "1"
 bitvec = "1"
-clap = { version = "3.1.8", features = ["derive"] }
 ndarray = "0.15.4"
+nalgebra = "0.31"
 factorial = "0.2"
 itertools = "0.10"
 lazy_static = "1.4"
 num = "0.4"
-phf = { version = "0.10", features = ["macros"] }
+phf = { version = "0.11", features = ["macros"] }
 rand = "0.8"
 thiserror = "1"
 eval = "^0.4"
+
 
 [dev-dependencies]
 rstest = "0.15"
