@@ -1,8 +1,7 @@
-use crate::utils::timeit;
-
-use anyhow::Result;
-
 use crate::utils::integers::powmod;
+use crate::utils::timeit;
+use anyhow::Result;
+use lazy_static::lazy_static;
 
 const NB_EULER_NUMBERS: usize = 24680;
 const M: u64 = 1_020_202_009;
@@ -39,7 +38,6 @@ fn p() -> Result<String> {
     Ok(euler_numbers.nth(NB_EULER_NUMBERS - 2).unwrap().to_string())
 }
 
-use lazy_static::lazy_static;
 lazy_static! {
     static ref FACTORIAL_MODULUS: Vec<u64> = {
         let mut factorial = vec![0; NB_EULER_NUMBERS + 1];
