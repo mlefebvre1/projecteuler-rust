@@ -53,6 +53,20 @@ where
     vec
 }
 
+pub fn powmod(base: u64, exp: u64, m: u64) -> u64 {
+    let mut exp = exp;
+    let mut base = base % m;
+    let mut ans = 1;
+    while exp > 0 {
+        if exp.is_odd() {
+            ans = (ans * base) % m;
+        }
+        base = (base * base) % m;
+        exp >>= 1;
+    }
+    ans
+}
+
 #[cfg(test)]
 mod test {
 
@@ -76,5 +90,15 @@ mod test {
             int_to_vec_of_u8::<BigUint>(&BigUint::from(957327usize)),
             [9, 5, 7, 3, 2, 7]
         );
+    }
+
+    #[rstest]
+    #[case(2, 1236, 100000, 48736)]
+    #[case(148, 148, 148148, 28120)]
+    #[case(0, 0, 99, 1)]
+    #[case(0, 99, 99, 0)]
+    #[case(1, 99, 101, 1)]
+    fn test_powmod(#[case] base: u64, #[case] exp: u64, #[case] modulus: u64, #[case] ans: u64) {
+        assert_eq!(powmod(base, exp, modulus), ans)
     }
 }
