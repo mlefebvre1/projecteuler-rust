@@ -12,6 +12,7 @@ mod problem100;
 mod problem101;
 mod problem102;
 mod problem104;
+mod problem107;
 mod problem11;
 mod problem12;
 mod problem13;

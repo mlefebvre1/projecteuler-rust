@@ -1,4 +1,7 @@
-use crate::graph::dgraph::{Dgraph, Edge};
+use crate::graph::{
+    dgraph::{BuildGraph, Dgraph, Edge},
+    shortest_path::ShortestPath,
+};
 use crate::utils::matrix::load_matrix2d_from_file;
 use crate::utils::timeit;
 
@@ -43,6 +46,35 @@ impl MatrixGraph {
         }
     }
 
+    fn append_edges(&mut self, vertex_id: usize, right: bool, left: bool, down: bool, up: bool) {
+        let shape = self.matrix.shape();
+        let [_, x_len] = [shape[0], shape[1]];
+        let (x, y) = (vertex_id % x_len, vertex_id / x_len);
+        if right {
+            self.graph
+                .add_edge(Edge::new(vertex_id, vertex_id + 1, self.matrix[[y, x + 1]]));
+        }
+        if left {
+            self.graph
+                .add_edge(Edge::new(vertex_id, vertex_id - 1, self.matrix[[y, x - 1]]));
+        }
+        if down {
+            self.graph.add_edge(Edge::new(
+                vertex_id,
+                vertex_id + x_len,
+                self.matrix[[y + 1, x]],
+            ));
+        }
+        if up {
+            self.graph.add_edge(Edge::new(
+                vertex_id,
+                vertex_id - x_len,
+                self.matrix[[y - 1, x]],
+            ));
+        }
+    }
+}
+impl BuildGraph for MatrixGraph {
     fn build_graph(&mut self) {
         let shape = self.matrix.shape();
         let [y_len, x_len] = [shape[0], shape[1]];
@@ -80,34 +112,6 @@ impl MatrixGraph {
                 // Right, Left, Down, Up
                 self.append_edges(vertex_id, true, true, true, true);
             }
-        }
-    }
-
-    fn append_edges(&mut self, vertex_id: usize, right: bool, left: bool, down: bool, up: bool) {
-        let shape = self.matrix.shape();
-        let [_, x_len] = [shape[0], shape[1]];
-        let (x, y) = (vertex_id % x_len, vertex_id / x_len);
-        if right {
-            self.graph
-                .add_edge(Edge::new(vertex_id, vertex_id + 1, self.matrix[[y, x + 1]]));
-        }
-        if left {
-            self.graph
-                .add_edge(Edge::new(vertex_id, vertex_id - 1, self.matrix[[y, x - 1]]));
-        }
-        if down {
-            self.graph.add_edge(Edge::new(
-                vertex_id,
-                vertex_id + x_len,
-                self.matrix[[y + 1, x]],
-            ));
-        }
-        if up {
-            self.graph.add_edge(Edge::new(
-                vertex_id,
-                vertex_id - x_len,
-                self.matrix[[y - 1, x]],
-            ));
         }
     }
 }

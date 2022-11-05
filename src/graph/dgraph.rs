@@ -1,10 +1,18 @@
+use super::minimal_spanning_tree::MinimalSpanningTree;
+use super::shortest_path::ShortestPath;
+use anyhow::Result;
+use std::collections::BTreeSet;
 use std::fmt;
+
+pub trait BuildGraph {
+    fn build_graph(&mut self);
+}
 
 #[derive(Debug, Clone, Copy)]
 pub struct Edge {
-    src: usize,
-    dst: usize,
-    weight: isize,
+    pub src: usize,
+    pub dst: usize,
+    pub weight: isize,
 }
 
 impl Edge {
@@ -15,8 +23,8 @@ impl Edge {
 
 #[derive(Debug, Clone)]
 pub struct Vertex {
-    id: usize,
-    neighbors: Vec<Edge>,
+    pub id: usize,
+    pub neighbors: Vec<Edge>,
 }
 
 #[derive(Debug)]
@@ -49,8 +57,10 @@ impl Dgraph {
         self.edges.push(edge);
         self.vertices[edge.src].neighbors.push(edge);
     }
+}
 
-    pub fn disjktra_shortest_path(&self, src: usize, dst: usize) -> isize {
+impl ShortestPath for Dgraph {
+    fn disjktra_shortest_path(&self, src: usize, dst: usize) -> isize {
         fn vertex_id_with_min_dist(dist: &[isize], visited: &[bool]) -> Option<usize> {
             let mut min_dist = isize::MAX;
             let mut vertex_id_min_dist = None;
@@ -86,6 +96,41 @@ impl Dgraph {
             }
         }
         dist[dst]
+    }
+}
+
+impl MinimalSpanningTree for Dgraph {
+    fn kruskal_minimum_spanning_tree(&self) -> Result<Vec<Edge>> {
+        let vertices = self.vertices.clone();
+        let mut edges = self.edges.clone();
+        edges.sort_by_key(|edge| edge.weight);
+
+        let mut forest = vertices
+            .iter()
+            .map(|vertex| {
+                let mut set = BTreeSet::new();
+                set.insert(vertex.id);
+                set
+            })
+            .collect::<Vec<_>>();
+
+        let mut tree_edges = Vec::new();
+        for edge in edges {
+            if forest.len() == 1 {
+                break;
+            }
+            let (u, v) = (edge.src, edge.dst);
+            let (u_set, v_set) = (
+                Self::find_set(&forest, u).unwrap(),
+                Self::find_set(&forest, v).unwrap(),
+            );
+            if u_set != v_set {
+                tree_edges.push(edge);
+                Self::merge_sets_and_delete_original_sets(&mut forest, &u_set, &v_set)?;
+            }
+        }
+
+        Ok(tree_edges)
     }
 }
 
