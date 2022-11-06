@@ -38,7 +38,7 @@ fn is_bouncy(n: &u64) -> bool {
     incr_sort != digits && decr_sort != digits
 }
 
-timeit::timeit!(Problem108, solve, p);
+timeit::timeit!(Problem112, solve, p);
 
 #[cfg(test)]
 mod test {
