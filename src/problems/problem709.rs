@@ -5,7 +5,7 @@ use lazy_static::lazy_static;
 const NB_EULER_NUMBERS: usize = 24680;
 const M: u64 = 1_020_202_009;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
         Even Stevens
         Problem 709
