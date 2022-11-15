@@ -1,6 +1,4 @@
 use crate::series::pentagonal::GeneralizedPentagonal;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -66,14 +64,12 @@ fn partition(n: isize, partitions: &[isize], pentagonals: &[isize]) -> isize {
         % 1e6 as isize
 }
 
-timeit::timeit!(Problem78, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "55374");
+        assert_eq!(p().unwrap(), "55374");
     }
 }

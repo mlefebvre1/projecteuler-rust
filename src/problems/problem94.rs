@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -110,14 +108,12 @@ fn calc_perimeter(shortest: usize, largest: usize) -> usize {
     2 * shortest + 2 * largest
 }
 
-timeit::timeit!(Problem94, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "518408346");
+        assert_eq!(p().unwrap(), "518408346");
     }
 }

@@ -1,9 +1,6 @@
-use itertools::Itertools;
-
-use crate::utils::timeit;
-use std::fs;
-
 use anyhow::Result;
+use itertools::Itertools;
+use std::fs;
 
 fn p() -> Result<String> {
     /*
@@ -44,14 +41,12 @@ fn p() -> Result<String> {
     Ok(line.to_string())
 }
 
-timeit::timeit!(Problem99, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "709");
+        assert_eq!(p().unwrap(), "709");
     }
 }

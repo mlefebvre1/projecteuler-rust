@@ -1,6 +1,5 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Digit fifth powers
@@ -33,14 +32,12 @@ fn p() -> Result<String> {
     Ok(solutions.fold(0, |acc, (_, n)| acc + n).to_string())
 }
 
-timeit::timeit!(Problem30, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "443839");
+        assert_eq!(p().unwrap(), "443839");
     }
 }

@@ -1,5 +1,4 @@
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
-use crate::utils::timeit;
 use itertools::Itertools;
 use std::fs;
 
@@ -150,14 +149,12 @@ fn anagram_squared_validate(anagrams: &[String], square_a: &NumDigits) -> NumDig
     square_b
 }
 
-timeit::timeit!(Problem98, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "18769");
+        assert_eq!(p().unwrap(), "18769");
     }
 }

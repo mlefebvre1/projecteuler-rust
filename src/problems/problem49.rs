@@ -1,9 +1,8 @@
 use crate::ntheory::primes::{is_prime, sieves};
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Prime permutations
@@ -75,14 +74,12 @@ fn extract_the_correct_terms_and_concat(candidate: &[usize]) -> String {
     ans
 }
 
-timeit::timeit!(Problem49, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "296962999629");
+        assert_eq!(p().unwrap(), "296962999629");
     }
 }

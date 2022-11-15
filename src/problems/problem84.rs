@@ -1,6 +1,4 @@
 use crate::utils::monopoly::{Game, NB_SQUARES};
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -64,14 +62,12 @@ fn p() -> Result<String> {
     Ok(three_most_popular_squares.join(""))
 }
 
-timeit::timeit!(Problem84, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "101524");
+        assert_eq!(p().unwrap(), "101524");
     }
 }

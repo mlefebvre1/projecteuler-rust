@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use std::fs;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Maximum path sum I
@@ -68,14 +67,12 @@ fn prepare_matrix() -> Vec<Vec<usize>> {
     matrix
 }
 
-timeit::timeit!(Problem18, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1074");
+        assert_eq!(p().unwrap(), "1074");
     }
 }

@@ -1,7 +1,6 @@
 use crate::ntheory::primes::{is_prime, sieves};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Circular primes
@@ -56,8 +55,6 @@ impl Iterator for DigitRotations {
     }
 }
 
-timeit::timeit!(Problem35, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -74,6 +71,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "55");
+        assert_eq!(p().unwrap(), "55");
     }
 }

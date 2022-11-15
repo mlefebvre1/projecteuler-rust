@@ -1,7 +1,6 @@
 use crate::ntheory::primes::{is_prime, sieves};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Consecutive prime sum
@@ -42,14 +41,12 @@ fn p() -> Result<String> {
     Ok(max_prime_sum.to_string())
 }
 
-timeit::timeit!(Problem50, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "997651");
+        assert_eq!(p().unwrap(), "997651");
     }
 }

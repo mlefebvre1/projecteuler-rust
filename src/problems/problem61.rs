@@ -3,8 +3,6 @@ use crate::series::{
     square::Square, triangular::Triangular,
 };
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -158,14 +156,12 @@ fn cyclical_figurate_recursive_search(
     (false, 0)
 }
 
-timeit::timeit!(Problem61, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "28684");
+        assert_eq!(p().unwrap(), "28684");
     }
 }

@@ -1,5 +1,4 @@
 use crate::series::fibonacci::Fibonacci;
-use crate::utils::timeit;
 use num::Integer;
 
 use anyhow::Result;
@@ -24,14 +23,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem02, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "4613732");
+        assert_eq!(p().unwrap(), "4613732");
     }
 }

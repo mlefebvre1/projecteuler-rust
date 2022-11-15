@@ -1,7 +1,6 @@
 use crate::ntheory::{factor, primes};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Highly divisible triangular number
@@ -59,14 +58,12 @@ fn t(n: isize) -> f64 {
     n as f64 * (n as f64 + 1f64) / 2f64
 }
 
-timeit::timeit!(Problem12, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "76576500");
+        assert_eq!(p().unwrap(), "76576500");
     }
 }

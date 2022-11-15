@@ -1,7 +1,5 @@
-use crate::utils::timeit;
-use num::BigUint;
-
 use anyhow::Result;
+use num::BigUint;
 
 fn p() -> Result<String> {
     /*
@@ -23,14 +21,12 @@ fn p() -> Result<String> {
     Ok(ans.to_string())
 }
 
-timeit::timeit!(Problem97, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "8739992577");
+        assert_eq!(p().unwrap(), "8739992577");
     }
 }

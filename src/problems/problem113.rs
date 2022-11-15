@@ -1,4 +1,3 @@
-use crate::utils::timeit;
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -66,14 +65,12 @@ fn p() -> Result<String> {
     Ok(total_non_bouncy.to_string())
 }
 
-timeit::timeit!(Problem113, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "51161058134250");
+        assert_eq!(p().unwrap(), "51161058134250");
     }
 }

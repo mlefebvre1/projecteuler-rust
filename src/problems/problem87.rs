@@ -1,6 +1,4 @@
 use crate::ntheory::primes::sieves;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -37,14 +35,12 @@ fn p() -> Result<String> {
     Ok(cache.into_iter().filter(|&n| n != 0).count().to_string())
 }
 
-timeit::timeit!(Problem87, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1097343");
+        assert_eq!(p().unwrap(), "1097343");
     }
 }

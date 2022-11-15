@@ -1,6 +1,4 @@
 use crate::ntheory::pythagorean::{pythagorean_triples, PythagoreanTriple};
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -72,7 +70,6 @@ fn pythagorean_splits(triple: &PythagoreanTriple) -> Vec<usize> {
     }
     v
 }
-timeit::timeit!(Problem86, solve, p);
 
 #[cfg(test)]
 mod test {
@@ -80,6 +77,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1818");
+        assert_eq!(p().unwrap(), "1818");
     }
 }

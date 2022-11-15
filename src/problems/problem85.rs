@@ -1,6 +1,4 @@
 use crate::series::triangular::Triangular;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -43,14 +41,12 @@ struct BestRectangle {
     shape: (usize, usize),
 }
 
-timeit::timeit!(Problem85, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "2772");
+        assert_eq!(p().unwrap(), "2772");
     }
 }

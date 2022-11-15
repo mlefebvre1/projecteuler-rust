@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use std::fs;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Names scores
@@ -35,14 +34,12 @@ fn calc_name_score(name: &str, index: usize) -> usize {
     name_score
 }
 
-timeit::timeit!(Problem22, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "871198282");
+        assert_eq!(p().unwrap(), "871198282");
     }
 }

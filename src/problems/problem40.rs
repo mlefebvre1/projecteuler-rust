@@ -1,6 +1,5 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Champernowne's constant
@@ -48,14 +47,12 @@ fn p() -> Result<String> {
     Ok(prod.to_string())
 }
 
-timeit::timeit!(Problem40, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "210");
+        assert_eq!(p().unwrap(), "210");
     }
 }

@@ -1,7 +1,5 @@
-use crate::utils::timeit;
-use std::fs;
-
 use anyhow::Result;
+use std::fs;
 
 fn p() -> Result<String> {
     /*
@@ -92,14 +90,12 @@ fn find_largest_digit(logins: &[&str], digits_to_place: &[usize]) -> usize {
         .unwrap()
 }
 
-timeit::timeit!(Problem79, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "73162890");
+        assert_eq!(p().unwrap(), "73162890");
     }
 }

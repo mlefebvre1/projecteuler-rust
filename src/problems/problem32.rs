@@ -1,8 +1,7 @@
 use crate::ntheory::arithmetic::pandigital_validation;
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Pandigital products
@@ -35,14 +34,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem32, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "45228");
+        assert_eq!(p().unwrap(), "45228");
     }
 }

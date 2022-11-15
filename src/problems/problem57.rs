@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use num::BigUint;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Square root convergents
@@ -35,14 +34,12 @@ fn p() -> Result<String> {
     Ok(total.to_string())
 }
 
-timeit::timeit!(Problem57, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "153");
+        assert_eq!(p().unwrap(), "153");
     }
 }

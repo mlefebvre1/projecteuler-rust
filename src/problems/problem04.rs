@@ -1,8 +1,7 @@
 use crate::ntheory::palindrome;
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Largest palindrome product
@@ -19,14 +18,12 @@ fn p() -> Result<String> {
     Ok(candidates.max().unwrap().to_string())
 }
 
-timeit::timeit!(Problem04, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "906609");
+        assert_eq!(p().unwrap(), "906609");
     }
 }

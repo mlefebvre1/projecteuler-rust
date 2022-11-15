@@ -1,7 +1,5 @@
-use crate::utils::timeit;
-use std::fs;
-
 use anyhow::Result;
+use std::fs;
 
 fn p() -> Result<String> {
     /*
@@ -55,14 +53,12 @@ fn prepare_matrix() -> Vec<Vec<usize>> {
     matrix
 }
 
-timeit::timeit!(Problem67, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "7273");
+        assert_eq!(p().unwrap(), "7273");
     }
 }

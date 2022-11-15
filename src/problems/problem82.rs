@@ -1,8 +1,6 @@
 use crate::utils::matrix::load_matrix2d_from_file;
-use crate::utils::timeit;
-use ndarray::s;
-
 use anyhow::Result;
+use ndarray::s;
 
 fn p() -> Result<String> {
     /*
@@ -80,14 +78,12 @@ fn p() -> Result<String> {
     Ok(matrix_slice.into_iter().min().unwrap().to_string())
 }
 
-timeit::timeit!(Problem82, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "260324");
+        assert_eq!(p().unwrap(), "260324");
     }
 }

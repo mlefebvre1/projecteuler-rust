@@ -1,8 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use phf::phf_map;
 use std::fs;
-
-use anyhow::Result;
 
 fn p() -> Result<String> {
     /*
@@ -134,14 +132,12 @@ fn arab_to_roman_number(arab_number: usize) -> String {
     roman_number
 }
 
-timeit::timeit!(Problem89, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "743");
+        assert_eq!(p().unwrap(), "743");
     }
 }

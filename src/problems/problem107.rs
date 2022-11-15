@@ -2,7 +2,6 @@ use crate::graph::{
     dgraph::{Dgraph, Edge},
     minimal_spanning_tree::MinimalSpanningTree,
 };
-use crate::utils::timeit;
 use anyhow::Result;
 use std::fs;
 
@@ -75,14 +74,12 @@ impl MatrixGraph {
     }
 }
 
-timeit::timeit!(Problem107, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "259679");
+        assert_eq!(p().unwrap(), "259679");
     }
 }

@@ -1,8 +1,6 @@
-use crate::utils::timeit;
-
+use anyhow::Result;
 use num::Integer;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Multiples of 3 and 5
@@ -19,14 +17,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem01, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "233168");
+        assert_eq!(p().unwrap(), "233168");
     }
 }

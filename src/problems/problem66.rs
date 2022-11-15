@@ -1,9 +1,7 @@
 use crate::series::square::Square;
-use crate::utils::timeit;
+use anyhow::Result;
 use ndarray::{arr2, Array2};
 use num::BigInt;
-
-use anyhow::Result;
 
 fn p() -> Result<String> {
     /*
@@ -126,14 +124,12 @@ fn matrix_multiply_2d(matrix_a: &Array2<BigInt>, matrix_b: &Array2<BigInt>) -> A
     arr2(&[[m00, m01], [m10, m11]])
 }
 
-timeit::timeit!(Problem66, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "661");
+        assert_eq!(p().unwrap(), "661");
     }
 }

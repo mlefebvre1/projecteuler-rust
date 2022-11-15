@@ -1,8 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use eval::{eval, Value::Null};
 use itertools::Itertools;
-
-use anyhow::Result;
 
 fn p() -> Result<String> {
     /*
@@ -174,14 +172,12 @@ fn get_score(expressions: &[String]) -> usize {
     score
 }
 
-timeit::timeit!(Problem93, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1258");
+        assert_eq!(p().unwrap(), "1258");
     }
 }

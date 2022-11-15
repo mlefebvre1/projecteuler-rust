@@ -1,6 +1,4 @@
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -75,14 +73,12 @@ fn generate_digit_sum_values(max_digit_sum: usize) -> Vec<usize> {
     mem
 }
 
-timeit::timeit!(Problem92, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "8581146");
+        assert_eq!(p().unwrap(), "8581146");
     }
 }

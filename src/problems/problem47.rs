@@ -1,8 +1,6 @@
 use crate::ntheory::primes::{distinct_primes, is_prime, sieves};
-
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Distinct primes factors
@@ -40,14 +38,12 @@ fn p() -> Result<String> {
     Ok(ans)
 }
 
-timeit::timeit!(Problem47, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "134043");
+        assert_eq!(p().unwrap(), "134043");
     }
 }

@@ -1,7 +1,6 @@
 use crate::series::pentagonal::Pentagonal;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Pentagon numbers
@@ -58,14 +57,12 @@ fn p() -> Result<String> {
     Ok(minimal_pentagon.to_string())
 }
 
-timeit::timeit!(Problem44, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "5482660");
+        assert_eq!(p().unwrap(), "5482660");
     }
 }

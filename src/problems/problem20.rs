@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use num::BigUint;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Factorial digit sum
@@ -27,7 +26,6 @@ fn factorial(n: usize) -> BigUint {
     }
     fact
 }
-timeit::timeit!(Problem20, solve, p);
 
 #[cfg(test)]
 mod test {
@@ -35,6 +33,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "648");
+        assert_eq!(p().unwrap(), "648");
     }
 }

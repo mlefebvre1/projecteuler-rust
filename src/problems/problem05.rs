@@ -1,7 +1,6 @@
 use crate::ntheory::primes;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Smallest multiple
@@ -27,14 +26,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem05, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "232792560");
+        assert_eq!(p().unwrap(), "232792560");
     }
 }

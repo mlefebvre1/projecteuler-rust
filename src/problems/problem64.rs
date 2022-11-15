@@ -1,22 +1,6 @@
 use crate::series::square::Square;
-use crate::utils::timeit;
-use num::Integer;
-
-fn sqrt_continued_fraction_expansion_len(n: usize) -> usize {
-    let (m0, d0, a0) = (0, 1, (n as f64).sqrt().floor() as usize);
-    let (mut mn, mut dn, mut an) = (m0, d0, a0);
-    let criteria = 2 * an;
-    let mut len = 0;
-    while an != criteria {
-        mn = dn * an - mn;
-        dn = (n - mn.pow(2)) / dn;
-        an = (a0 + mn) / dn;
-        len += 1;
-    }
-    len
-}
-
 use anyhow::Result;
+use num::Integer;
 
 fn p() -> Result<String> {
     /*
@@ -42,7 +26,19 @@ fn p() -> Result<String> {
     Ok(odd_period_sqrts.count().to_string())
 }
 
-timeit::timeit!(Problem64, solve, p);
+fn sqrt_continued_fraction_expansion_len(n: usize) -> usize {
+    let (m0, d0, a0) = (0, 1, (n as f64).sqrt().floor() as usize);
+    let (mut mn, mut dn, mut an) = (m0, d0, a0);
+    let criteria = 2 * an;
+    let mut len = 0;
+    while an != criteria {
+        mn = dn * an - mn;
+        dn = (n - mn.pow(2)) / dn;
+        an = (a0 + mn) / dn;
+        len += 1;
+    }
+    len
+}
 
 #[cfg(test)]
 mod test {
@@ -50,6 +46,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1322");
+        assert_eq!(p().unwrap(), "1322");
     }
 }

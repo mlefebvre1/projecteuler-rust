@@ -1,7 +1,6 @@
 use crate::ntheory::primes;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Summation of primes
@@ -17,14 +16,12 @@ fn p() -> Result<String> {
     Ok(sum.to_string())
 }
 
-timeit::timeit!(Problem10, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "142913828922");
+        assert_eq!(p().unwrap(), "142913828922");
     }
 }

@@ -1,7 +1,6 @@
 use crate::ntheory::factor;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Amicable numbers
@@ -30,14 +29,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem21, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "31626");
+        assert_eq!(p().unwrap(), "31626");
     }
 }

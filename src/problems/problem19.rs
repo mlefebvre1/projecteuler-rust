@@ -1,8 +1,7 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use num::Integer;
 use phf::phf_map;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Counting Sundays
@@ -74,14 +73,12 @@ fn nb_days_in_month(month: &str, year: usize) -> usize {
     return *NB_DAYS_PER_MONTH.get(month).unwrap();
 }
 
-timeit::timeit!(Problem19, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "171");
+        assert_eq!(p().unwrap(), "171");
     }
 }

@@ -1,7 +1,6 @@
 use crate::ntheory::pythagorean;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Special Pythagorean triplet
@@ -20,14 +19,12 @@ fn p() -> Result<String> {
     Ok(triple.prod().to_string())
 }
 
-timeit::timeit!(Problem09, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "31875000");
+        assert_eq!(p().unwrap(), "31875000");
     }
 }

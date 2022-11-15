@@ -1,4 +1,3 @@
-use crate::utils::timeit;
 use anyhow::Result;
 use num::Integer;
 
@@ -30,14 +29,12 @@ fn p() -> Result<String> {
     Ok(sum_rmax.to_string())
 }
 
-timeit::timeit!(Problem120, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "333082500");
+        assert_eq!(p().unwrap(), "333082500");
     }
 }

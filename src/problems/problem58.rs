@@ -1,7 +1,6 @@
 use crate::ntheory::primes::is_prime;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Spiral primes
@@ -141,14 +140,12 @@ fn test_get_nb_primes() {
     );
 }
 
-timeit::timeit!(Problem58, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "26241");
+        assert_eq!(p().unwrap(), "26241");
     }
 }

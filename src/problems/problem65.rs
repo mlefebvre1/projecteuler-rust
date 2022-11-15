@@ -1,8 +1,6 @@
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
-use num::BigUint;
-
 use anyhow::Result;
+use num::BigUint;
 
 fn p() -> Result<String> {
     /*
@@ -75,14 +73,12 @@ fn convergent_of_e_numerator(m: usize) -> BigUint {
     h[1].clone()
 }
 
-timeit::timeit!(Problem65, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "272");
+        assert_eq!(p().unwrap(), "272");
     }
 }

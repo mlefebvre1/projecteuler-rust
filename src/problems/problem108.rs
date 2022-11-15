@@ -1,4 +1,4 @@
-use crate::{ntheory::factor::factorize, utils::timeit};
+use crate::ntheory::factor::factorize;
 use anyhow::Result;
 use itertools::Itertools;
 use num::integer::lcm;
@@ -51,14 +51,12 @@ fn nb_reciprocal_diophantine(n: u64) -> u64 {
         .count() as u64
 }
 
-timeit::timeit!(Problem108, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "180180");
+        assert_eq!(p().unwrap(), "180180");
     }
 }

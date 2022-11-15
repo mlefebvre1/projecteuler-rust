@@ -1,10 +1,8 @@
 use crate::series::cubic::Cubic;
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 use std::collections::HashMap;
-
-use anyhow::Result;
 
 fn p() -> Result<String> {
     /*
@@ -79,14 +77,12 @@ fn search_hash_with_correct_nb_permutations(
     ans
 }
 
-timeit::timeit!(Problem62, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "127035954683");
+        assert_eq!(p().unwrap(), "127035954683");
     }
 }

@@ -1,6 +1,5 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Sum square difference
@@ -23,14 +22,12 @@ fn p() -> Result<String> {
     Ok((square_of_sum - sum_of_square).to_string())
 }
 
-timeit::timeit!(Problem06, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "25164150");
+        assert_eq!(p().unwrap(), "25164150");
     }
 }

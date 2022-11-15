@@ -1,6 +1,5 @@
 use crate::ntheory::primes::{is_prime, sieves};
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
-use crate::utils::timeit;
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -23,8 +22,6 @@ fn p() -> Result<String> {
     }
     panic!();
 }
-
-timeit::timeit!(Problem60, solve, p);
 
 fn find_5_concat_primes(prime: usize, primes: &[usize], nb_primes: usize) -> usize {
     const TARGET: usize = 5;
@@ -74,6 +71,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "26033");
+        assert_eq!(p().unwrap(), "26033");
     }
 }

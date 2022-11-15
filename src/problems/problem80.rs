@@ -1,8 +1,6 @@
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
-use num::BigUint;
-
 use anyhow::Result;
+use num::BigUint;
 
 fn p() -> Result<String> {
     /*
@@ -91,14 +89,12 @@ impl SqrtDigitExpansion {
     }
 }
 
-timeit::timeit!(Problem80, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "40886");
+        assert_eq!(p().unwrap(), "40886");
     }
 }

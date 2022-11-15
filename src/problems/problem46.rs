@@ -1,8 +1,7 @@
 use crate::ntheory::primes::sieves;
 use crate::series::composite::OddComposite;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Goldbach's other conjecture
@@ -46,14 +45,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem46, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "5777");
+        assert_eq!(p().unwrap(), "5777");
     }
 }

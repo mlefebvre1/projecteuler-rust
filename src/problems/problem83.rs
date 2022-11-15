@@ -3,8 +3,6 @@ use crate::graph::{
     shortest_path::ShortestPath,
 };
 use crate::utils::matrix::load_matrix2d_from_file;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -116,14 +114,12 @@ impl BuildGraph for MatrixGraph {
     }
 }
 
-timeit::timeit!(Problem83, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "425185");
+        assert_eq!(p().unwrap(), "425185");
     }
 }

@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use factorial::Factorial;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Digit factorials
@@ -25,14 +24,12 @@ fn p() -> Result<String> {
         .to_string())
 }
 
-timeit::timeit!(Problem34, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "40730");
+        assert_eq!(p().unwrap(), "40730");
     }
 }

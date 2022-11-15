@@ -1,7 +1,6 @@
 use crate::ntheory::palindrome::{is_palindrome, is_palindrome_str};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Double-base palindromes
@@ -19,14 +18,12 @@ fn p() -> Result<String> {
     Ok(palindroms.sum::<usize>().to_string())
 }
 
-timeit::timeit!(Problem36, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "872187");
+        assert_eq!(p().unwrap(), "872187");
     }
 }

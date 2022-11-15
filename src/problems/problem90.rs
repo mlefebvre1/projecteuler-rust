@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -116,14 +114,12 @@ fn squares_validation(dice1: &Dice, dice2: &Dice) -> bool {
     pair_presence.iter().find(|&presence| !presence) == None
 }
 
-timeit::timeit!(Problem90, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1217");
+        assert_eq!(p().unwrap(), "1217");
     }
 }

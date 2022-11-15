@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -98,14 +96,12 @@ fn comb_k(max_accepted: usize, arr_len: usize, table: &mut [usize], max_k: usize
     }
 }
 
-timeit::timeit!(Problem88, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "7587457");
+        assert_eq!(p().unwrap(), "7587457");
     }
 }

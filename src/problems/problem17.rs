@@ -1,6 +1,5 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Number letter counts
@@ -94,14 +93,12 @@ fn count_letters(n: usize) -> usize {
     nb_letters
 }
 
-timeit::timeit!(Problem17, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "21124");
+        assert_eq!(p().unwrap(), "21124");
     }
 }

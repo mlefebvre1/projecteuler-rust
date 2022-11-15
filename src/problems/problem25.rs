@@ -1,8 +1,7 @@
 use crate::series::fibonacci::Fibonacci;
-use crate::utils::timeit;
+use anyhow::Result;
 use num::BigUint;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     The Fibonacci sequence is defined by the recurrence relation:
@@ -36,14 +35,12 @@ fn p() -> Result<String> {
     Ok(index.to_string())
 }
 
-timeit::timeit!(Problem25, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "4782");
+        assert_eq!(p().unwrap(), "4782");
     }
 }

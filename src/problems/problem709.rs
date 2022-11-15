@@ -1,5 +1,4 @@
-use crate::utils::integers::powmod;
-use crate::utils::timeit;
+use crate::utils::integers::PowMod;
 use anyhow::Result;
 use lazy_static::lazy_static;
 
@@ -49,7 +48,7 @@ lazy_static! {
         }
         factorial
     };
-    static ref DIV2_MODULUS: u64 = powmod(2, M - 2, M);
+    static ref DIV2_MODULUS: u64 = u64::powmod(2, M - 2, M);
 }
 
 struct EulerNumbers {
@@ -70,7 +69,7 @@ impl EulerNumbers {
     }
     fn calculate_combinations(&self, n: usize, r: usize) -> u64 {
         // c(n,r) % M = (n! / (r! (n-r)!)) % M
-        let inverse_mult = powmod(FACTORIAL_MODULUS[r] * FACTORIAL_MODULUS[n - r], M - 2, M);
+        let inverse_mult = u64::powmod(FACTORIAL_MODULUS[r] * FACTORIAL_MODULUS[n - r], M - 2, M);
         FACTORIAL_MODULUS[n] * inverse_mult % M
     }
 }
@@ -97,14 +96,12 @@ impl Iterator for EulerNumbers {
     }
 }
 
-timeit::timeit!(Problem101, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "773479144");
+        assert_eq!(p().unwrap(), "773479144");
     }
 }

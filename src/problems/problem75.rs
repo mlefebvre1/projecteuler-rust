@@ -1,6 +1,4 @@
 use crate::ntheory::pythagorean::{pythagorean_triples, PythagoreanTriple};
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -46,14 +44,12 @@ fn nb_repetitions_for_each_length(triples: &[PythagoreanTriple], max_len: usize)
     l_cnt
 }
 
-timeit::timeit!(Problem75, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "161667");
+        assert_eq!(p().unwrap(), "161667");
     }
 }

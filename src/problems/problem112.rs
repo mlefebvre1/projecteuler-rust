@@ -1,4 +1,4 @@
-use crate::utils::{integers::int_to_vec_of_u8, timeit};
+use crate::utils::integers::int_to_vec_of_u8;
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -38,14 +38,12 @@ fn is_bouncy(n: &u64) -> bool {
     incr_sort != digits && decr_sort != digits
 }
 
-timeit::timeit!(Problem112, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "1587000");
+        assert_eq!(p().unwrap(), "1587000");
     }
 }

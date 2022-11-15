@@ -1,9 +1,8 @@
 use crate::ntheory::primes::is_prime;
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 use num::Integer;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Quadratic primes
@@ -55,14 +54,12 @@ fn quadratic_consecutive_primes(a: isize, b: isize) -> isize {
     n
 }
 
-timeit::timeit!(Problem27, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "-59231");
+        assert_eq!(p().unwrap(), "-59231");
     }
 }

@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
 use std::fs;
 
@@ -40,8 +38,6 @@ fn p() -> Result<String> {
         .count();
     Ok(nb_trianles_containing_origin.to_string())
 }
-
-timeit::timeit!(Problem102, solve, p);
 
 #[derive(Debug, Clone, Copy)]
 struct Point(f64, f64);
@@ -100,6 +96,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "228");
+        assert_eq!(p().unwrap(), "228");
     }
 }

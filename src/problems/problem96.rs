@@ -1,10 +1,8 @@
 use crate::utils::integers::vec_of_u8_to_int;
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 use ndarray::{self, s};
 use std::fs;
-
-use anyhow::Result;
 
 fn p() -> Result<String> {
     /*
@@ -151,14 +149,12 @@ impl Sudoku {
     }
 }
 
-timeit::timeit!(Problem96, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "24702");
+        assert_eq!(p().unwrap(), "24702");
     }
 }

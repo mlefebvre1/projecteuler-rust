@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use crate::utils::integers::int_to_vec_of_u8;
 use anyhow::Result;
 
@@ -56,14 +54,12 @@ fn saturate(n: u64, max_value: u64) -> u64 {
     }
 }
 
-timeit::timeit!(Problem104, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "329468");
+        assert_eq!(p().unwrap(), "329468");
     }
 }

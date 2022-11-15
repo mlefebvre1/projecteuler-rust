@@ -1,8 +1,7 @@
 use crate::ntheory::palindrome::is_palindrome;
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Lychrel numbers
@@ -57,14 +56,12 @@ fn is_lynchrel_number(n: u128) -> bool {
     true
 }
 
-timeit::timeit!(Problem55, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "249");
+        assert_eq!(p().unwrap(), "249");
     }
 }

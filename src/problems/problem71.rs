@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -39,14 +37,12 @@ fn p() -> Result<String> {
     Ok(ans.to_string())
 }
 
-timeit::timeit!(Problem71, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "428570");
+        assert_eq!(p().unwrap(), "428570");
     }
 }

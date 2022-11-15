@@ -1,10 +1,6 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
-
-use num::{pow, ToPrimitive};
-
 use nalgebra::DMatrix;
+use num::{pow, ToPrimitive};
 
 #[allow(non_snake_case)]
 fn p() -> Result<String> {
@@ -76,14 +72,12 @@ fn p() -> Result<String> {
     Ok(total.floor().to_usize().unwrap().to_string())
 }
 
-timeit::timeit!(Problem101, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "37076114526");
+        assert_eq!(p().unwrap(), "37076114526");
     }
 }

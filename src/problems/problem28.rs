@@ -1,6 +1,5 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Number spiral diagonals
@@ -47,14 +46,12 @@ fn p() -> Result<String> {
     Ok(total.to_string())
 }
 
-timeit::timeit!(Problem28, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "669171001");
+        assert_eq!(p().unwrap(), "669171001");
     }
 }

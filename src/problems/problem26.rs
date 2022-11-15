@@ -1,7 +1,6 @@
 use crate::ntheory::{arithmetic, primes};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Reciprocal cycles
@@ -35,14 +34,12 @@ fn p() -> Result<String> {
     Ok((*max_prime).to_string())
 }
 
-timeit::timeit!(Problem26, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "983");
+        assert_eq!(p().unwrap(), "983");
     }
 }

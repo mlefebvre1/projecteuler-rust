@@ -1,9 +1,7 @@
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
+use anyhow::Result;
 use factorial::Factorial;
 use phf::phf_map;
-
-use anyhow::Result;
 
 fn p() -> Result<String> {
     /*
@@ -96,14 +94,12 @@ impl ChainMap {
     }
 }
 
-timeit::timeit!(Problem74, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "402");
+        assert_eq!(p().unwrap(), "402");
     }
 }

@@ -1,8 +1,7 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use factorial::Factorial;
 use num::BigUint;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Combinatoric selections
@@ -27,14 +26,12 @@ fn p() -> Result<String> {
     Ok(combinatorics_greater_than_target.count().to_string())
 }
 
-timeit::timeit!(Problem53, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "4075");
+        assert_eq!(p().unwrap(), "4075");
     }
 }

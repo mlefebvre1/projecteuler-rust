@@ -1,4 +1,4 @@
-use crate::utils::{integers::int_to_vec_of_u8, timeit};
+use crate::utils::integers::int_to_vec_of_u8;
 use anyhow::Result;
 use itertools::iproduct;
 
@@ -41,14 +41,12 @@ fn p() -> Result<String> {
     Ok(ans.to_string())
 }
 
-timeit::timeit!(Problem119, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "248155780267521");
+        assert_eq!(p().unwrap(), "248155780267521");
     }
 }

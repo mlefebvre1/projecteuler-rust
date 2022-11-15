@@ -1,7 +1,6 @@
 use crate::ntheory::primes::sieves;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Sum square difference
@@ -23,14 +22,12 @@ fn p() -> Result<String> {
     Ok(primes[PRIME_INDEX - 1].to_string())
 }
 
-timeit::timeit!(Problem07, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "104743");
+        assert_eq!(p().unwrap(), "104743");
     }
 }

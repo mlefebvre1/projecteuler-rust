@@ -1,8 +1,7 @@
 use crate::utils::poker;
-use crate::utils::timeit;
+use anyhow::Result;
 use std::fs;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Poker hands
@@ -47,14 +46,12 @@ fn p() -> Result<String> {
     Ok(nb_win_player1.to_string())
 }
 
-timeit::timeit!(Problem54, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "376");
+        assert_eq!(p().unwrap(), "376");
     }
 }

@@ -1,7 +1,6 @@
 use crate::ntheory::arithmetic::pandigital_validation;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Pandigital multiples
@@ -43,14 +42,12 @@ fn p() -> Result<String> {
     Ok(pandigitals.max().unwrap())
 }
 
-timeit::timeit!(Problem38, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "932718654");
+        assert_eq!(p().unwrap(), "932718654");
     }
 }

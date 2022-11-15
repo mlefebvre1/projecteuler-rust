@@ -1,8 +1,7 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use num::BigUint;
 use std::fs;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Large sum
@@ -123,14 +122,12 @@ fn p() -> Result<String> {
     Ok(String::from(&total_str[0..10]))
 }
 
-timeit::timeit!(Problem13, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "5537376230");
+        assert_eq!(p().unwrap(), "5537376230");
     }
 }

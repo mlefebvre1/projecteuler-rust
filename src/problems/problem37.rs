@@ -1,7 +1,6 @@
 use crate::ntheory::primes::{is_prime, sieves};
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Truncatable primes
@@ -38,14 +37,12 @@ fn p() -> Result<String> {
     Ok(truncatables.sum::<usize>().to_string())
 }
 
-timeit::timeit!(Problem37, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "748317");
+        assert_eq!(p().unwrap(), "748317");
     }
 }

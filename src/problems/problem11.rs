@@ -1,7 +1,6 @@
 use crate::utils::matrix::load_matrix2d_from_file;
-use crate::utils::timeit;
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Largest product in a grid
@@ -111,14 +110,12 @@ fn p() -> Result<String> {
     Ok(max_prod.to_string())
 }
 
-timeit::timeit!(Problem11, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "70600674");
+        assert_eq!(p().unwrap(), "70600674");
     }
 }

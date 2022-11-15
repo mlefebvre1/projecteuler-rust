@@ -1,7 +1,5 @@
-use crate::utils::timeit;
-use num::Integer;
-
 use anyhow::Result;
+use num::Integer;
 
 fn p() -> Result<String> {
     /*
@@ -78,14 +76,12 @@ fn make_chains(max_n: usize, div_sums: &[usize]) -> Vec<(usize, usize)> {
     chain_starting_n_and_len
 }
 
-timeit::timeit!(Problem95, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "14316");
+        assert_eq!(p().unwrap(), "14316");
     }
 }

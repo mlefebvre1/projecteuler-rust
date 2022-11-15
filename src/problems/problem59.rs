@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use std::fs;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     XOR decryption
@@ -67,14 +66,12 @@ fn count_repetitions(stream: &[&str]) -> [usize; 256] {
     repetitions
 }
 
-timeit::timeit!(Problem59, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "129448");
+        assert_eq!(p().unwrap(), "129448");
     }
 }

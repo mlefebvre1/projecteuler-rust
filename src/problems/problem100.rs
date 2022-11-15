@@ -1,5 +1,3 @@
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -49,14 +47,12 @@ fn is_chance_is_50_50(x: u128, y: u128) -> bool {
     2 * x * (x - 1) == y * (y - 1)
 }
 
-timeit::timeit!(Problem100, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "756872327473");
+        assert_eq!(p().unwrap(), "756872327473");
     }
 }

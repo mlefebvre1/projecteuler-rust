@@ -1,7 +1,6 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Lexicographic permutations
@@ -23,14 +22,12 @@ fn p() -> Result<String> {
     )))
 }
 
-timeit::timeit!(Problem24, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "2783915460");
+        assert_eq!(p().unwrap(), "2783915460");
     }
 }

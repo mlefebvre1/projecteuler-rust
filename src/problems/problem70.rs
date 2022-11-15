@@ -1,7 +1,5 @@
 use crate::ntheory::primes::sieves;
 use crate::utils::integers::int_to_vec_of_u8;
-use crate::utils::timeit;
-
 use anyhow::Result;
 
 fn p() -> Result<String> {
@@ -58,14 +56,12 @@ fn phi_from_2_primes() -> Vec<(usize, usize)> {
     phi_from_2_primes_vec
 }
 
-timeit::timeit!(Problem70, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "8319823");
+        assert_eq!(p().unwrap(), "8319823");
     }
 }

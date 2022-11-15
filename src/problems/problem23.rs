@@ -1,22 +1,6 @@
 use crate::ntheory::factor::proper_divisors_sum;
-use crate::utils::timeit;
-
-const MAX_N: usize = 28123;
-
-fn get_array_of_sum_of_two_abundants(abundants: &[usize]) -> [bool; MAX_N] {
-    let mut numbers_written_as_sum_of_2_abundants: [bool; MAX_N] = [false; MAX_N];
-    for a in abundants {
-        for b in abundants {
-            let n = a + b;
-            if n < MAX_N {
-                numbers_written_as_sum_of_2_abundants[n] = true;
-            }
-        }
-    }
-    numbers_written_as_sum_of_2_abundants
-}
-
 use anyhow::Result;
+
 fn p() -> Result<String> {
     /*
     Non-abundant sums
@@ -49,7 +33,20 @@ fn p() -> Result<String> {
     Ok(sum_of_non_two_abundants.to_string())
 }
 
-timeit::timeit!(Problem23, solve, p);
+const MAX_N: usize = 28123;
+
+fn get_array_of_sum_of_two_abundants(abundants: &[usize]) -> [bool; MAX_N] {
+    let mut numbers_written_as_sum_of_2_abundants: [bool; MAX_N] = [false; MAX_N];
+    for a in abundants {
+        for b in abundants {
+            let n = a + b;
+            if n < MAX_N {
+                numbers_written_as_sum_of_2_abundants[n] = true;
+            }
+        }
+    }
+    numbers_written_as_sum_of_2_abundants
+}
 
 #[cfg(test)]
 mod test {
@@ -57,6 +54,6 @@ mod test {
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "4179871");
+        assert_eq!(p().unwrap(), "4179871");
     }
 }

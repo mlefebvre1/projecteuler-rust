@@ -1,9 +1,8 @@
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 use num::BigUint;
 use std::collections::HashSet;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Distinct powers
@@ -29,14 +28,12 @@ fn p() -> Result<String> {
     Ok(terms.collect::<HashSet<BigUint>>().len().to_string())
 }
 
-timeit::timeit!(Problem29, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "9183");
+        assert_eq!(p().unwrap(), "9183");
     }
 }

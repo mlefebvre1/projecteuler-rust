@@ -1,9 +1,8 @@
 use crate::ntheory::primes::sieves;
 use crate::utils::integers::vec_of_u8_to_int;
-use crate::utils::timeit;
+use anyhow::Result;
 use itertools::Itertools;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Sub-string divisibility
@@ -52,14 +51,12 @@ fn p() -> Result<String> {
     Ok(divisibles.iter().sum::<usize>().to_string())
 }
 
-timeit::timeit!(Problem43, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "16695334890");
+        assert_eq!(p().unwrap(), "16695334890");
     }
 }

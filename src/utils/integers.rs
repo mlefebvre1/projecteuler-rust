@@ -1,4 +1,4 @@
-use num::{pow, FromPrimitive, Integer, ToPrimitive, Unsigned};
+use num::{pow, FromPrimitive, Integer, ToPrimitive, Unsigned, Zero};
 
 pub fn vec_of_u8_to_int<T>(vec: &[u8]) -> T
 where
@@ -53,19 +53,33 @@ where
     vec
 }
 
-pub fn powmod(base: u64, exp: u64, m: u64) -> u64 {
-    let mut exp = exp;
-    let mut base = base % m;
-    let mut ans = 1;
-    while exp > 0 {
-        if exp.is_odd() {
-            ans = (ans * base) % m;
+pub trait PowMod<T>
+where
+    T: Clone
+        + Copy
+        + Integer
+        + FromPrimitive
+        + Zero
+        + std::ops::Mul<Output = T>
+        + std::ops::ShrAssign<T>,
+{
+    fn powmod(base: T, exp: T, m: T) -> T {
+        let mut exp = exp;
+        let mut base = base % m;
+        let mut ans = T::from_u32(1).unwrap();
+        while exp > T::from_u32(0).unwrap() {
+            if exp.is_odd() {
+                ans = (ans * base) % m;
+            }
+            base = (base * base) % m;
+            exp >>= T::from_u32(1).unwrap();
         }
-        base = (base * base) % m;
-        exp >>= 1;
+        ans
     }
-    ans
 }
+
+impl PowMod<u64> for u64 {}
+impl PowMod<u128> for u128 {}
 
 #[cfg(test)]
 mod test {
@@ -99,6 +113,6 @@ mod test {
     #[case(0, 99, 99, 0)]
     #[case(1, 99, 101, 1)]
     fn test_powmod(#[case] base: u64, #[case] exp: u64, #[case] modulus: u64, #[case] ans: u64) {
-        assert_eq!(powmod(base, exp, modulus), ans)
+        assert_eq!(u64::powmod(base, exp, modulus), ans)
     }
 }

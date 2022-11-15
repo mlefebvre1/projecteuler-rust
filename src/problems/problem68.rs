@@ -1,7 +1,5 @@
-use crate::utils::timeit;
-use itertools::Itertools;
-
 use anyhow::Result;
+use itertools::Itertools;
 
 fn p() -> Result<String> {
     /*
@@ -93,14 +91,12 @@ fn build_string_from_gon_ring(gon_ring: &[(u8, u8, u8)]) -> Vec<u8> {
     result
 }
 
-timeit::timeit!(Problem68, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "6531031914842725");
+        assert_eq!(p().unwrap(), "6531031914842725");
     }
 }

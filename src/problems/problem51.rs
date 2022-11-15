@@ -1,9 +1,8 @@
 use crate::ntheory::primes::is_prime;
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
-use crate::utils::timeit;
+use anyhow::Result;
 use bitvec::prelude::*;
 
-use anyhow::Result;
 fn p() -> Result<String> {
     /*
     Prime digit replacements
@@ -103,14 +102,12 @@ fn p() -> Result<String> {
     panic!();
 }
 
-timeit::timeit!(Problem51, solve, p);
-
 #[cfg(test)]
 mod test {
     use super::*;
 
     #[test]
     fn test_solution() {
-        assert_eq!(solve().unwrap(), "121313");
+        assert_eq!(p().unwrap(), "121313");
     }
 }
