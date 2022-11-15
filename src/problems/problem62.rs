@@ -4,7 +4,7 @@ use anyhow::Result;
 use itertools::Itertools;
 use std::collections::HashMap;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Cubic permutations
     Problem 62

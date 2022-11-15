@@ -2,7 +2,7 @@ use crate::series::triangular::Triangular;
 use anyhow::Result;
 use std::fs;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Coded triangle numbers
     Problem 42

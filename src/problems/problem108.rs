@@ -3,7 +3,7 @@ use anyhow::Result;
 use itertools::Itertools;
 use num::integer::lcm;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Diophantine reciprocals I
     Problem 108

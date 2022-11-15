@@ -1,6 +1,6 @@
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Right triangles with integer coordinates
     Problem 91

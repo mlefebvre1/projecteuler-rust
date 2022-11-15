@@ -3,7 +3,7 @@ use anyhow::Result;
 use ndarray::{arr2, Array2};
 use num::BigInt;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Diophantine equation
 

@@ -1,6 +1,6 @@
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Lattice paths
     Problem 15

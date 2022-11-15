@@ -1,7 +1,7 @@
 use crate::ntheory::pythagorean;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Special Pythagorean triplet
     Problem 9

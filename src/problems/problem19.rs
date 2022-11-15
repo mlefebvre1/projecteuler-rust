@@ -2,7 +2,7 @@ use anyhow::Result;
 use num::Integer;
 use phf::phf_map;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Counting Sundays
     Problem 19

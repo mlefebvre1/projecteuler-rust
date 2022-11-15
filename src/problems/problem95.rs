@@ -1,7 +1,7 @@
 use anyhow::Result;
 use num::Integer;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Amicable chains
     Problem 95

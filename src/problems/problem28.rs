@@ -1,6 +1,6 @@
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Number spiral diagonals
     Problem 28

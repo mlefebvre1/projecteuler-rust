@@ -3,7 +3,7 @@ use itertools::Itertools;
 use num::BigUint;
 use std::collections::HashSet;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Distinct powers
     Problem 29

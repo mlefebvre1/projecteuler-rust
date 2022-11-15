@@ -1,7 +1,7 @@
 use crate::ntheory::primes;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Smallest multiple
     Problem 5

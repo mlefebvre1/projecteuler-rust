@@ -1,7 +1,7 @@
 use crate::ntheory::{factor, primes};
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Highly divisible triangular number
     Problem 12

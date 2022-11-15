@@ -1,7 +1,7 @@
 use anyhow::Result;
 use num::BigUint;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Powerful digit sum
     Problem 56

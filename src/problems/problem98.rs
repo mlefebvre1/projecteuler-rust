@@ -4,7 +4,7 @@ use std::fs;
 
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Anagramic squares
     Problem 98

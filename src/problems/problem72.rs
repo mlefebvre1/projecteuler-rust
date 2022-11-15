@@ -1,7 +1,7 @@
 use anyhow::Result;
 use num::Integer;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Counting fractions
     Problem 72

@@ -2,7 +2,7 @@ use crate::utils::integers::int_to_vec_of_u8;
 use anyhow::Result;
 use num::BigUint;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Powerful digit counts
     Problem 63

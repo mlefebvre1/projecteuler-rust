@@ -1,7 +1,7 @@
 use crate::utils::matrix::load_matrix2d_from_file;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Largest product in a grid
     Problem 11

@@ -2,7 +2,7 @@ use crate::ntheory::primes::sieves;
 use crate::series::composite::OddComposite;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Goldbach's other conjecture
     Problem 46

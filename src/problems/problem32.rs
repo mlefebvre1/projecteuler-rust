@@ -2,7 +2,7 @@ use crate::ntheory::arithmetic::pandigital_validation;
 use anyhow::Result;
 use itertools::Itertools;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Pandigital products
     Problem 32

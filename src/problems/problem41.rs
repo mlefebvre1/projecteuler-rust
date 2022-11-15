@@ -2,7 +2,7 @@ use crate::ntheory::primes::is_prime;
 use anyhow::Result;
 use itertools::Itertools;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Pandigital prime
     Problem 41

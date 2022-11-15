@@ -2,7 +2,7 @@ use anyhow::Result;
 use num::BigUint;
 use std::fs;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Large sum
     Problem 13

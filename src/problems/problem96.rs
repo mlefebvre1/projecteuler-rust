@@ -4,7 +4,7 @@ use itertools::Itertools;
 use ndarray::{self, s};
 use std::fs;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Su Doku
     Problem 96

@@ -2,7 +2,7 @@ use anyhow::Result;
 use itertools::Itertools;
 use std::fs;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Largest exponential
     Problem 99

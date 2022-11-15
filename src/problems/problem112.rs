@@ -1,7 +1,7 @@
 use crate::utils::integers::int_to_vec_of_u8;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Working from left-to-right if no digit is exceeded by the digit to its left it is called an increasing number; for
     example, 134468.

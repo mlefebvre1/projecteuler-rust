@@ -3,7 +3,7 @@ use anyhow::Result;
 use itertools::Itertools;
 use num::Integer;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Quadratic primes
     Problem 27

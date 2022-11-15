@@ -2,7 +2,7 @@ use crate::series::fibonacci::Fibonacci;
 use num::Integer;
 
 use anyhow::Result;
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Even Fibonacci numbers
     Problem 2

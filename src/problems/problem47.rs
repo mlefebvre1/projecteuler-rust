@@ -1,7 +1,7 @@
 use crate::ntheory::primes::{distinct_primes, is_prime, sieves};
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Distinct primes factors
     Problem 47

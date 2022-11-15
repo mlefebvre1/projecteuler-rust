@@ -1,7 +1,7 @@
 use anyhow::Result;
 use num::Integer;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Multiples of 3 and 5
     Problem 1

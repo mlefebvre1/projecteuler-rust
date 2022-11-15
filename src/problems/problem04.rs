@@ -2,7 +2,7 @@ use crate::ntheory::palindrome;
 use anyhow::Result;
 use itertools::Itertools;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Largest palindrome product
     Problem 4

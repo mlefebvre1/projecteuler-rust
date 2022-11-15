@@ -2,7 +2,7 @@ use anyhow::Result;
 use eval::{eval, Value::Null};
 use itertools::Itertools;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Arithmetic expressions
     Problem 93

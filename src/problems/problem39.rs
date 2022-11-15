@@ -1,7 +1,7 @@
 use crate::ntheory::pythagorean::pythagorean_triples;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Integer right triangles
     Problem 39

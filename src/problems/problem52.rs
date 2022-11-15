@@ -1,7 +1,7 @@
 use crate::utils::integers::int_to_vec_of_u8;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Permuted multiples
     Problem 52

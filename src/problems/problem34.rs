@@ -1,7 +1,7 @@
 use anyhow::Result;
 use factorial::Factorial;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Digit factorials
     Problem 34

@@ -3,7 +3,7 @@ use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
 use anyhow::Result;
 use bitvec::prelude::*;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Prime digit replacements
     Problem 51

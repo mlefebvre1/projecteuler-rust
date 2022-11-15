@@ -1,7 +1,7 @@
 use crate::series::triangular::Triangular;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Counting rectangles
     Problem 85

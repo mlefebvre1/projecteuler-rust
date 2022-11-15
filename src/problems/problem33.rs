@@ -2,7 +2,7 @@ use anyhow::Result;
 use itertools::Itertools;
 use num::Integer;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Digit cancelling fractions
     Problem 33

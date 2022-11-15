@@ -2,7 +2,7 @@ use crate::series::square::Square;
 use anyhow::Result;
 use num::Integer;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Odd period square roots
     Problem 64

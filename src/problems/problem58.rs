@@ -1,7 +1,7 @@
 use crate::ntheory::primes::is_prime;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Spiral primes
     Problem 58

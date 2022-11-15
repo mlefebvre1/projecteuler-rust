@@ -3,7 +3,7 @@ use crate::utils::integers::vec_of_u8_to_int;
 use anyhow::Result;
 use itertools::Itertools;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Sub-string divisibility
     Problem 43

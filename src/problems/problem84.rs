@@ -1,7 +1,7 @@
 use crate::utils::monopoly::{Game, NB_SQUARES};
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Monopoly odds
     Problem 84

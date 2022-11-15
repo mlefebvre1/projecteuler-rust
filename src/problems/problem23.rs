@@ -1,7 +1,7 @@
 use crate::ntheory::factor::proper_divisors_sum;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Non-abundant sums
     Problem 23

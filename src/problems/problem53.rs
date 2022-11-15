@@ -2,7 +2,7 @@ use anyhow::Result;
 use factorial::Factorial;
 use num::BigUint;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Combinatoric selections
     Problem 53

@@ -1,7 +1,7 @@
 use crate::series::pentagonal::Pentagonal;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Pentagon numbers
     Problem 44

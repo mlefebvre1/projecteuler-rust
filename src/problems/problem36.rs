@@ -1,7 +1,7 @@
 use crate::ntheory::palindrome::{is_palindrome, is_palindrome_str};
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Double-base palindromes
     Problem 36

@@ -3,7 +3,7 @@ use nalgebra::DMatrix;
 use num::{pow, ToPrimitive};
 
 #[allow(non_snake_case)]
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Optimum polynomial
     Problem 101

@@ -2,7 +2,7 @@ use crate::utils::poker;
 use anyhow::Result;
 use std::fs;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Poker hands
     Problem 54

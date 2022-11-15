@@ -1,7 +1,7 @@
 use crate::ntheory::{arithmetic, primes};
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Reciprocal cycles
     Problem 26

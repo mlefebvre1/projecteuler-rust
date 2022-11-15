@@ -2,7 +2,7 @@ use crate::series::fibonacci::Fibonacci;
 use anyhow::Result;
 use num::BigUint;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     The Fibonacci sequence is defined by the recurrence relation:
 

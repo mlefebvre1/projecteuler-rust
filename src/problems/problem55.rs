@@ -2,7 +2,7 @@ use crate::ntheory::palindrome::is_palindrome;
 use crate::utils::integers::{int_to_vec_of_u8, vec_of_u8_to_int};
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Lychrel numbers
     Problem 55

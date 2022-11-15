@@ -1,7 +1,7 @@
 use crate::series::pentagonal::GeneralizedPentagonal;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Coin partitions
     Problem 78

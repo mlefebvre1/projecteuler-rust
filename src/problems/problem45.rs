@@ -3,7 +3,7 @@ use crate::series::pentagonal::is_pentagonal;
 use crate::series::triangular::Triangular;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Triangular, pentagonal, and hexagonal
     Problem 45

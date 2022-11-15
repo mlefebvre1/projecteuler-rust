@@ -1,7 +1,7 @@
 use crate::ntheory::arithmetic::pandigital_validation;
 use anyhow::Result;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     Pandigital multiples
     Problem 38

@@ -2,7 +2,7 @@ use anyhow::Result;
 use phf::phf_map;
 use std::fs;
 
-fn p() -> Result<String> {
+pub fn p() -> Result<String> {
     /*
     For a number written in Roman numerals to be considered valid there are basic rules which must be followed.
     Even though the rules allow some numbers to be expressed in more than one way there is always a "best" way of
