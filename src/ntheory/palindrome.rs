@@ -16,13 +16,8 @@ where
 {
     let n_vec = int_to_vec_of_u8::<T>(n);
     if n_vec.len() > 1 {
-        let n_vec_reversed: Vec<&u8> = n_vec.iter().rev().collect();
-        for (n1, n2) in n_vec.iter().zip(n_vec_reversed) {
-            if n1 != n2 {
-                return false;
-            }
-        }
-        return true;
+        let n_vec_reserved = n_vec.iter().rev().copied().collect::<Vec<_>>();
+        return n_vec == n_vec_reserved;
     }
     true
 }
