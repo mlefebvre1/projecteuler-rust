@@ -101,7 +101,7 @@ impl Sudoku {
                             (_, _y) if _y < self.y_max - 1 => Some((0, _y + 1)),
                             _ => None,
                         };
-                        if next_square == None {
+                        if next_square.is_none() {
                             return true;
                         }
                         let (next_x, next_y) = next_square.unwrap();

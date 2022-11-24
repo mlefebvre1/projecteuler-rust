@@ -111,7 +111,7 @@ fn squares_validation(dice1: &Dice, dice2: &Dice) -> bool {
             pair_presence[presence_index_from_square(square)] = true;
         }
     }
-    pair_presence.iter().find(|&presence| !presence) == None
+    !pair_presence.iter().any(|presence| !presence)
 }
 
 #[cfg(test)]

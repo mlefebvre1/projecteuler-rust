@@ -82,7 +82,7 @@ impl ShortestPath for Dgraph {
 
         loop {
             let cur_vertex_id = vertex_id_with_min_dist(&dist, &visited);
-            if cur_vertex_id == None {
+            if cur_vertex_id.is_none() {
                 break;
             }
             let cur_vertex_id = cur_vertex_id.unwrap();
